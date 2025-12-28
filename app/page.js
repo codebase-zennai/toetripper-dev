@@ -1,65 +1,282 @@
 import Image from "next/image";
+import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
+import Brands from "./components/Brands";
+import Services from "./components/Services";
+import Explore from "./components/Explore";
+import Metrics from "./components/Metrics";
+import BlogPosts from "./components/BlogPosts";
+import NewsletterCTA from "./components/NewsletterCTA";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <Navbar />
+      <Hero />
+      {/* <Brands /> */}
+      <Services />
+      <Explore />
+      <Metrics />
+      {/* <BlogPosts /> */}
+      <NewsletterCTA />
+      <section className="section background-black">
+        <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+          <div className="space-2rem"></div>
+          <div
+            data-w-id="fa36639f-bc34-8f1a-4024-d088998077f8"
+            className="footer-top"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="footer-block">
+              <a
+                href="/"
+                aria-current="page"
+                className="footer-logo-link-wrapper w-nav-brand w--current"
+              >
+                <img
+                  width="Auto"
+                  height="Auto"
+                  alt="Logo"
+                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png"
+                  loading="eager"
+                  srcSet="
+                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-500.png  500w,
+                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-800.png  800w,
+                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png       1011w
+                "
+                  sizes="(max-width: 479px) 139.984375px, (max-width: 991px) 124.4296875px, 9vw"
+                  className="footer-logo"
+                />
+              </a>
+              <div className="socials-wrapper">
+                <a
+                  href="https://www.youtube.com/"
+                  target="_blank"
+                  className="w-inline-block"
+                >
+                  <img
+                    width="Auto"
+                    height="Auto"
+                    alt=""
+                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png"
+                    loading="eager"
+                    srcSet="
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon-p-500.png 500w,
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png       512w
+                  "
+                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
+                    className="social-icon smaller"
+                  />
+                </a>
+                <a
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  className="w-inline-block"
+                >
+                  <img
+                    width="Auto"
+                    height="Auto"
+                    alt=""
+                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
+                    loading="eager"
+                    srcSet="
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w,
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png       512w
+                  "
+                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
+                    className="social-icon smaller"
+                  />
+                </a>
+                <a
+                  href="https://www.tiktok.com/en/"
+                  target="_blank"
+                  className="w-inline-block"
+                >
+                  <img
+                    width="Auto"
+                    height="Auto"
+                    alt=""
+                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
+                    loading="eager"
+                    srcSet="
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w,
+                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png       512w
+                  "
+                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
+                    className="social-icon smaller"
+                  />
+                </a>
+              </div>
+              <p className="max-width-17vw font-white">
+                Navigate the Markets, Secure Your Future.
+              </p>
+            </div>
+            <div className="footer-right-flex">
+              <div className="footer-wrapper">
+                <h5 className="font-white">Main</h5>
+                <div className="footer-link-wrapper">
+                  <a
+                    href="/"
+                    aria-current="page"
+                    className="footer-link w--current"
+                  >
+                    Home
+                  </a>
+                  <a
+                    href="/"
+                    aria-current="page"
+                    className="footer-link move-down w--current"
+                  >
+                    Home
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/about" className="footer-link">
+                    About
+                  </a>
+                  <a href="/about" className="footer-link move-down">
+                    About
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/services" className="footer-link">
+                    Services
+                  </a>
+                  <a href="/services" className="footer-link move-down">
+                    Services
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/blog" className="footer-link">
+                    Blog
+                  </a>
+                  <a href="/blog" className="footer-link move-down">
+                    Blog
+                  </a>
+                </div>
+              </div>
+              <div className="footer-wrapper">
+                <h5 className="font-white">Pages</h5>
+                <div className="footer-link-wrapper">
+                  <a href="/contact" className="footer-link">
+                    Contact
+                  </a>
+                  <a href="/contact" className="footer-link move-down">
+                    Contact
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/terms-conditions" className="footer-link">
+                    Terms &amp; Conditions
+                  </a>
+                  <a href="/terms-conditions" className="footer-link move-down">
+                    Terms &amp; Conditions
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/privacy-policy" className="footer-link">
+                    Privacy Policy
+                  </a>
+                  <a href="/privacy-policy" className="footer-link move-down">
+                    Privacy Policy
+                  </a>
+                </div>
+              </div>
+              <div className="footer-wrapper">
+                <h5 className="font-white">Utilities</h5>
+                <div className="footer-link-wrapper">
+                  <a href="/utilties/style-guide" className="footer-link">
+                    Style Guide
+                  </a>
+                  <a
+                    href="/utilties/style-guide"
+                    className="footer-link move-down"
+                  >
+                    Style Guide
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/utilties/instructions" className="footer-link">
+                    Instructions
+                  </a>
+                  <a
+                    href="/utilties/instructions"
+                    className="footer-link move-down"
+                  >
+                    Instructions
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/utilties/licenses" className="footer-link">
+                    Licenses
+                  </a>
+                  <a
+                    href="/utilties/licenses"
+                    className="footer-link move-down"
+                  >
+                    Licenses
+                  </a>
+                </div>
+                <div className="footer-link-wrapper">
+                  <a href="/utilties/changelog" className="footer-link">
+                    Changelog
+                  </a>
+                  <a
+                    href="/utilties/changelog"
+                    className="footer-link move-down"
+                  >
+                    Changelog
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-w-id="fa36639f-bc34-8f1a-4024-d0889980784b"
+            className="footer-line"
+          ></div>
+          <div
+            data-w-id="fa36639f-bc34-8f1a-4024-d0889980784c"
+            className="footer-bottom"
           >
-            Documentation
-          </a>
+            <p className="font-white">
+              © 2024 Wealth Bento. All Rights Reserved.
+            </p>
+            <div className="footer-flex">
+              <div className="footer-flex-bottom">
+                <p className="font-white">Powered By </p>
+                <a
+                  href="https://webflow.com/"
+                  target="_blank"
+                  className="w-inline-block"
+                >
+                  <p className="footer-bottom-text">Webflow</p>
+                </a>
+              </div>
+              <div className="footer-flex-bottom">
+                <p className="font-white">Built By </p>
+                <a
+                  href="https://webflow.com/templates/designers/rick-mummery"
+                  target="_blank"
+                  className="w-inline-block"
+                >
+                  <p className="footer-bottom-text">Rick Mummery</p>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+      <script
+        src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66e3df8d47eb3991ca9dbef7"
+        type="text/javascript"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossOrigin="anonymous"
+      ></script>
+      <script
+        src="https://wubflow-shield.nocodexport.dev/66e3df8d47eb3991ca9dbef7/js/webflow.9633dd252.js"
+        type="text/javascript"
+      ></script>
+    </>
   );
 }
