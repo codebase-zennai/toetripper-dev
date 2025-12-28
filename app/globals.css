@@ -1,3 +1,7 @@
+@import "tailwindcss";
+
+/* Wrap manual CSS in a layer with lower priority than Tailwind */
+/* @layer base { */
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -6208,3 +6212,4 @@ blockquote {
     max-width: 100%;
   }
 }
+/* } End of @layer base */
