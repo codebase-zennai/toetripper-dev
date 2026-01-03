@@ -17,13 +17,8 @@ export default function Footer() {
                 width="Auto"
                 height="Auto"
                 alt="Logo"
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png"
+                src="./Brand Kit for Toe Tripper/Toe Tripper Logo.png"
                 loading="eager"
-                srcSet="
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-500.png  500w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-800.png  800w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png       1011w
-                "
                 sizes="(max-width: 479px) 139.984375px, (max-width: 991px) 124.4296875px, 9vw"
                 className="footer-logo"
               />

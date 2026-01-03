@@ -1,3 +1,5 @@
+import { CircleQuestionMark, Search } from "lucide-react";
+
 export default function Explore() {
   return (
     <section className="section">
@@ -14,14 +16,8 @@ export default function Explore() {
             </div>
             <img
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
-              srcSet="
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e526a2084df10aec9ee814_img_l3iO-p-500.webp   500w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e526a2084df10aec9ee814_img_l3iO-p-800.webp   800w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e526a2084df10aec9ee814_img_l3iO-p-1080.webp 1080w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e526a2084df10aec9ee814_img_l3iO.webp        1440w
-              "
               alt="woman on laptop"
-              src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e526a2084df10aec9ee814_img_l3iO.webp"
+              src="./images/explore1.jpg"
               loading="lazy"
               className="features-image"
             />
@@ -30,24 +26,16 @@ export default function Explore() {
             <div className="card-text-block slide-from-right-animation">
               <div className="subheading-flex">
                 <div className="icon-wrapper background-primary">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e973921c46c8c0a5af604b_svg_iWgg.svg"
-                    loading="eager"
-                    className="small-icon"
-                  />
+                  <Search className="text-white"/>
                 </div>
-                <h5>Experts</h5>
+                <h5>Tailor-Made Experiential Travel</h5>
               </div>
               <h2>
-                our team of experienced{" "}
-                <span className="italics">analysts.</span>
+                curated by experienced{" "}
+                <span className="italics">travel specialists</span>
               </h2>
               <p>
-                Leverage cutting-edge technology and in-depth market knowledge
-                to identify potential trading opportunities
+                Crafted through deep destination expertise and trusted global partnerships to deliver truly personalized, immersive journeys.
               </p>
               <a
                 href="/about"
@@ -76,25 +64,17 @@ export default function Explore() {
             <div className="card-text-block slide-up-animation">
               <div className="subheading-flex">
                 <div className="icon-wrapper background-primary">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e97079bd748f6d00dcde55_svg_cnHJ.svg"
-                    loading="eager"
-                    className="small-icon"
-                  />
+                  <CircleQuestionMark className="text-white"/>
                 </div>
-                <h5>Real-Time</h5>
+                <h5>Why Us?</h5>
               </div>
               <h2>
-                Quality Trade Alerts With
-                <span className="italics">Wealth Bento.</span>
+                Seamless travel, executed
+                <span className="italics"> with precision.</span>
               </h2>
               <div className="metrics-flex space-between align-center">
                 <p>
-                  Never miss a chance to capitalize on market movements and
-                  make informed decisions.
+                  Never miss a chance for seamless travel through expert planning and on-ground execution.
                 </p>
                 <a
                   href="/services"
@@ -124,14 +104,8 @@ export default function Explore() {
             </div>
             <img
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
-              srcSet="
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a384e9d2bc959c048dc1_Img-1-p-500.webp   500w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a384e9d2bc959c048dc1_Img-1-p-800.webp   800w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a384e9d2bc959c048dc1_Img-1-p-1080.webp 1080w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a384e9d2bc959c048dc1_Img-1.webp        1440w
-              "
               alt="woman and man  sitting on a chair"
-              src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a384e9d2bc959c048dc1_Img-1.webp"
+                src="./images/explore2.jpg"
               loading="lazy"
               className="features-image align-top"
             />
