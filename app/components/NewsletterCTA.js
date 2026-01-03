@@ -9,12 +9,12 @@ export default function NewsletterCTA() {
           <div className="cta-wrapper">
             <div className="w-layout-hflex cta-card slide-down-animation">
               <h2 className="text-white">
-                Expert <span className="italics">Stock Analysis</span>
+                  Let’s Plan Your <span className="italics">Trip</span>
               </h2>
               <div className="space-1rem"></div>
               <p className="max-width-30rem text-white">
-                Subscribe alongside tens of thousands of investors and
-                immediately receive expert up-to-date stock picks.
+                Share your travel requirements with us and our team will get in
+                touch to curate a personalized travel solution for you.
               </p>
               <div className="space-2rem"></div>
               <div className="sign-up-form w-form">

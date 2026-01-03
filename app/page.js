@@ -18,7 +18,7 @@ export default function Home() {
       <Explore />
       <Brands />
       <Metrics />
-      {/* <BlogPosts /> */}
+      <BlogPosts />
       <NewsletterCTA />
       <Footer />
       <script
