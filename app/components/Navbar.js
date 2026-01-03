@@ -2,7 +2,7 @@ export default function Navbar() {
   return (
     <div
       data-animation="default"
-      className="navbar w-nav"
+      className="navbar w-nav p-10"
       data-easing2="ease"
       data-easing="ease"
       data-collapse="medium"
@@ -18,17 +18,9 @@ export default function Navbar() {
         className="logo-link-wrapper w-nav-brand w--current"
       >
         <img
-          width="Auto"
-          height="Auto"
           alt="Logo"
-          src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png"
+          src=".\Brand Kit for Toe Tripper\Toe Tripper Logo.png"
           loading="eager"
-          srcSet="
-            https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-500.png  500w,
-            https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-800.png  800w,
-            https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png       1011w
-          "
-          sizes="(max-width: 991px) 124.4296875px, 9vw"
           className="logo"
         />
       </a>

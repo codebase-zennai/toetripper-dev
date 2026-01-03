@@ -1,3 +1,5 @@
+import { IceCream } from "lucide-react";
+
 export default function Hero() {
   return (
     <section className="section">
@@ -25,11 +27,11 @@ export default function Hero() {
               </h1>
               <div className="hero-line"></div>
             </div>
-            <div className="card-flex-wrapper">
+            <div className="card-flex-wrapper font-white  ">
               <div className="card background-primary">
                 <div className="line-flex">
                   <div className="line"></div>
-                  <h5>Quality</h5>
+                  <h5>Effortless</h5>
                   <div className="line"></div>
                 </div>
                 <div className="move-flex">
@@ -37,22 +39,15 @@ export default function Hero() {
                     data-w-id="7f686655-205d-dfce-349c-464c2a11efdc"
                     className="move"
                   >
-                    STOCKS
+                    TRAVEL
                   </h4>
                   <h4
                     data-w-id="2654ea20-eee1-abff-ff89-8a6ab3d2ad9d"
                     className="move-up"
                   >
-                    TICKERS
+                    Experiences
                   </h4>
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt="icon"
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e4292f859f2602266127cd_charger.svg"
-                    loading="eager"
-                    className="icon"
-                  />
+                  <IceCream size={48} className="ice-cream-icon" />
                 </div>
               </div>
               <div className="card font-white background-secondary">
@@ -74,7 +69,7 @@ export default function Hero() {
                       loading="eager"
                       className="arrow"
                     />
-                    <h5 className="hero-heading-text">Stock Alerts</h5>
+                    <h5 className="hero-heading-text">Travel Desk</h5>
                   </div>
                   <div className="hero-heading-flex">
                     <img
@@ -85,7 +80,7 @@ export default function Hero() {
                       loading="eager"
                       className="arrow"
                     />
-                    <h5 className="hero-heading-text">Stock Alerts</h5>
+                    <h5 className="hero-heading-text">Travel Desk</h5>
                   </div>
                   <div className="hero-heading-flex">
                     <img
@@ -96,7 +91,7 @@ export default function Hero() {
                       loading="eager"
                       className="arrow"
                     />
-                    <h5 className="hero-heading-text">Stock Alerts</h5>
+                    <h5 className="hero-heading-text">Travel Desk</h5>
                   </div>
                   <div className="hero-heading-flex">
                     <img
@@ -107,7 +102,7 @@ export default function Hero() {
                       loading="eager"
                       className="arrow"
                     />
-                    <h5 className="hero-heading-text">Stock Alerts</h5>
+                    <h5 className="hero-heading-text">Travel Desk</h5>
                   </div>
                   <div className="hero-heading-flex">
                     <img
@@ -118,7 +113,7 @@ export default function Hero() {
                       loading="eager"
                       className="arrow"
                     />
-                    <h5 className="hero-heading-text">Stock Alerts</h5>
+                    <h5 className="hero-heading-text">Travel Desk</h5>
                   </div>
                 </div>
               </div>
@@ -162,15 +157,9 @@ export default function Hero() {
               </a>
             </div>
             <img
-              src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a463f0ccaa6615380ed9_Hero.webp"
+              src="./images/home.jpg"
               loading="lazy"
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
-              srcSet="
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a463f0ccaa6615380ed9_Hero-p-500.webp   500w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a463f0ccaa6615380ed9_Hero-p-800.webp   800w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a463f0ccaa6615380ed9_Hero-p-1080.webp 1080w,
-                https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a463f0ccaa6615380ed9_Hero.webp        1440w
-              "
               alt="woman and man  sitting on a chair"
               className="hero-image"
             />

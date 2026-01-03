@@ -2902,11 +2902,7 @@ blockquote {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 7.8vw;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 4.5rem;
-  padding-right: 4.5rem;
+  /* height: 7.8vw; */
   display: flex;
   position: absolute;
   inset: 0% 0% auto;
@@ -3791,7 +3787,12 @@ blockquote {
   z-index: 1;
   border-radius: var(--border-radius);
   text-align: center;
-  background-image: url("https://cdn.prod.website-files.com/66e3df8d47eb3991ca9dbef7/66e52526c6abb1203e209925_img_CTJ4.webp");
+    background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url("https://images.pexels.com/photos/210012/pexels-photo-210012.jpeg");
   background-position: 50% 0;
   background-repeat: no-repeat;
   background-size: cover;

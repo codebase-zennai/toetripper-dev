@@ -1,3 +1,5 @@
+import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
+
 export default function Services() {
   return (
     <section className="section">
@@ -11,23 +13,24 @@ export default function Services() {
             className="features-card-large"
           >
             <div className="features-flex">
-              <img
-                width="Auto"
-                height="Auto"
-                alt="icon"
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e4277518536574700195d6_signal_cellular_alt.svg"
-                loading="eager"
-                className="features-arrow-image"
-              />
-              <div className="features-block no-gap align-right">
-                <h2>
-                  2X
-                  <br />
-                </h2>
-                <h1 className="outline-black">SPY</h1>
+              <div className="w-full items-center justify-center">
+                <div className="flex justify-center">
+                  <TreePalm
+                    size={200}
+                    strokeWidth={0.5}
+                    className="text-white"
+                  />
+                </div>
+                <div className="flex m-10 justify-center">
+                  <h2 className="text-white text-center"> Tailored journeys</h2>
+                </div>
               </div>
             </div>
-            <h5>Cumulative Returns of Double the S&amp;P 500</h5>
+            <div className="flex justify-center w-full">
+              <h5 className="text-white text-center">
+                Luxury travel designed for individuality
+              </h5>
+            </div>
           </div>
           <div className="features-block">
             <div className="features-flex-wrapper">
@@ -35,30 +38,21 @@ export default function Services() {
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3a"
                 className="features-card-small"
               >
-                <h5>Returns</h5>
-                <h2 className="medium-text">
-                  114<sup>%</sup>
-                </h2>
+                <h5>MICE & Incentive Travel </h5>
+                <div className="w-full justify-center flex">
+                  <TicketsPlane size={100} strokeWidth={0.5} />
+                </div>
               </div>
               <div
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3f"
                 className="features-card-small"
               >
                 <div className="features-flex space-between">
-                  <h5>capture</h5>
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt="Up arrow"
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e96fbb43d052216cc9e5fd_svg_ZSZ9.svg"
-                    loading="eager"
-                    className="icon"
-                  />
+                  <h5>Corporate Events</h5>
                 </div>
-                <h4>
-                  GAINS
-                  <br />
-                </h4>
+                <div className="w-full justify-center flex">
+                  <PartyPopper size={100} strokeWidth={0.5} />
+                </div>
               </div>
             </div>
             <div
@@ -66,15 +60,9 @@ export default function Services() {
               className="features-card-wide"
             >
               <div className="features-flex space-between align-center">
-                <h4 className="outline-white">REAL-TIME</h4>
-                <img
-                  width="Auto"
-                  height="Auto"
-                  alt="Clock icon"
-                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e96f34a529b6cf93f7db14_svg_BEMF.svg"
-                  loading="eager"
-                  className="icon"
-                />
+                <h4 className="text-white">Consultative & Support Services</h4>
+                <HeartHandshake size={125} strokeWidth={1} className="text-white"/>
+                
               </div>
               <h5 className="font-white">
                 Alerts to safely participate in the market
