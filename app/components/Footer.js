@@ -1,3 +1,5 @@
+'use client';
+
 export default function Footer() {
   return (
     <section className="section background-black">
@@ -35,10 +37,7 @@ export default function Footer() {
                   alt=""
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png"
                   loading="eager"
-                  srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png       512w
-                  "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png 512w"
                   sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                   className="social-icon smaller"
                 />
@@ -54,10 +53,7 @@ export default function Footer() {
                   alt=""
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
                   loading="eager"
-                  srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png       512w
-                  "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
                   sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                   className="social-icon smaller"
                 />
@@ -73,10 +69,7 @@ export default function Footer() {
                   alt=""
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
                   loading="eager"
-                  srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png       512w
-                  "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
                   sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                   className="social-icon smaller"
                 />

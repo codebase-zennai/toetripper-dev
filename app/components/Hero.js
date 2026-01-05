@@ -1,3 +1,5 @@
+'use client';
+
 import { IceCream } from "lucide-react";
 
 export default function Hero() {

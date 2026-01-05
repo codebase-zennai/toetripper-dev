@@ -1,3 +1,5 @@
+'use client';
+
 import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
 
 export default function Services() {

@@ -1,3 +1,5 @@
+'use client';
+
 import { CircleQuestionMark, Search } from "lucide-react";
 
 export default function Explore() {

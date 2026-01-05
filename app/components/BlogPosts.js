@@ -1,3 +1,5 @@
+'use client';
+
 export default function BlogPosts() {
   return (
     <section className="section background-black">
@@ -83,12 +85,7 @@ export default function BlogPosts() {
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins.webp"
                     loading="eager"
                     sizes="(max-width: 479px) 85vw, (max-width: 991px) 360px, 25vw"
-                    srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-500.webp   500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-800.webp   800w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-1080.webp 1080w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins.webp        1440w
-                    "
+                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins-p-1080.webp 1080w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66f287578fbaaecfa6d82453_Coins.webp 1440w"
                     className="image-absolute"
                   />
                   <div className="plus-wrapper">
@@ -141,12 +138,7 @@ export default function BlogPosts() {
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205.webp"
                     loading="eager"
                     sizes="(max-width: 479px) 85vw, (max-width: 991px) 360px, 25vw"
-                    srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-500.webp   500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-800.webp   800w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-1080.webp 1080w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205.webp        1440w
-                    "
+                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205-p-1080.webp 1080w, https://wubflow-shield.NOCODEXPORT.DEV/66e5258893f281dac24798b8/66ee61c1ba429411465a015b_blog%205.webp 1440w"
                     className="image-absolute"
                   />
                   <div className="plus-wrapper">

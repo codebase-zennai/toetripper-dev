@@ -20,7 +20,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="w-mod-js w-mod-ix">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

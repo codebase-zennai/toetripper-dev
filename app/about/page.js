@@ -1,10 +1,41 @@
+'use client';
+
+import { useState } from 'react';
 import Navbar from "../components/Navbar";
+import WebflowClientOnly from "../components/WebflowClientOnly";
 import "./about.css";
+import NewsletterCTA from '../components/NewsletterCTA';
 
 export default function About() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    try {
+      // Add your form submission logic here (e.g., API call)
+      // For now, we'll simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setStatus('success');
+      setEmail('');
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      setStatus('error');
+      
+      // Reset error message after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
+
   return (
-    <>
-      <Navbar />
+    <WebflowClientOnly>
+      <>
+        <Navbar />
       <section className="section">
         <div className="w-layout-blockcontainer container padding-9rem w-container">
           <div className="space-page-top"></div>
@@ -64,11 +95,7 @@ export default function About() {
           <div className="about-images-flex slide-from-right-animation">
             <img
               sizes="(max-width: 479px) 85vw, (max-width: 991px) 420px, 29vw"
-              srcSet="
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0-p-500.webp 500w,
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0-p-800.webp 800w,
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0.webp       960w
-            "
+              srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0.webp 960w"
               alt="woman and man  sitting on a chair"
               src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52a7e4b537205d4792604_img_NKZ0.webp"
               loading="eager"
@@ -107,12 +134,7 @@ export default function About() {
             </div>
             <img
               sizes="(max-width: 479px) 85vw, (max-width: 991px) 420px, 29vw"
-              srcSet="
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-500.webp   500w,
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-800.webp   800w,
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-1080.webp 1080w,
-              https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2.webp        1440w
-            "
+              srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2-p-1080.webp 1080w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2.webp 1440w"
               alt="woman and man standing"
               src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e52888311b2e77b16068ef_img_zOC2.webp"
               loading="eager"
@@ -277,11 +299,7 @@ export default function About() {
                 </div>
                 <img
                   sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 596px, 41vw"
-                  srcSet="
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-500.webp 500w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-800.webp 800w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane.webp       960w
-                "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane.webp 960w"
                   alt="woman sitting on a chair"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane.webp"
                   loading="lazy"
@@ -328,10 +346,7 @@ export default function About() {
                       alt=""
                       src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
                       loading="eager"
-                      srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png       512w
-                    "
+                      srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
                       sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                       className="social-icon smaller"
                     />
@@ -347,10 +362,7 @@ export default function About() {
                       alt=""
                       src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
                       loading="eager"
-                      srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png       512w
-                    "
+                      srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
                       sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                       className="social-icon smaller"
                     />
@@ -398,10 +410,7 @@ export default function About() {
                       alt=""
                       src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
                       loading="eager"
-                      srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png       512w
-                    "
+                      srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
                       sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                       className="social-icon smaller"
                     />
@@ -417,10 +426,7 @@ export default function About() {
                       alt=""
                       src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
                       loading="eager"
-                      srcSet="
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w,
-                      https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png       512w
-                    "
+                      srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
                       sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                       className="social-icon smaller"
                     />
@@ -446,11 +452,7 @@ export default function About() {
                 </div>
                 <img
                   sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 596px, 41vw"
-                  srcSet="
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-500.webp 500w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-800.webp 800w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob.webp       960w
-                "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob.webp 960w"
                   alt="man sitting on a chair"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob.webp"
                   loading="lazy"
@@ -463,63 +465,7 @@ export default function About() {
         </div>
         <div className="space-7rem"></div>
       </section>
-      <section className="section">
-        <div className="space-7rem"></div>
-        <div className="space-7rem"></div>
-        <div className="space-7rem"></div>
-        <div className="w-layout-blockcontainer cta-container w-container">
-          <div className="cta-wrapper">
-            <div className="w-layout-hflex cta-card slide-down-animation">
-              <h2 className="cta-title">
-                Expert <span className="italics">Stock Analysis</span>
-              </h2>
-              <div className="space-1rem"></div>
-              <p className="max-width-30rem">
-                Subscribe alongside tens of thousands of investors and
-                immediately receive expert up-to-date stock picks.
-              </p>
-              <div className="space-2rem"></div>
-              <div className="sign-up-form w-form">
-                <form
-                  id="wf-form-Subscribe-To-Newsletter"
-                  name="wf-form-Subscribe-To-Newsletter"
-                  data-name="Subscribe To Newsletter"
-                  method="get"
-                  className="sign-up-form-container"
-                  data-wf-page-id="66e538b6807afc8f8755530c"
-                  data-wf-element-id="d2f74130-cfa6-9378-383c-8bf2dd17b6f4"
-                >
-                  <input
-                    className="sign-up-text-field w-input"
-                    maxLength={256}
-                    name="Newsletter-Email-2"
-                    data-name="Newsletter Email 2"
-                    aria-label="Enter your email"
-                    placeholder="Enter your email"
-                    type="email"
-                    id="Newsletter-Email-2"
-                    required
-                  />
-                  <input
-                    type="submit"
-                    data-wait="Please wait..."
-                    className="button-subscribe w-button"
-                    value="→"
-                  />
-                </form>
-                <div className="success-message-sign-up-form w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div className="error-message w-form-fail">
-                  <div className="red-font">
-                    Oops! Something went wrong while submitting the form.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <NewsletterCTA />
       <section className="section background-black">
         <div className="w-layout-blockcontainer container padding-4-5rem w-container">
           <div className="space-2rem"></div>
@@ -535,11 +481,7 @@ export default function About() {
                   alt="Logo"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png"
                   loading="eager"
-                  srcSet="
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-500.png  500w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-800.png  800w,
-                  https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png       1011w
-                "
+                  srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin-p-800.png 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f2538bc11df4e06933f3a5_WLTH%20Thin.png 1011w"
                   sizes="(max-width: 479px) 139.984375px, (max-width: 991px) 124.4296875px, 9vw"
                   className="footer-logo"
                 />
@@ -556,10 +498,7 @@ export default function About() {
                     alt=""
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png"
                     loading="eager"
-                    srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png       512w
-                  "
+                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e588688b33955498caac1f_youtubeicon.png 512w"
                     sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                     className="social-icon smaller"
                   />
@@ -575,10 +514,7 @@ export default function About() {
                     alt=""
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
                     loading="eager"
-                    srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png       512w
-                  "
+                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
                     sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                     className="social-icon smaller"
                   />
@@ -594,10 +530,7 @@ export default function About() {
                     alt=""
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
                     loading="eager"
-                    srcSet="
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w,
-                    https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png       512w
-                  "
+                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
                     sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
                     className="social-icon smaller"
                   />
@@ -763,26 +696,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      <script
-        src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66e3df8d47eb3991ca9dbef7"
-        type="text/javascript"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossOrigin="anonymous"
-      ></script>
-      <script
-        src="https://wubflow-shield.nocodexport.dev/66e3df8d47eb3991ca9dbef7/js/webflow.9633dd252.js"
-        type="text/javascript"
-      ></script>
-      <script
-        src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66e3df8d47eb3991ca9dbef7"
-        type="text/javascript"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossOrigin="anonymous"
-      ></script>
-      <script
-        src="https://wubflow-shield.nocodexport.dev/66e3df8d47eb3991ca9dbef7/js/webflow.9633dd252.js"
-        type="text/javascript"
-      ></script>
     </>
+    </WebflowClientOnly>
   );
 }

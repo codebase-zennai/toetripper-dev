@@ -1,4 +1,33 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function NewsletterCTA() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    try {
+      // Add your form submission logic here (e.g., API call)
+      // For now, we'll simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setStatus('success');
+      setEmail('');
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      setStatus('error');
+      
+      // Reset error message after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
+
   return (
     <div className="background-black">
       <section className="section">
@@ -17,43 +46,7 @@ export default function NewsletterCTA() {
                 touch to curate a personalized travel solution for you.
               </p>
               <div className="space-2rem"></div>
-              <div className="sign-up-form w-form">
-                <form
-                  id="wf-form-Subscribe-To-Newsletter"
-                  name="wf-form-Subscribe-To-Newsletter"
-                  data-name="Subscribe To Newsletter"
-                  method="get"
-                  className="sign-up-form-container"
-                  data-wf-page-id="66e3df8d47eb3991ca9dbefe"
-                  data-wf-element-id="d2f74130-cfa6-9378-383c-8bf2dd17b6f4"
-                >
-                  <input
-                    className="sign-up-text-field w-input"
-                    maxLength="256"
-                    name="Newsletter-Email-2"
-                    data-name="Newsletter Email 2"
-                    aria-label="Enter your email"
-                    placeholder="Enter your email"
-                    type="email"
-                    id="Newsletter-Email-2"
-                    required=""
-                  />
-                  <input
-                    type="submit"
-                    data-wait="Please wait..."
-                    className="button-subscribe w-button"
-                    value="→"
-                  />
-                </form>
-                <div className="success-message-sign-up-form w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div className="error-message w-form-fail">
-                  <div className="red-font">
-                    Oops! Something went wrong while submitting the form.
-                  </div>
-                </div>
-              </div>
+   
             </div>
           </div>
         </div>
