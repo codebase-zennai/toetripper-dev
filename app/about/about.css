@@ -1,0 +1,209 @@
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+.flip-from-bottom-animation {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.flip-from-bottom-animation.animated {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.slide-from-left-animation {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.slide-from-left-animation.animated {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.slide-from-right-animation {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide-from-right-animation.animated {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+/* Hero Title Animation */
+.hero-title {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-title.animated {
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* About Images Sticky Section */
+.about-stick {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.height-200vw {
+  position: relative;
+  min-height: 200vh;
+}
+
+/* About Images Carousel Animation */
+.about-images-carousel {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  min-width: max-content;
+}
+
+.about-image {
+  width: 420px;
+  height: 560px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .about-image {
+    width: 280px;
+    height: 400px;
+  }
+  
+  .about-images-carousel {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Video Background */
+.w-background-video {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.w-background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Metrics Cards Animation */
+.metrics-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.metrics-card.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.metrics-card:nth-child(1).animated {
+  transition-delay: 0.1s;
+}
+
+.metrics-card:nth-child(2).animated {
+  transition-delay: 0.2s;
+}
+
+.metrics-card:nth-child(3).animated {
+  transition-delay: 0.3s;
+}
+
+.metrics-card:nth-child(4).animated {
+  transition-delay: 0.4s;
+}
+
+/* Team Section Animation */
+.team-image,
+.team-block {
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.team-image {
+  transform: translateX(-50px);
+}
+
+.team-block {
+  transform: translateX(50px);
+}
+
+.team-image.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.team-block.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .about-images-flex {
+    grid-template-columns: 1fr;
+  }
+}

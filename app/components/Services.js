@@ -1,19 +1,48 @@
 'use client';
 
+import { motion } from "framer-motion";
 import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
+
+const viewportOptions = { once: true, amount: 0.2, margin: "-80px" };
+const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
+const hoverTransition = { duration: 0.2, ease: [0.34, 1.56, 0.64, 1] };
+
+const createBentoVariants = ({ x = 0, y = 0 }) => ({
+  hidden: { opacity: 0, x, y },
+  visible: { opacity: 1, x: 0, y: 0 },
+});
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function Services() {
   return (
     <section className="section">
-      <div
+      <motion.div
         data-w-id="26f29636-e130-073f-81a3-5680a2a67ade"
         className="w-layout-blockcontainer container w-container"
-      > 
-        <h1 className="text-center p-10">Our <span className="italics">Services</span></h1>
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOptions}
+        transition={{ ...baseTransition, duration: 0.6 }}
+      >
+        <h1 className="text-center p-10">
+          Our <span className="italics">Services</span>
+        </h1>
         <div id="learn-more" className="features-flex-wrapper">
-          <div
+          <motion.div
             data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf2d"
-            className="features-card-large hover:scale-95 transition-transform duration-100"
+            className="features-card-large"
+            variants={createBentoVariants({ y: 40, scale: 0.93 })}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOptions}
+            transition={{ ...baseTransition, delay: 0.05 }}
+            whileHover={{ y: -6, transition: hoverTransition }}
+            whileTap={{ y: -3, transition: hoverTransition }}
           >
             <div className="features-flex">
               <div className="w-full items-center justify-center">
@@ -34,21 +63,35 @@ export default function Services() {
                 Luxury travel designed for individuality
               </h5>
             </div>
-          </div>
+          </motion.div>
           <div className="features-block">
             <div className="features-flex-wrapper">
-              <div
+              <motion.div
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3a"
-                className="features-card-small hover:scale-95 transition-transform duration-100"
+                className="features-card-small"
+                variants={createBentoVariants({ x: -40 })}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOptions}
+                transition={{ ...baseTransition, delay: 0.1 }}
+                whileHover={{ y: -4, transition: hoverTransition }}
+                whileTap={{ y: -2, transition: hoverTransition }}
               >
                 <h5>MICE & Incentive Travel </h5>
                 <div className="w-full justify-center flex">
                   <TicketsPlane size={100} strokeWidth={0.5} />
                 </div>
-              </div>
-              <div
+              </motion.div>
+              <motion.div
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3f"
-                className="features-card-small hover:scale-95 transition-transform duration-100"
+                className="features-card-small"
+                variants={createBentoVariants({ x: 40 })}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOptions}
+                transition={{ ...baseTransition, delay: 0.14 }}
+                whileHover={{ y: -4, transition: hoverTransition }}
+                whileTap={{ y: -2, transition: hoverTransition }}
               >
                 <div className="features-flex space-between">
                   <h5>Corporate Events</h5>
@@ -56,25 +99,35 @@ export default function Services() {
                 <div className="w-full justify-center flex">
                   <PartyPopper size={100} strokeWidth={0.5} />
                 </div>
-              </div>
+              </motion.div>
             </div>
-            <div
+            <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
-              className="features-card-wide hover:scale-95 transition-transform duration-100"
+              className="features-card-wide"
+              variants={createBentoVariants({ y: 30 })}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOptions}
+              transition={{ ...baseTransition, delay: 0.18 }}
+              whileHover={{ y: -5, transition: hoverTransition }}
+              whileTap={{ y: -3, transition: hoverTransition }}
             >
               <div className="features-flex space-between align-center">
                 <h4 className="text-white">Consultative & Support Services</h4>
-                <HeartHandshake size={125} strokeWidth={1} className="text-white"/>
-                
+                <HeartHandshake
+                  size={125}
+                  strokeWidth={1}
+                  className="text-white"
+                />
               </div>
               <h5 className="font-white">
                 Alerts to safely participate in the market
               </h5>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="space-7rem"></div>
-      </div>
+      </motion.div>
     </section>
   );
 }

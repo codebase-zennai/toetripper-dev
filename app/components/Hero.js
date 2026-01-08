@@ -1,6 +1,27 @@
 'use client';
 
+import { motion } from "framer-motion";
 import { IceCream } from "lucide-react";
+
+const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
+const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
+const spinnerTransition = { duration: 8, ease: "linear", repeat: Infinity };
+const headingItems = ["Travel Desk", "Travel Desk", "Travel Desk", "Travel Desk", "Travel Desk"];
+
+const heroBlockVariants = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const heroImageVariants = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const cardGroupVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function Hero() {
   return (
@@ -8,7 +29,13 @@ export default function Hero() {
       <div className="w-layout-blockcontainer container padding-4-5rem w-container">
         <div className="space-7rem"></div>
         <div className="hero-flex">
-          <div className="hero-block slide-from-right-animation">
+          <motion.div
+            className="hero-block"
+            variants={heroBlockVariants}
+            initial="hidden"
+            animate="visible"
+            transition={transition}
+          >
             <div className="hero-text-block">
               <div className="subheading-flex">
                 <div className="icon-wrapper background-primary">
@@ -29,8 +56,19 @@ export default function Hero() {
               </h1>
               <div className="hero-line"></div>
             </div>
-            <div className="card-flex-wrapper font-white  ">
-              <div className="card background-primary">
+            <motion.div
+              className="card-flex-wrapper font-white"
+              variants={cardGroupVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ ...transition, delay: 0.1 }}
+            >
+              <motion.div
+                className="card background-primary"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...transition, delay: 0.2 }}
+              >
                 <div className="line-flex">
                   <div className="line"></div>
                   <h5>Effortless</h5>
@@ -51,73 +89,60 @@ export default function Hero() {
                   </h4>
                   <IceCream size={48} className="ice-cream-icon" />
                 </div>
-              </div>
-              <div className="card font-white background-secondary">
+              </motion.div>
+              <motion.div
+                className="card font-white background-secondary"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...transition, delay: 0.3 }}
+              >
                 <h2>36K+</h2>
                 <h5>Customers</h5>
-              </div>
-            </div>
-          </div>
-          <div className="hero-image-wrapper slide-from-left-animation">
+              </motion.div>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            className="hero-image-wrapper"
+            variants={heroImageVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ ...transition, delay: 0.15 }}
+          >
             <div className="cut-out-wrapper align-center">
               <div className="hero-heading-wrapper">
-                <div className="hero-heading">
-                  <div className="hero-heading-flex">
-                    <img
-                      width="Auto"
-                      height="Auto"
-                      alt="Dot Icon"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
-                      loading="eager"
-                      className="arrow"
-                    />
-                    <h5 className="hero-heading-text">Travel Desk</h5>
-                  </div>
-                  <div className="hero-heading-flex">
-                    <img
-                      width="Auto"
-                      height="Auto"
-                      alt="Dot Icon"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
-                      loading="eager"
-                      className="arrow"
-                    />
-                    <h5 className="hero-heading-text">Travel Desk</h5>
-                  </div>
-                  <div className="hero-heading-flex">
-                    <img
-                      width="Auto"
-                      height="Auto"
-                      alt="Dot Icon"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
-                      loading="eager"
-                      className="arrow"
-                    />
-                    <h5 className="hero-heading-text">Travel Desk</h5>
-                  </div>
-                  <div className="hero-heading-flex">
-                    <img
-                      width="Auto"
-                      height="Auto"
-                      alt="Dot Icon"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
-                      loading="eager"
-                      className="arrow"
-                    />
-                    <h5 className="hero-heading-text">Travel Desk</h5>
-                  </div>
-                  <div className="hero-heading-flex">
-                    <img
-                      width="Auto"
-                      height="Auto"
-                      alt="Dot Icon"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
-                      loading="eager"
-                      className="arrow"
-                    />
-                    <h5 className="hero-heading-text">Travel Desk</h5>
-                  </div>
-                </div>
+                <motion.div
+                  className="hero-heading"
+                  initial={{ x: "0%" }}
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={marqueeTransition}
+                >
+                  {headingItems.map((label, index) => (
+                    <div key={`heading-${index}`} className="hero-heading-flex">
+                      <img
+                        width="Auto"
+                        height="Auto"
+                        alt="Dot Icon"
+                        src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
+                        loading="eager"
+                        className="arrow"
+                      />
+                      <h5 className="hero-heading-text">{label}</h5>
+                    </div>
+                  ))}
+                  {headingItems.map((label, index) => (
+                    <div key={`heading-dup-${index}`} className="hero-heading-flex">
+                      <img
+                        width="Auto"
+                        height="Auto"
+                        alt="Dot Icon"
+                        src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f268777327d085522c22a0_svg_2ltJ.svg"
+                        loading="eager"
+                        className="arrow"
+                      />
+                      <h5 className="hero-heading-text">{label}</h5>
+                    </div>
+                  ))}
+                </motion.div>
               </div>
               <img
                 src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f257dcb7e01b8ca88410bc_Top%20Left.svg"
@@ -170,12 +195,14 @@ export default function Hero() {
               data-w-id="5df85663-d46d-b744-b25a-bb603e0e3bf9"
               className="spinner-wrapper w-inline-block"
             >
-              <div
+              <motion.div
                 data-w-id="5df85663-d46d-b744-b25a-bb603e0e3bfa"
                 className="spinner-image"
-              ></div>
+                animate={{ rotate: 360 }}
+                transition={spinnerTransition}
+              ></motion.div>
             </a>
-          </div>
+          </motion.div>
         </div>
         <div className="space-7rem"></div>
       </div>
