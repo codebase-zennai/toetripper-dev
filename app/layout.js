@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-        <LoadingSpinner />
+        <Suspense fallback={null}>
+          <LoadingSpinner />
+        </Suspense>
         {children}
         
         <Script
