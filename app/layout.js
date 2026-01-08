@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
+        <LoadingSpinner />
         {children}
         
         <Script
