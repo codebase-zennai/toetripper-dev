@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
+import { useState } from "react";
 
 const viewportOptions = { once: true, amount: 0.2, margin: "-80px" };
 const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
@@ -18,8 +19,15 @@ const containerVariants = {
 };
 
 export default function Services() {
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e) => {
+    setCursorPos({ x: e.clientX, y: e.clientY });
+  };
+
   return (
-    <section className="section">
+    <section className="section" onMouseMove={handleMouseMove}>
       <motion.div
         data-w-id="26f29636-e130-073f-81a3-5680a2a67ade"
         className="w-layout-blockcontainer container w-container"
@@ -36,6 +44,7 @@ export default function Services() {
           <motion.div
             data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf2d"
             className="features-card-large"
+            style={{ cursor: isHovering ? 'none' : 'pointer' }}
             variants={createBentoVariants({ y: 40, scale: 0.93 })}
             initial="hidden"
             whileInView="visible"
@@ -43,6 +52,8 @@ export default function Services() {
             transition={{ ...baseTransition, delay: 0.05 }}
             whileHover={{ y: -6, transition: hoverTransition }}
             whileTap={{ y: -3, transition: hoverTransition }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
             <div className="features-flex">
               <div className="w-full items-center justify-center">
@@ -69,6 +80,7 @@ export default function Services() {
               <motion.div
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3a"
                 className="features-card-small"
+                style={{ cursor: isHovering ? 'none' : 'pointer' }}
                 variants={createBentoVariants({ x: -40 })}
                 initial="hidden"
                 whileInView="visible"
@@ -76,6 +88,8 @@ export default function Services() {
                 transition={{ ...baseTransition, delay: 0.1 }}
                 whileHover={{ y: -4, transition: hoverTransition }}
                 whileTap={{ y: -2, transition: hoverTransition }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
                 <h5>MICE & Incentive Travel </h5>
                 <div className="w-full justify-center flex">
@@ -85,6 +99,7 @@ export default function Services() {
               <motion.div
                 data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3f"
                 className="features-card-small"
+                style={{ cursor: isHovering ? 'none' : 'pointer' }}
                 variants={createBentoVariants({ x: 40 })}
                 initial="hidden"
                 whileInView="visible"
@@ -92,6 +107,8 @@ export default function Services() {
                 transition={{ ...baseTransition, delay: 0.14 }}
                 whileHover={{ y: -4, transition: hoverTransition }}
                 whileTap={{ y: -2, transition: hoverTransition }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
                 <div className="features-flex space-between">
                   <h5>Corporate Events</h5>
@@ -104,6 +121,7 @@ export default function Services() {
             <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
               className="features-card-wide"
+              style={{ cursor: isHovering ? 'none' : 'pointer' }}
               variants={createBentoVariants({ y: 30 })}
               initial="hidden"
               whileInView="visible"
@@ -111,6 +129,8 @@ export default function Services() {
               transition={{ ...baseTransition, delay: 0.18 }}
               whileHover={{ y: -5, transition: hoverTransition }}
               whileTap={{ y: -3, transition: hoverTransition }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
               <div className="features-flex space-between align-center">
                 <h4 className="text-white">Consultative & Support Services</h4>
@@ -128,6 +148,41 @@ export default function Services() {
         </div>
         <div className="space-7rem"></div>
       </motion.div>
+      
+      <AnimatePresence>
+        {isHovering && (
+          <motion.div
+            key="services-cursor"
+            initial={{ scale: 0.4, opacity: 0, y: 8 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.4, opacity: 0, y: 8 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'fixed',
+              left: cursorPos.x,
+              top: cursorPos.y,
+              width: 100,
+              height: 100,
+              backgroundColor: "#F4A300",
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 9999,
+              color: 'white',
+              fontSize: 12,
+              fontWeight: 500,
+              textAlign: 'center',
+              letterSpacing: 1,
+              textTransform: 'uppercase',
+            }}
+          >
+            Click Here
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

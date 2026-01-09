@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
 import LoadingSpinner from "./components/LoadingSpinner";
+import FloatingCTA from "./components/FloatingCTA";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
           <LoadingSpinner />
         </Suspense>
         {children}
+        <FloatingCTA />
         
         <Script
           id="webfont-loader"

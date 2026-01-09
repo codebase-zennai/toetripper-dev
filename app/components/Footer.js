@@ -203,36 +203,6 @@ export default function Footer() {
           data-w-id="fa36639f-bc34-8f1a-4024-d0889980784b"
           className="footer-line"
         ></div>
-        <div
-          data-w-id="fa36639f-bc34-8f1a-4024-d0889980784c"
-          className="footer-bottom"
-        >
-          <p className="font-white">
-            © 2024 Wealth Bento. All Rights Reserved.
-          </p>
-          <div className="footer-flex">
-            <div className="footer-flex-bottom">
-              <p className="font-white">Powered By </p>
-              <a
-                href="https://webflow.com/"
-                target="_blank"
-                className="w-inline-block"
-              >
-                <p className="footer-bottom-text">Webflow</p>
-              </a>
-            </div>
-            <div className="footer-flex-bottom">
-              <p className="font-white">Built By </p>
-              <a
-                href="https://webflow.com/templates/designers/rick-mummery"
-                target="_blank"
-                className="w-inline-block"
-              >
-                <p className="footer-bottom-text">Rick Mummery</p>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

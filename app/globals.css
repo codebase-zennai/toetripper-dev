@@ -1905,6 +1905,11 @@ textarea.w-select {
   margin-right: 15px;
 }
 
+.package-ul{
+  padding-left: 0px;
+  padding-top: 40px;
+}
+
 .w-richtext figure.w-richtext-align-floatright {
   float: right;
   clear: none;
