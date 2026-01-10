@@ -68,31 +68,21 @@ export default function Explore() {
                 <div className="icon-wrapper background-primary">
                   <CircleQuestionMark className="text-white"/>
                 </div>
-                <h5>Why Us?</h5>
+                <h5>What Sets Us Apart</h5>
               </div>
               <h2>
-                Seamless travel, executed
-                <span className="italics"> with precision.</span>
+                Elevating every journey with
+                <span className="italics"> thoughtful detail.</span>
               </h2>
-              <div className="metrics-flex space-between align-center">
-                <p>
-                  Never miss a chance for seamless travel through expert planning and on-ground execution.
-                </p>
-                <a
-                  href="/services"
-                  data-w-id="c0341e22-4b5c-b0e6-d122-e43ef5c5890f"
-                  className="services-link w-inline-block"
-                >
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt="Link Arrow"
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e44551aba3c50e102266ed_ArrowSide.svg"
-                    loading="eager"
-                    className="large-icon invert"
-                  />
-                </a>
-              </div>
+              <ul className="metrics-flex bullet-column">
+                <li>Bespoke itineraries — never cookie-cutter</li>
+                <li>Trusted global partners &amp; local experts</li>
+                <li>Transparent pricing with clear deliverables</li>
+                <li>Human support — before, during &amp; after travel</li>
+              </ul>
+              <p className="experience-highlight">
+                15+ years of experience | 27,000+ journeys planned | 50+ destinations covered
+              </p>
             </div>
           </div>
           <div className="features-image-wrapper align-botton slide-down-animation">

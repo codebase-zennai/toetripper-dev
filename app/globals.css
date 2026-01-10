@@ -2960,6 +2960,96 @@ blockquote {
   overflow: hidden;
 }
 
+.nav-link-wrapper.dropdown {
+  overflow: visible;
+  align-items: flex-start;
+}
+
+.nav-link-wrapper.dropdown .dropdown-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 14rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.75rem 2rem -0.75rem rgba(15, 23, 42, 0.35);
+  z-index: 30;
+}
+
+.nav-link-wrapper.dropdown:hover .dropdown-menu,
+.nav-link-wrapper.dropdown:focus-within .dropdown-menu,
+.nav-link-wrapper.dropdown.dropdown-open .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-heading {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.dropdown-link {
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: none;
+  padding: 0.25rem 0;
+  transition: color 0.25s ease;
+  display: block;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus {
+  color: #2563eb;
+}
+
+.dropdown-group {
+  border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.dropdown-trigger {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.dropdown-trigger:focus {
+  outline: none;
+}
+
+.nav-link-wrapper.dropdown .nav-link.move-down {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-link-wrapper.dropdown .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    padding: 0.5rem 0 0 0;
+    min-width: 100%;
+  }
+
+  .dropdown-heading {
+    margin-top: 0.5rem;
+  }
+}
+
 .nav-container {
   justify-content: flex-end;
   align-items: center;
@@ -3113,9 +3203,9 @@ blockquote {
 
 .hero-text {
   text-transform: uppercase;
-  font-size: 11.11vw;
+  font-size: 9.5vw;
   font-weight: 500;
-  line-height: 8.89vw;
+  line-height: 7.5vw;
 }
 
 .hero-line {
@@ -3794,8 +3884,8 @@ blockquote {
   text-align: left;
   background-image:
     linear-gradient(
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.85)
     ),
     url("https://images.pexels.com/photos/210012/pexels-photo-210012.jpeg");
   background-position: 50% 0;

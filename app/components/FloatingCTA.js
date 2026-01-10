@@ -13,7 +13,7 @@ export default function FloatingCTA() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[200]">
+    <div className="fixed bottom-6 right-6 z-[600]">
       <Link
         href={CTA_HREF}
         className="group flex items-center gap-3 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(25,59,157,0.35)] transition-transform duration-200 animate-bounce hover:animate-none hover:translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"

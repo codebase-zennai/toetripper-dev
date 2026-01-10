@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
 import { IceCream } from "lucide-react";
@@ -6,7 +6,13 @@ import { IceCream } from "lucide-react";
 const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
 const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
 const spinnerTransition = { duration: 8, ease: "linear", repeat: Infinity };
-const headingItems = ["Travel Desk", "Travel Desk", "Travel Desk", "Travel Desk", "Travel Desk"];
+const headingItems = [
+  "Travel Desk",
+  "Travel Desk",
+  "Travel Desk",
+  "Travel Desk",
+  "Travel Desk",
+];
 
 const heroBlockVariants = {
   hidden: { opacity: 0, x: 60 },
@@ -27,34 +33,34 @@ export default function Hero() {
   return (
     <section className="section">
       <div className="w-layout-blockcontainer container padding-4-5rem w-container">
-        <div className="space-7rem"></div>
-        <div className="hero-flex">
+        <div className="flex">
           <motion.div
-            className="hero-block"
-            variants={heroBlockVariants}
+            className="flex flex-col justify-between my-20"
+            // variants={heroBlockVariants}
             initial="hidden"
             animate="visible"
             transition={transition}
           >
-            <div className="hero-text-block">
-              <div className="subheading-flex">
-                <div className="icon-wrapper background-primary">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e9774998ae29f000632c22_svg_BKz3.svg"
-                    loading="eager"
-                    className="small-icon"
-                  />
-                </div>
-                <h5>Travel & Hospitality</h5>
+            <div className="">
+            <div className="subheading-flex">
+              {/* <div className="icon-wrapper background-primary">
+                <img
+                  width="Auto"
+                  height="Auto"
+                  alt=""
+                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e9774998ae29f000632c22_svg_BKz3.svg"
+                  loading="eager"
+                  className="small-icon"
+                />
               </div>
-              <h1 className="hero-text ">
+              <h5>Travel & Hospitality</h5> */}
+            </div>
+            <div className="">
+              <p className="hero-text">
                 Journey Beyond <span className="italics">Tickets</span>
-                <br />
-              </h1>
+              </p>
               <div className="hero-line"></div>
+            </div>
             </div>
             <motion.div
               className="card-flex-wrapper font-white"
@@ -130,7 +136,10 @@ export default function Hero() {
                     </div>
                   ))}
                   {headingItems.map((label, index) => (
-                    <div key={`heading-dup-${index}`} className="hero-heading-flex">
+                    <div
+                      key={`heading-dup-${index}`}
+                      className="hero-heading-flex"
+                    >
                       <img
                         width="Auto"
                         height="Auto"

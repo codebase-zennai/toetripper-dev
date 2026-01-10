@@ -38,7 +38,7 @@ export default function Services() {
         transition={{ ...baseTransition, duration: 0.6 }}
       >
         <h1 className="text-center p-10">
-          Our <span className="italics">Services</span>
+          Our Services
         </h1>
         <div id="learn-more" className="features-flex-wrapper">
           <motion.div
@@ -133,7 +133,7 @@ export default function Services() {
               onMouseLeave={() => setIsHovering(false)}
             >
               <div className="features-flex space-between align-center">
-                <h4 className="text-white">Consultative & Support Services</h4>
+                <h4 className="text-white">Corporate Travel Solutions</h4>
                 <HeartHandshake
                   size={125}
                   strokeWidth={1}

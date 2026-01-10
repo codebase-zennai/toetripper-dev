@@ -1,92 +1,85 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+
+const navLinks = [
+  { label: 'Home', href: '/', current: true },
+  { label: 'About', href: '/about' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+
 export default function Navbar() {
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  const toggleServices = () => setServicesOpen((prev) => !prev);
+  const closeServices = () => setServicesOpen(false);
+
   return (
-    <div
-      data-animation="default"
-      className="navbar w-nav p-10"
-      data-easing2="ease"
-      data-easing="ease"
-      data-collapse="medium"
-      role="banner"
-      data-no-scroll="1"
-      data-duration="400"
-      data-doc-height="1"
-    >
-      <a
-        href="/"
-        aria-current="page"
-        className="logo-link-wrapper w-nav-brand w--current"
-      >
-        <img
-          alt="Logo"
-          src=".\Brand Kit for Toe Tripper\Toe Tripper Logo.png"
-          loading="eager"
-          className="logo"
-        />
-      </a>
-      <div className="nav-container w-container">
+    <div>
+      <div className="items-center justify-between flex mx-10 mb-10 mt-5">
+        <Link href="/" aria-label="Toe Tripper" className="brand w-nav-brand" onClick={closeServices}>
+          <Image src="/Brand Kit for Toe Tripper/Toe Tripper Logo.png" alt="Toe Tripper" width={350} height={56} priority />
+        </Link>
+
         <nav role="navigation" className="nav-menu w-nav-menu">
-          <div className="nav-link-wrapper">
-            <a
-              href="/"
-              aria-current="page"
-              className="nav-link w-nav-link w--current"
+          {navLinks.slice(0, 2).map((link) => (
+            <div key={link.href} className="nav-link-wrapper">
+              <Link href={link.href} aria-current={link.current ? 'page' : undefined} className={`nav-link w-nav-link${link.current ? ' w--current' : ''}`} onClick={closeServices}>
+                {link.label}
+              </Link>
+              <Link href={link.href} aria-current={link.current ? 'page' : undefined} className={`nav-link move-down hide-on-tab w-nav-link${link.current ? ' w--current' : ''}`} onClick={closeServices}>
+                {link.label}
+              </Link>
+            </div>
+          ))}
+
+          <div
+            className={`nav-link-wrapper dropdown${servicesOpen ? ' dropdown-open' : ''}`}
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button
+              type="button"
+              className="nav-link w-nav-link dropdown-trigger"
+              aria-haspopup="true"
+              aria-expanded={servicesOpen}
+              onClick={toggleServices}
             >
-              Home
-            </a>
-            <a
-              href="/"
-              aria-current="page"
-              className="nav-link move-down hide-on-tab w-nav-link w--current"
-            >
-              Home
-            </a>
+              Services
+            </button>
+            <div className="dropdown-menu" role="menu">
+              <div className="dropdown-group">
+                <span className="dropdown-heading">Destinations</span>
+                <Link href="/services/destinations/india" className="dropdown-link" role="menuitem" onClick={closeServices}>
+                  Indian
+                </Link>
+                <Link href="/services/destinations/international" className="dropdown-link" role="menuitem" onClick={closeServices}>
+                  International
+                </Link>
+              </div>
+              <Link href="/services/corporate-events" className="dropdown-link" role="menuitem" onClick={closeServices}>
+                Corporate Events
+              </Link>
+              <Link href="/services/mice-incentive" className="dropdown-link" role="menuitem" onClick={closeServices}>
+                MICE &amp; Incentive Travel
+              </Link>
+            </div>
           </div>
-          <div className="nav-link-wrapper">
-            <a href="/about" className="nav-link w-nav-link">
-              About
-            </a>
-            <a
-              href="/about"
-              className="nav-link move-down hide-on-tab w-nav-link"
-            >
-              About
-            </a>
-          </div>
-          <div className="nav-link-wrapper">
-            <a href="/services" className="nav-link w-nav-link">
-              services
-            </a>
-            <a
-              href="/services"
-              className="nav-link move-down hide-on-tab w-nav-link"
-            >
-              services
-            </a>
-          </div>
-          <div className="nav-link-wrapper">
-            <a href="/blog" className="nav-link w-nav-link">
-              Blog
-            </a>
-            <a
-              href="/blog"
-              className="nav-link move-down hide-on-tab w-nav-link"
-            >
-              Blog
-            </a>
-          </div>
-          <div className="nav-link-wrapper">
-            <a href="/contact" className="nav-link w-nav-link">
-              Contact
-            </a>
-            <a
-              href="/contact"
-              className="nav-link move-down hide-on-tab w-nav-link"
-            >
-              Contact
-            </a>
-          </div>
+
+          {navLinks.slice(2).map((link) => (
+            <div key={link.href} className="nav-link-wrapper">
+              <Link href={link.href} className="nav-link w-nav-link" onClick={closeServices}>
+                {link.label}
+              </Link>
+              <Link href={link.href} className="nav-link move-down hide-on-tab w-nav-link" onClick={closeServices}>
+                {link.label}
+              </Link>
+            </div>
+          ))}
         </nav>
         <div className="menu-button w-nav-button">
           <div className="burger-icon w-icon-nav-menu"></div>
