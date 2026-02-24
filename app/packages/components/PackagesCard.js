@@ -11,7 +11,7 @@ export default function PackagesCard({
   destination,
 }) {
   return (
-    <div className="border border-black/8 overflow-hidden bg-white shadow-[0_20px_45px_rgba(15,15,15,0.08)] flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(15,15,15,0.15)]">
+    <div className="border border-black/8 rounded-xl overflow-hidden bg-white shadow-[0_20px_45px_rgba(15,15,15,0.08)] flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(15,15,15,0.15)]">
       <div className="relative h-50 md:h-60 overflow-hidden ">
         <img
           src={imageSrc}

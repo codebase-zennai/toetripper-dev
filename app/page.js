@@ -11,6 +11,7 @@ import BlogPosts from "./components/BlogPosts";
 import NewsletterCTA from "./components/NewsletterCTA";
 import Footer from "./components/Footer";
 import WebflowClientOnly from "./components/WebflowClientOnly";
+import FeaturedPackages from "./components/FeaturedPackages";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <>
         <Navbar />
         <Hero />
+        <FeaturedPackages />
         <Services />
         <Explore />
         <Brands />
