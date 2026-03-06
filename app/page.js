@@ -19,12 +19,12 @@ export default function Home() {
       <>
         <Navbar />
         <Hero />
-        <FeaturedPackages />
         <Services />
+        <FeaturedPackages />
         <Explore />
-        <Brands />
+        {/* <Brands /> */}
         <Metrics />
-        <BlogPosts />
+        {/* <BlogPosts /> */}
         <NewsletterCTA />
         <Footer />
       </>

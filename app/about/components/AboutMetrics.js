@@ -30,8 +30,8 @@ export default function AboutMetrics() {
 
   return (
     <>
-      <section className="section">
-        <div className="w-layout-blockcontainer container background-black rounded-corners w-container">
+      <div>
+        <div className="background-black rounded-corners">
           <div className="space-7rem"></div>
           <div className="returns-flex">
             <h1 ref={returnsLeftRef} className="large-text slide-from-left-animation">114%</h1>
@@ -43,9 +43,9 @@ export default function AboutMetrics() {
           </div>
           <div className="space-7rem"></div>
         </div>
-      </section>
-      <section className="section background-black">
-        <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+      </div>
+      <div className="background-black">
+        <div className="padding-4-5rem">
           <div className="metrics-grid-quarter">
             <div
               ref={(el) => (metricsCardsRef.current[0] = el)}
@@ -60,7 +60,7 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="caps">Hardwork</h4>
+              <h4 className="uppercase">Hardwork</h4>
               <h5>
                 Lorem ipsum <br />
                 dolor sit amet.
@@ -79,7 +79,7 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="caps">Research</h4>
+              <h4 className="uppercase">Research</h4>
               <h5>
                 Lorem ipsum <br />
                 dolor sit amet.
@@ -98,7 +98,7 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="caps">Innovation</h4>
+              <h4 className="uppercase">Innovation</h4>
               <h5>
                 Lorem ipsum <br />
                 dolor sit amet.
@@ -117,8 +117,8 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon invert"
               />
-              <h4 className="caps font-white">Veterans</h4>
-              <h5 className="font-white">
+              <h4 className="uppercase text-site-white">Veterans</h4>
+              <h5 className="text-site-white">
                 Lorem ipsum <br />
                 dolor sit amet.
               </h5>
@@ -126,7 +126,7 @@ export default function AboutMetrics() {
           </div>
           <div className="space-7rem"></div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

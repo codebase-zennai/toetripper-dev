@@ -1,7 +1,92 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #193B9D;
+  --color-secondary: #F4A300;
+  --color-site-white: whitesmoke;
+  --color-site-black: #050505;
+  --color-light-gray: #e7e7e9;
+  --color-dark-gray: #c7c7c7;
+}
+
+/* ===== Shared Animation Keyframes ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== Shared Animation Classes ===== */
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+.flip-from-bottom-animation {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.flip-from-bottom-animation.animated {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.slide-from-left-animation {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.slide-from-left-animation.animated {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.slide-from-right-animation {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.slide-from-right-animation.animated {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.slide-down-animation {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.slide-down-animation.animated {
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.slide-up-animation {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.slide-up-animation.animated {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
 /* Wrap manual CSS in a layer with lower priority than Tailwind */
-/* @layer base { */
+@layer base {
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -2229,6 +2314,9 @@ body {
   font-family: Inter, sans-serif;
   font-size: 1vw;
   line-height: 1.4vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -2580,22 +2668,10 @@ blockquote {
   inset: -1rem;
 }
 
-.caps {
-  text-transform: uppercase;
-}
-
 .outline-black {
   color: #0000;
   -webkit-text-stroke-width: 0.1vw;
   -webkit-text-stroke-color: var(--black);
-}
-
-.font-black {
-  color: var(--black);
-}
-
-.no-wrap {
-  white-space: nowrap;
 }
 
 .space-1rem {
@@ -3037,16 +3113,77 @@ blockquote {
   font-size: 0.9rem;
   font-weight: 500;
   text-transform: none;
-  padding: 0.25rem 0;
-  transition: color 0.25s ease;
-  display: block;
+  letter-spacing: normal;
+  padding: 0.45rem 0.6rem;
+  transition: color 0.25s ease, background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-decoration: none;
+  border-radius: 0.375rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .tt-dropdown-link:hover,
 .tt-dropdown-link:focus {
   color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.06);
   outline: none;
+}
+
+/* Chevron Icons */
+.tt-chevron-icon {
+  display: inline-block;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.tt-navbar-link--chevron {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.tt-chevron-right {
+  margin-left: auto;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.tt-dropdown-link--nested:hover .tt-chevron-right {
+  opacity: 1;
+}
+
+/* Nested Dropdown Container */
+.tt-dropdown-nested {
+  position: relative;
+}
+
+/* Nested Sub-Dropdown */
+.tt-dropdown-sub {
+  display: none;
+  flex-direction: column;
+  gap: 0.15rem;
+  position: absolute;
+  left: 100%;
+  top: -0.5rem;
+  min-width: 11rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.75rem 2rem -0.75rem rgba(15, 23, 42, 0.35);
+  z-index: 1003;
+  margin-left: 0.25rem;
+}
+
+/* Desktop: show sub-dropdown on hover */
+.tt-dropdown-nested:hover > .tt-dropdown-sub {
+  display: flex;
 }
 
 /* Mobile Toggle Button */
@@ -3158,6 +3295,29 @@ blockquote {
 
   .tt-dropdown-heading {
     margin-top: 0.5rem;
+  }
+
+  /* Mobile nested dropdown: inline expand */
+  .tt-dropdown-nested:hover > .tt-dropdown-sub {
+    display: none;
+  }
+
+  .tt-dropdown-sub {
+    position: static;
+    box-shadow: none;
+    background-color: transparent;
+    margin-left: 0;
+    padding: 0.25rem 0 0.25rem 1rem;
+    min-width: 100%;
+    border-radius: 0;
+  }
+
+  .tt-dropdown-sub--open {
+    display: flex;
+  }
+
+  .tt-chevron-icon {
+    display: inline-block;
   }
 }
 
@@ -3583,9 +3743,8 @@ blockquote {
   margin-right: auto;
   display: flex;
 }
-
+ 
 .features-card-wide {
-  background-color: var(--black);
   text-align: left;
   border-radius: 24px;
   flex-direction: column;
@@ -4284,10 +4443,6 @@ blockquote {
   top: -19.45vw;
 }
 
-.font-white {
-  color: var(--white);
-}
-
 .max-width-30rem {
   max-width: 33.33vw;
 }
@@ -4452,13 +4607,6 @@ blockquote {
   flex-flow: column;
   justify-content: flex-start;
   align-items: flex-start;
-  display: flex;
-}
-
-.centered-block {
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
   display: flex;
 }
 
@@ -6619,4 +6767,7 @@ blockquote {
     max-width: 100%;
   }
 }
-/* } End of @layer base */
+}
+.section  {
+  padding-inline: 5rem ;  
+}

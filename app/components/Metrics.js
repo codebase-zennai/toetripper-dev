@@ -2,10 +2,10 @@
 
 export default function Metrics() {
   return (
-    <section className="section">
-      <div className="w-layout-blockcontainer container background-black rounded-corners w-container">
+    <div className=""> 
+      <div className="background-black rounded-corners">
         <div className="space-7rem"></div>
-        <div className="metrics-wrapper font-white">
+        <div className="metrics-wrapper text-site-white">
           <div
             data-w-id="611319a8-5885-5a98-7ea0-fcd288e08620"
             className="metrics-block"
@@ -37,6 +37,6 @@ export default function Metrics() {
         </div>
         <div className="space-7rem"></div>
       </div>
-    </section>
+    </div>
   );
 }

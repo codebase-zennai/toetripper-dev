@@ -3,7 +3,7 @@
 export default function Footer() {
   return (
     <section className="section background-black">
-      <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+      <div className="padding-4-5rem">
         <div className="space-2rem"></div>
         <div
           data-w-id="fa36639f-bc34-8f1a-4024-d088998077f8"
@@ -19,7 +19,7 @@ export default function Footer() {
                 width="Auto"
                 height="Auto"
                 alt="Logo"
-                src="./Brand Kit for Toe Tripper/Toe Tripper Logo.png"
+                src="/Brand Kit for Toe Tripper/Toe Tripper Logo.png"
                 loading="eager"
                 sizes="(max-width: 479px) 139.984375px, (max-width: 991px) 124.4296875px, 9vw"
                 className="footer-logo"
@@ -75,13 +75,13 @@ export default function Footer() {
                 />
               </a>
             </div>
-            <p className="max-width-17vw font-white">
+            <p className="max-width-17vw text-site-white">
               Navigate the Markets, Secure Your Future.
             </p>
           </div>
           <div className="footer-right-flex">
             <div className="footer-wrapper">
-              <h5 className="font-white">Main</h5>
+              <h5 className="text-site-white">Main</h5>
               <div className="footer-link-wrapper">
                 <a
                   href="/"
@@ -124,7 +124,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="footer-wrapper">
-              <h5 className="font-white">Pages</h5>
+              <h5 className="text-site-white">Pages</h5>
               <div className="footer-link-wrapper">
                 <a href="/contact" className="footer-link">
                   Contact
@@ -151,7 +151,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="footer-wrapper">
-              <h5 className="font-white">Utilities</h5>
+              <h5 className="text-site-white">Utilities</h5>
               <div className="footer-link-wrapper">
                 <a href="/utilties/style-guide" className="footer-link">
                   Style Guide

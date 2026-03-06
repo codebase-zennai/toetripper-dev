@@ -53,8 +53,8 @@ export default function NewsletterCTA() {
   };
 
   return (
-    <div className="background-black">
-      <section className="section">
+    <div className="background-black" id="Contact">
+      <div className="">
         <div className="space-7rem"></div>
         <div className="space-7rem"></div>
         <div className="space-7rem"></div>
@@ -207,7 +207,7 @@ export default function NewsletterCTA() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

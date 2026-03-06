@@ -184,13 +184,13 @@ export default function PackagesGrid() {
   };
 
   return (
-    <section className="bg-linear-to-b mb-40" id="packages">
-      <div className="w-layout-blockcontainer container padding-9rem w-container">
+    <section className="bg-linear-to-b mb-40 px-20" id="packages"> 
+      <div className="padding-9rem">
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 p-5 bg-white border border-black/8  mb-6">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 p-5 bg-white border border-black/8  mb-6 rounded-xl">
           <button 
-            className="filter-bt flex items-center gap-2 py-2.5 px-5 bg-black text-white border-none rounded-lg font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#333]"
+            className="filter-bt flex items-center gap-2 py-2.5 px-5 bg-black border-none rounded-lg font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#333]"
             onClick={() => setShowFilters(!showFilters)}
           >
             Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
@@ -229,8 +229,8 @@ export default function PackagesGrid() {
                     key={dest}
                     className={`py-2 px-4 border rounded-[20px] text-sm cursor-pointer transition-all duration-200 ${
                       selectedDestination === dest 
-                        ? 'filter-chip-active border-black' 
-                        : 'filter-chip border-black/20 hover:border-black/40'
+                        ? 'bg-[#111] text-white border-black hover:bg-[#333]' 
+                        : 'bg-white text-black border-black/20 hover:border-black/40 hover:bg-black/2'
                     }`}
                     onClick={() => setSelectedDestination(dest)}
                   >
@@ -248,8 +248,8 @@ export default function PackagesGrid() {
                     key={cat}
                     className={`py-2 px-4 border rounded-[20px] text-sm cursor-pointer transition-all duration-200 ${
                       selectedCategory === cat 
-                        ? 'filter-chip-active border-black' 
-                        : 'filter-chip border-black/20 hover:border-black/40'
+                        ? 'bg-[#111] text-white border-black hover:bg-[#333]' 
+                        : 'bg-white text-black border-black/20 hover:border-black/40 hover:bg-black/2'
                     }`}
                     onClick={() => setSelectedCategory(cat)}
                   >
@@ -267,8 +267,8 @@ export default function PackagesGrid() {
                     key={range.label}
                     className={`py-2 px-4 border rounded-[20px] text-sm cursor-pointer transition-all duration-200 ${
                       selectedPriceRange.label === range.label 
-                        ? 'filter-chip-active border-black' 
-                        : 'filter-chip border-black/20 hover:border-black/40'
+                        ? 'bg-[#111] text-white border-black hover:bg-[#333]' 
+                        : 'bg-white text-black border-black/20 hover:border-black/40 hover:bg-black/2'
                     }`}
                     onClick={() => setSelectedPriceRange(range)}
                   >

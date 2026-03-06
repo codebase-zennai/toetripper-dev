@@ -38,11 +38,11 @@ const TRENDING_PACKAGES = [
 export default function FeaturedPackages(){
   return (
     <section className="section mb-20">
-      <div className="w-layout-blockcontainer container padding-9rem w-container">
+      <div className="padding-9rem">
         <div className="flex flex-col items-center gap-3 mb-12">
-          <h2 className="text-[clamp(2rem,3vw,2.75rem)] font-semibold tracking-tight text-center">
-            Trending Destinations
-          </h2>
+        <h1 className="text-center p-10">
+         Trending Destinations
+        </h1>
           <p className="max-w-136 text-black/65 text-base text-center">
             Discover our most popular getaways curated for unforgettable experiences
           </p>

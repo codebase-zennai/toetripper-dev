@@ -22,7 +22,7 @@ export default function AboutImages() {
       ref={containerRef}
       className="section height-200vw"
     >
-      <div className="w-layout-blockcontainer container about-stick w-container">
+      <div className="about-stick">
         <motion.div 
           className="about-images-carousel"
           style={{ x }}

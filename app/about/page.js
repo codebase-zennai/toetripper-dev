@@ -45,7 +45,7 @@ export default function About() {
         <AboutHero />
         <AboutImages />
       <section className="section">
-        <div className="w-layout-blockcontainer container padding-9rem w-container">
+        <div className="padding-9rem">
           <div className="space-7rem"></div>
         </div>
       </section>

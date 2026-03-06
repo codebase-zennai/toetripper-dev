@@ -30,7 +30,6 @@ export default function Services() {
     <section className="section" onMouseMove={handleMouseMove}>
       <motion.div
         data-w-id="26f29636-e130-073f-81a3-5680a2a67ade"
-        className="w-layout-blockcontainer container w-container"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -65,62 +64,48 @@ export default function Services() {
                   />
                 </div>
                 <div className="flex m-10 justify-center">
-                  <h2 className="text-white text-center"> Tailored journeys</h2>
+                  <h2 className="text-white text-center">Experiential Holidays</h2>
                 </div>
               </div>
             </div>
             <div className="flex justify-center w-full">
               <h5 className="text-white text-center">
-                Luxury travel designed for individuality
+                Premium travel designed for individuality
               </h5>
             </div>
           </motion.div>
           <div className="features-block">
             <div className="features-flex-wrapper">
-              <motion.div
-                data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3a"
-                className="features-card-small"
-                style={{ cursor: isHovering ? 'none' : 'pointer' }}
-                variants={createBentoVariants({ x: -40 })}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOptions}
-                transition={{ ...baseTransition, delay: 0.1 }}
-                whileHover={{ y: -4, transition: hoverTransition }}
-                whileTap={{ y: -2, transition: hoverTransition }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <h5>MICE & Incentive Travel </h5>
-                <div className="w-full justify-center flex">
-                  <TicketsPlane size={100} strokeWidth={0.5} />
-                </div>
-              </motion.div>
-              <motion.div
-                data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf3f"
-                className="features-card-small"
-                style={{ cursor: isHovering ? 'none' : 'pointer' }}
-                variants={createBentoVariants({ x: 40 })}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOptions}
-                transition={{ ...baseTransition, delay: 0.14 }}
-                whileHover={{ y: -4, transition: hoverTransition }}
-                whileTap={{ y: -2, transition: hoverTransition }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <div className="features-flex space-between">
-                  <h5>Corporate Events</h5>
-                </div>
-                <div className="w-full justify-center flex">
-                  <PartyPopper size={100} strokeWidth={0.5} />
-                </div>
-              </motion.div>
+            <motion.div
+              data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
+              className="features-card-wide bg-white"
+              style={{ cursor: isHovering ? 'none' : 'pointer' }}
+              variants={createBentoVariants({ y: 30 })}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOptions}
+              transition={{ ...baseTransition, delay: 0.18 }}
+              whileHover={{ y: -5, transition: hoverTransition }}
+              whileTap={{ y: -3, transition: hoverTransition }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="features-flex space-between align-center">
+                <h4 className="">MICE & Events</h4>
+                <HeartHandshake
+                  size={125}
+                  strokeWidth={1}
+                  className=""
+                />
+              </div>
+              <h5 className="">
+                Alerts to safely participate in the market
+              </h5>
+            </motion.div>
             </div>
             <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
-              className="features-card-wide"
+              className="features-card-wide bg-black"
               style={{ cursor: isHovering ? 'none' : 'pointer' }}
               variants={createBentoVariants({ y: 30 })}
               initial="hidden"
@@ -140,7 +125,7 @@ export default function Services() {
                   className="text-white"
                 />
               </div>
-              <h5 className="font-white">
+              <h5 className="text-site-white">
                 Alerts to safely participate in the market
               </h5>
             </motion.div>

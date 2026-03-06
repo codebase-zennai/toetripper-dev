@@ -5,7 +5,7 @@ import { CircleQuestionMark, Search } from "lucide-react";
 export default function Explore() {
   return (
     <section className="section">
-      <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+      <div className="padding-4-5rem">
         <div id="explore" className="card-flex">
           <div className="features-image-wrapper slide-from-left-animation">
             <div className="cut-out-wrapper">
@@ -19,7 +19,7 @@ export default function Explore() {
             <img
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
               alt="woman on laptop"
-              src="./images/explore1.jpg"
+              src="/images/explore1.jpg"
               loading="lazy"
               className="features-image"
             />
@@ -97,7 +97,7 @@ export default function Explore() {
             <img
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
               alt="woman and man  sitting on a chair"
-                src="./images/explore2.jpg"
+                src="/images/explore2.jpg"
               loading="lazy"
               className="features-image align-top"
             />

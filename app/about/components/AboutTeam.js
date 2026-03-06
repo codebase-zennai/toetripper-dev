@@ -25,8 +25,8 @@ export default function AboutTeam() {
   }, []);
 
   return (
-    <section className="section">
-      <div className="w-layout-blockcontainer container background-black w-container">
+    <div>
+      <div className="background-black">
         <div className="padding-13-5rem">
           <div className="about-flex gap-4rem">
             <div
@@ -224,6 +224,6 @@ export default function AboutTeam() {
           <div className="space-7rem hide-on-tab"></div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

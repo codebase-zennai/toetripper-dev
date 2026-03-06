@@ -3,7 +3,7 @@
 export default function Brands() {
   return (
     <section className="section">
-      <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+      <div className="padding-4-5rem">
         {/* <h1 className="text-center pb-20 slide-from-left-animation font-extrabold">Our Clients</h1> */}
         <div className="brands-wrapper">
           <div className="brands-grid slide-up-animation">

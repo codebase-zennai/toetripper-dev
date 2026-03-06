@@ -22,7 +22,7 @@ export default function PackagesCard({
       </div>
       <div className="p-5 md:p-6 flex flex-col h-full gap-5">
         <div className="">
-        <p className="p-card-title font-semibold leading-tight">{title}</p>
+        <p className="text-[20px] font-semibold leading-tight">{title}</p>
         </div>
         <p className="text-black/60 leading-relaxed text-sm md:text-[0.9375rem] flex-1">
           {description}

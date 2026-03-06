@@ -8,35 +8,37 @@ import { useState } from 'react';
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', href: '/' },
   { id: 'about', label: 'About', href: '/about' },
-  { id: 'service', label: 'Services', href: '/services' },
-  // { 
-  //   id: 'services', 
-  //   label: 'Services', 
-  //   isDropdown: true,
-  //   items: [
-  //     { label: 'Tailored Journeys', href: '/services/tailored-journeys' },
-  //     { label: 'MICE and Incentive', href: '/services/mice-incentive' },
-  //     { label: 'Corporate Events', href: '/services/corporate-events' }
-  //   ]
-  // },
   { 
-    id: 'destinations', 
-    label: 'Destinations', 
+    id: 'service', 
+    label: 'Services', 
     isDropdown: true,
     items: [
-      { label: 'Indian', href: '/packages' },
-      { label: 'International', href: '/packages/' }
-    ]
+      { label: 'MICE and Events', href: '/services/mice-incentive' },
+      { label: 'Corporate Travel Desk', href: '/services/corporate-travels' },
+      { 
+        label: 'Experiential Holidays', 
+        isNested: true,
+        items: [
+          { label: 'Domestic', href: '/packages' },
+          { label: 'International', href: '/packages/international' }
+        ]
+      },
+  ]
   },
-  { id: 'blog', label: 'Blog', href: '/blog' },
   { id: 'contact', label: 'Contact', href: '/contact' }
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSubOpen, setMobileSubOpen] = useState(null);
 
   const handleCloseAll = () => {
     setMobileMenuOpen(false);
+    setMobileSubOpen(null);
+  };
+
+  const toggleMobileSub = (label) => {
+    setMobileSubOpen((prev) => (prev === label ? null : label));
   };
 
   return (
@@ -61,10 +63,11 @@ export default function Navbar() {
                     <HoverCard.Trigger asChild>
                       <button
                         type="button"
-                        className="tt-navbar-link"
+                        className="tt-navbar-link tt-navbar-link--chevron"
                         aria-haspopup="true"
                       >
                         {item.label}
+                        <svg className="tt-chevron-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/></svg>
                       </button>
                     </HoverCard.Trigger>
 
@@ -74,22 +77,30 @@ export default function Navbar() {
                         sideOffset={12}
                         className="tt-dropdown tt-dropdown--radix"
                       >
-                        <span className="tt-dropdown-title">{item.label}</span>
                         {item.items.map((subItem, index) => {
-                          if (subItem.groupLabel) {
+                          if (subItem.isNested) {
                             return (
-                              <div key={index} className="tt-dropdown-group">
-                                <span className="tt-dropdown-heading">{subItem.groupLabel}</span>
-                                {subItem.links.map((link) => (
-                                  <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className="tt-dropdown-link"
-                                    onClick={handleCloseAll}
-                                  >
-                                    {link.label}
-                                  </Link>
-                                ))}
+                              <div key={index} className="tt-dropdown-nested">
+                                <button
+                                  type="button"
+                                  className="tt-dropdown-link tt-dropdown-link--nested"
+                                  onClick={() => toggleMobileSub(subItem.label)}
+                                >
+                                  {subItem.label}
+                                  <svg className="tt-chevron-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7"/></svg>
+                                </button>
+                                <div className={`tt-dropdown-sub${mobileSubOpen === subItem.label ? ' tt-dropdown-sub--open' : ''}`}>
+                                  {subItem.items.map((nestedItem) => (
+                                    <Link
+                                      key={nestedItem.href}
+                                      href={nestedItem.href}
+                                      className="tt-dropdown-link"
+                                      onClick={handleCloseAll}
+                                    >
+                                      {nestedItem.label}
+                                    </Link>
+                                  ))}
+                                </div> 
                               </div>
                             );
                           }

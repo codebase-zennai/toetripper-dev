@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export default function PackagesHero() {
   return (
     <section className="section pt-20">
-      <div className="w-layout-blockcontainer container padding-9rem w-container">
+      <div className="padding-9rem">
         <div className="title-block">
           <motion.div 
             className="subheading-flex"

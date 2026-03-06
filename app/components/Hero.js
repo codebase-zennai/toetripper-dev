@@ -31,8 +31,8 @@ const cardGroupVariants = {
 
 export default function Hero() {
   return (
-    <section className="section">
-      <div className="w-layout-blockcontainer container padding-4-5rem w-container">
+    <section className="section ">
+      <div className="padding-4-5rem">
         <div className="flex">
           <motion.div
             className="flex flex-col justify-between my-20"
@@ -63,7 +63,7 @@ export default function Hero() {
             </div>
             </div>
             <motion.div
-              className="card-flex-wrapper font-white"
+              className="card-flex-wrapper text-site-white"
               variants={cardGroupVariants}
               initial="hidden"
               animate="visible"
@@ -97,7 +97,7 @@ export default function Hero() {
                 </div>
               </motion.div>
               <motion.div
-                className="card font-white background-secondary"
+                className="card text-site-white background-secondary"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...transition, delay: 0.3 }}
@@ -193,7 +193,7 @@ export default function Hero() {
               </a>
             </div>
             <img
-              src="./images/home.jpg"
+              src="/images/home.jpg"
               loading="lazy"
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
               alt="woman and man  sitting on a chair"

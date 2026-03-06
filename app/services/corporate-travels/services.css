@@ -1,73 +1,6 @@
-/* Animation Keyframes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Animation Classes */
-.slide-from-left-animation {
-  opacity: 0;
-  transform: translateX(-50px);
-}
-
-.slide-from-left-animation.animated {
-  animation: fadeInLeft 0.8s ease-out forwards;
-}
-
-.slide-down-animation {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-
-.slide-down-animation.animated {
-  animation: fadeInDown 0.8s ease-out forwards;
-}
-
-.slide-up-animation {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.slide-up-animation.animated {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
+/* Services Page Styles */
+/* Shared keyframes & animation classes (fadeInUp, fadeInLeft, fadeInDown, fadeIn,
+   slide-from-left, slide-down, slide-up) are in globals.css */
 
 /* Bento Animations */
 .bento-animate {
@@ -163,22 +96,6 @@
 .container.rounded-corners-bottom {
   border-bottom-right-radius: 6.67vw;
   border-bottom-left-radius: 6.67vw;
-}
-
-.background-black {
-  background-color: var(--black);
-}
-
-.background-primary {
-  background-color: var(--primary);
-}
-
-.background-light-gray {
-  background-color: var(--light-gray);
-}
-
-.background-dark-gray {
-  background-color: var(--dark-gray);
 }
 
 /* Features Layout */

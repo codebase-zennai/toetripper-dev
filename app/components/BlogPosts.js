@@ -3,7 +3,7 @@
 export default function BlogPosts() {
   return (
     <section className="section background-black">
-      <div className="w-layout-blockcontainer container padding-9rem w-container">
+      <div className="padding-9rem">
         <div className="posts-title-flex flip-from-left-animation">
           <h3>
             Latest <span>Posts</span>
@@ -58,18 +58,18 @@ export default function BlogPosts() {
                       />
                     </div>
                     <div className="avatar-text-block">
-                      <h5 className="no-wrap">David Ross</h5>
+                      <h5 className="whitespace-nowrap">David Ross</h5>
                       <div className="avatar-line"></div>
                     </div>
                   </div>
                   <div className="posts-block">
                     <div className="badge-post">
-                      <h5 className="no-wrap font-black">Investing</h5>
+                      <h5 className="whitespace-nowrap text-site-black">Investing</h5>
                     </div>
-                    <h5 className="no-wrap">Sep 24</h5>
+                    <h5 className="whitespace-nowrap">Sep 24</h5>
                   </div>
                 </div>
-                <h4 className="font-white">Investing Starters Advice 101</h4>
+                <h4 className="text-site-white">Investing Starters Advice 101</h4>
               </a>
             </div>
             <div role="listitem" className="w-dyn-item">
@@ -111,18 +111,18 @@ export default function BlogPosts() {
                       />
                     </div>
                     <div className="avatar-text-block">
-                      <h5 className="no-wrap">Sarah Mitchell</h5>
+                      <h5 className="whitespace-nowrap">Sarah Mitchell</h5>
                       <div className="avatar-line"></div>
                     </div>
                   </div>
                   <div className="posts-block">
                     <div className="badge-post">
-                      <h5 className="no-wrap font-black">Budgeting</h5>
+                      <h5 className="whitespace-nowrap text-site-black">Budgeting</h5>
                     </div>
-                    <h5 className="no-wrap">Sep 24</h5>
+                    <h5 className="whitespace-nowrap">Sep 24</h5>
                   </div>
                 </div>
-                <h4 className="font-white">How Much Money Should I Save?</h4>
+                <h4 className="text-site-white">How Much Money Should I Save?</h4>
               </a>
             </div>
             <div role="listitem" className="w-dyn-item">
@@ -164,18 +164,18 @@ export default function BlogPosts() {
                       />
                     </div>
                     <div className="avatar-text-block">
-                      <h5 className="no-wrap">John Smith</h5>
+                      <h5 className="whitespace-nowrap">John Smith</h5>
                       <div className="avatar-line"></div>
                     </div>
                   </div>
                   <div className="posts-block">
                     <div className="badge-post">
-                      <h5 className="no-wrap font-black">Strategies</h5>
+                      <h5 className="whitespace-nowrap text-site-black">Strategies</h5>
                     </div>
-                    <h5 className="no-wrap">Sep 24</h5>
+                    <h5 className="whitespace-nowrap">Sep 24</h5>
                   </div>
                 </div>
-                <h4 className="font-white">
+                <h4 className="text-site-white">
                   How to Diversify Your Portfolio
                 </h4>
               </a>
@@ -183,7 +183,7 @@ export default function BlogPosts() {
           </div>
         </div>
         <div className="space-4rem"></div>
-        <div className="centered-block">
+        <div className="flex flex-col justify-center items-center">
           <a
             href="/blog"
             data-w-id="3beb919a-4aaa-f885-16a0-1c9b6601a3ec"
