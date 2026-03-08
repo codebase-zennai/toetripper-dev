@@ -1,4 +1,9 @@
 /* Legal Pages Shared Styles */
+.legal-hero,
+.legal-content {
+  font-family: 'Poppins', sans-serif;
+}
+
 .legal-hero {
   text-align: center;
   padding: 4rem 0 2rem;

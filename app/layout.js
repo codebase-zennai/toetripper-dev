@@ -1,11 +1,11 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import FloatingCTA from "./components/FloatingCTA";
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Suspense fallback={null}>
           <LoadingSpinner />
         </Suspense>
