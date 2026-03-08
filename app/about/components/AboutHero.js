@@ -24,7 +24,7 @@ export default function AboutHero() {
                 className="small-icon"
               />
             </div>
-            <h5>Wealth Bento</h5>
+            <h5>Toe Tripper</h5>
           </motion.div>
           <motion.h1
             data-w-id="c38081aa-76c9-6f89-8f7c-35d481bf5668"
@@ -41,7 +41,7 @@ export default function AboutHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
           >
-            We are a research site that manages a portfolio in real-time.
+            Travel should feel structured, reliable, and meaningful, not chaotic or transactional.
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
@@ -52,8 +52,8 @@ export default function AboutHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="button-text">Explore</p>
-            <p className="button-text-absolute">Explore</p>
+            <p className="button-text">Read Founder's Note</p>
+            <p className="button-text-absolute">Read Founder's Note</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"

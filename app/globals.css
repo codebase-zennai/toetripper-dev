@@ -3758,9 +3758,7 @@ blockquote {
   display: flex;
 }
 
-.features-card-wide.background-primary {
-  background-color: var(--primary);
-}
+
 
 .features-card-small {
   background-color: var(--white);

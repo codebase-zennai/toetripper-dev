@@ -1,6 +1,22 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Award, Diamond, FileCheck, Gem, HeartHandshake, Medal, PartyPopper, Target, TargetIcon, TicketsPlane, TreePalm } from 'lucide-react';
+
+const viewportOptions = { once: true, amount: 0.2, margin: '-80px' };
+const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
+const hoverTransition = { duration: 0.2, ease: [0.34, 1.56, 0.64, 1] };
+
+const createBentoVariants = ({ x = 0, y = 0 }) => ({
+  hidden: { opacity: 0, x, y },
+  visible: { opacity: 1, x: 0, y: 0 },
+});
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function AboutTeam() {
   const teamRefs = useRef([]);
@@ -62,25 +78,26 @@ export default function AboutTeam() {
               ref={(el) => (teamRefs.current[1] = el)}
               className="team-block slide-from-right-animation"
             >
-              <h3>Jane Doe</h3>
+              <h3>Founder's Note</h3>
               <p className="max-width-18rem">
-                With over 15 years of experience as a stock analyst on Wall
-                Street, Jane has solidified her reputation as a seasoned
-                professional. <br />
+                Toe Tripper was built on a simple belief: travel should feel
+                structured, reliable, and meaningful, not chaotic or
+                transactional. <br />
                 <br />
-                Her insights, honed during the post-financial crisis, have
-                consistently garnered attention and respect. <br />
+                With over 16 years of hands-on experience in corporate travel
+                and MICE execution, I have seen how fragmented vendor
+                management, price-driven decisions, and rushed planning can
+                dilute both business outcomes and personal experiences. <br />
                 <br />
-                Since 2015, Jane has been a prominent figure at stock
-                conferences and in the media, sharing her bold predictions and
-                in-depth analyses.
+                Toe Tripper exists to restore clarity and intention to travel,
+                whether for board meetings, incentive programs, or family
+                journeys. <br />
+                <br />
+                Nikita Rajpuut <br />
+                Founder, Toe Tripper
               </p>
               <div className="socials-wrapper">
-                <a
-                  href="https://www.youtube.com/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
+                <a href="https://www.youtube.com/" target="_blank" className="w-inline-block">
                   <img
                     width="Auto"
                     height="Auto"
@@ -90,11 +107,7 @@ export default function AboutTeam() {
                     className="social-icon smaller invert"
                   />
                 </a>
-                <a
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
+                <a href="https://www.instagram.com/" target="_blank" className="w-inline-block">
                   <img
                     width="Auto"
                     height="Auto"
@@ -106,11 +119,7 @@ export default function AboutTeam() {
                     className="social-icon smaller"
                   />
                 </a>
-                <a
-                  href="https://www.tiktok.com/en/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
+                <a href="https://www.tiktok.com/en/" target="_blank" className="w-inline-block">
                   <img
                     width="Auto"
                     height="Auto"
@@ -125,102 +134,114 @@ export default function AboutTeam() {
               </div>
             </div>
           </div>
+
           <div className="space-7rem"></div>
-          <div className="about-flex reverse-on-tab gap-4rem">
-            <div
-              ref={(el) => (teamRefs.current[2] = el)}
-              className="team-block slide-from-left-animation"
-            >
-              <h3>Jacob Smith</h3>
-              <p className="max-width-18rem">
-                Our seasoned Portfolio Manager, actively oversees the Bento
-                Wealth Fund, delivering insights and actionable strategies. He
-                manages our real-time trade alerts and stock positions.
-                <br />
-                <br />
-                Jacob&#x27;s proven track record of outperforming the market
-                during volatile times underscores his expertise in navigating
-                the dynamic world of investing.
-              </p>
-              <div className="socials-wrapper">
-                <a
-                  href="https://www.youtube.com/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/669f719e32c9ea42465af181/669f719e32c9ea42465af1c5_youtube.png"
-                    loading="eager"
-                    className="social-icon smaller invert"
-                  />
-                </a>
-                <a
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
-                    loading="eager"
-                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
-                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
-                    className="social-icon smaller"
-                  />
-                </a>
-                <a
-                  href="https://www.tiktok.com/en/"
-                  target="_blank"
-                  className="w-inline-block"
-                >
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
-                    loading="eager"
-                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
-                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
-                    className="social-icon smaller"
-                  />
-                </a>
-              </div>
+
+          <section
+            ref={(el) => (teamRefs.current[2] = el)}
+            className="about-difference-wrap team-block slide-from-right-animation"
+          >
+            <div className="about-difference-header mb-20">
+              <p className="about-redesign-kicker">Our Positioning</p>
+              <h3 className="text-white">What Makes Us Different</h3>
             </div>
-            <div
-              ref={(el) => (teamRefs.current[3] = el)}
-              className="team-image slide-from-right-animation"
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOptions}
+              transition={{ ...baseTransition, duration: 0.6 }}
             >
-              <div className="cut-out-wrapper align-right">
-                <img
-                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f260676650d29c73bf40d3_Top%20Right%20Mid.svg"
-                  loading="lazy"
-                  alt="Cut out SVG"
-                  className="cut-out-image"
-                />
+              <div className="features-flex-wrapper about-difference-bento">
+                <motion.div
+                  className="features-card-large"
+                  variants={createBentoVariants({ y: 40 })}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOptions}
+                  transition={{ ...baseTransition, delay: 0.05 }}
+                  whileHover={{ y: -6, transition: hoverTransition }}
+                  whileTap={{ y: -3, transition: hoverTransition }}
+                >
+                  <div className="features-flex">
+                    <div className="w-full items-center justify-center">
+                      <div className="flex justify-center">
+                        {/* <TargetIcon size={200} strokeWidth={0.5} className="text-white" /> */}
+                        <Gem size={200} strokeWidth={0.5} className="text-white" />
+                        
+                      </div>
+                      <div className="flex m-10 justify-center">
+                        <h2 className="text-white text-center"> We do not chase volume</h2>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div className="flex justify-center w-full">
+                    <h5 className="text-white text-center">
+                      We do not chase volume.
+                    </h5>
+                  </div> */}
+                </motion.div>
+
+                <div className="features-block">
+                  <div className="features-flex-wrapper text-black">
+                    <motion.div
+                      className="features-card-small pt-10"
+                      variants={createBentoVariants({ x: -40 })}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewportOptions}
+                      transition={{ ...baseTransition, delay: 0.1 }}
+                      whileHover={{ y: -4, transition: hoverTransition }}
+                      whileTap={{ y: -2, transition: hoverTransition }}
+                    >
+                      <h5 className='text-black mb-10'>We don't compete on discounts.</h5>
+                      <div className="w-full justify-center flex">
+                        <TicketsPlane size={100} strokeWidth={0.5} />
+                        {/* <Medal size={100} strokeWidth={0.5} className="text-black" /> */}
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      className="features-card-small pt-10"
+                      variants={createBentoVariants({ x: 40 })}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewportOptions}
+                      transition={{ ...baseTransition, delay: 0.14 }}
+                      whileHover={{ y: -4, transition: hoverTransition }}
+                      whileTap={{ y: -2, transition: hoverTransition }}
+                    >
+                      <div className="features-flex space-between mb-10">
+                        <h5>We design for clarity and accountability.</h5>
+                      </div>
+                      <div className="w-full justify-center flex">
+                        <FileCheck size={100} strokeWidth={0.5} />
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  <motion.div
+                    className="features-card-wide bg-[#F4A300]" 
+                    variants={createBentoVariants({ y: 30 })}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportOptions}
+                    transition={{ ...baseTransition, delay: 0.18 }}
+                    whileHover={{ y: -5, transition: hoverTransition }}
+                    whileTap={{ y: -3, transition: hoverTransition }}
+                  >
+                    <div className="features-flex space-between align-center">
+                      <h4 className="text-white">Long-term partnership value.</h4>
+                      <HeartHandshake size={125} strokeWidth={1} className="text-white" />
+                    </div>
+                  </motion.div>
+                </div>
               </div>
-              <div className="cut-out-wrapper align-bottom">
-                <img
-                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f260b5c5d70dd0e0ffb487_Bottom%20Left%20Mid.svg"
-                  loading="lazy"
-                  alt="Cut out SVG"
-                  className="cut-out-image"
-                />
-              </div>
-              <img
-                sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 596px, 41vw"
-                srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob.webp 960w"
-                alt="man sitting on a chair"
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a69375bed8324826235e_Jacob.webp"
-                loading="lazy"
-                className="features-image"
-              />
-            </div>
-          </div>
+            </motion.div>
+
+          </section>
+
           <div className="space-7rem hide-on-tab"></div>
         </div>
       </div>

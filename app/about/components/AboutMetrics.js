@@ -3,8 +3,8 @@
 import { useEffect, useRef } from 'react';
 
 export default function AboutMetrics() {
-  const returnsLeftRef = useRef(null);
-  const returnsRightRef = useRef(null);
+  const headingRef = useRef(null);
+  const descriptionRef = useRef(null);
   const metricsCardsRef = useRef([]);
 
   useEffect(() => {
@@ -19,8 +19,8 @@ export default function AboutMetrics() {
       { threshold: 0.1 }
     );
 
-    if (returnsLeftRef.current) observer.observe(returnsLeftRef.current);
-    if (returnsRightRef.current) observer.observe(returnsRightRef.current);
+    if (headingRef.current) observer.observe(headingRef.current);
+    if (descriptionRef.current) observer.observe(descriptionRef.current);
     metricsCardsRef.current.forEach((card) => {
       if (card) observer.observe(card);
     });
@@ -33,12 +33,14 @@ export default function AboutMetrics() {
       <div>
         <div className="background-black rounded-corners">
           <div className="space-7rem"></div>
-          <div className="returns-flex">
-            <h1 ref={returnsLeftRef} className="large-text slide-from-left-animation">114%</h1>
-            <h5 ref={returnsRightRef} className="max-width-30rem slide-from-right-animation">
-              Cumulative Returns Since Inception - The Bento Wealth&#x27;s
-              cumulative return outperforms the Nasdaq-100&#x27;s return during
-              the same period
+          <div className="title-block" style={{ textAlign: 'center', margin: '0 auto' }}>
+            <h2 ref={headingRef} className="hero-title slide-from-left-animation text-white">
+              Our Approach
+            </h2>
+            <h5 ref={descriptionRef} className="slide-from-right-animation text-white" style={{ maxWidth: '46rem', margin: '0 auto' }}>
+              We operate consultatively, not transactionally. Every requirement
+              begins with understanding what matters most, then structuring
+              travel around outcomes, reliability, and experience.
             </h5>
           </div>
           <div className="space-7rem"></div>
@@ -60,10 +62,10 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="uppercase">Hardwork</h4>
+              <h4 className="uppercase">Purpose</h4>
               <h5>
-                Lorem ipsum <br />
-                dolor sit amet.
+                Clarifying the intent <br />
+                behind every journey.
               </h5>
             </div>
             <div
@@ -79,10 +81,10 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="uppercase">Research</h4>
+              <h4 className="uppercase">Budget</h4>
               <h5>
-                Lorem ipsum <br />
-                dolor sit amet.
+                Balancing cost with <br />
+                comfort and value.
               </h5>
             </div>
             <div
@@ -98,10 +100,10 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon"
               />
-              <h4 className="uppercase">Innovation</h4>
+              <h4 className="uppercase">People</h4>
               <h5>
-                Lorem ipsum <br />
-                dolor sit amet.
+                Ensuring everyone <br />
+                stays aligned.
               </h5>
             </div>
             <div
@@ -117,10 +119,10 @@ export default function AboutMetrics() {
                 loading="eager"
                 className="large-icon invert"
               />
-              <h4 className="uppercase text-site-white">Veterans</h4>
+              <h4 className="uppercase text-site-white">Pace</h4>
               <h5 className="text-site-white">
-                Lorem ipsum <br />
-                dolor sit amet.
+                Designing the rhythm <br />
+                of the experience.
               </h5>
             </div>
           </div>

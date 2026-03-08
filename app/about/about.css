@@ -130,3 +130,124 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Approach and Difference Redesign */
+.about-redesign-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.about-redesign-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.about-redesign-panel {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: clamp(1.25rem, 2.4vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-redesign-panel-accent {
+  background: linear-gradient(145deg, rgba(187, 152, 98, 0.2), rgba(255, 255, 255, 0.06));
+  border-color: rgba(187, 152, 98, 0.45);
+}
+
+.about-redesign-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.about-redesign-body,
+.about-redesign-note {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.65;
+}
+
+.about-redesign-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.about-pillar-card {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.24);
+  padding: 0.8rem 0.9rem;
+  line-height: 1.5;
+}
+
+.about-difference-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.about-difference-header {
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: center;
+  text-align: center;
+}
+
+.about-difference-bento {
+  width: 100%;
+  justify-content: center;
+}
+
+.about-difference-card-tag {
+  margin: 0;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.about-difference-card-main {
+  background: linear-gradient(155deg, rgba(187, 152, 98, 0.36), rgba(0, 0, 0, 0.82));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+}
+
+.about-difference-card-light {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.about-difference-card-wide {
+  background: linear-gradient(145deg, rgba(19, 19, 19, 0.98), rgba(54, 54, 54, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 991px) {
+  .about-redesign-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}

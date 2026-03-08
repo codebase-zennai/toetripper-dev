@@ -68,21 +68,33 @@ export default function Explore() {
                 <div className="icon-wrapper background-primary">
                   <CircleQuestionMark className="text-white"/>
                 </div>
-                <h5>What Sets Us Apart</h5>
+                <h5>Our Approach</h5>
               </div>
               <h2>
-                Elevating every journey with
-                <span className="italics"> thoughtful detail.</span>
+                What truly sets us
+                <span className="italics"> apart.</span>
               </h2>
-              <ul className="metrics-flex bullet-column">
-                <li>Bespoke itineraries — never cookie-cutter</li>
-                <li>Trusted global partners &amp; local experts</li>
-                <li>Transparent pricing with clear deliverables</li>
-                <li>Human support — before, during &amp; after travel</li>
-              </ul>
-              <p className="experience-highlight">
-                15+ years of experience | 27,000+ journeys planned | 50+ destinations covered
+              <p>
+                We craft bespoke itineraries through trusted global partnerships and local expertise, ensuring transparent pricing and human support at every stage of your journey.
               </p>
+                            <a
+                href="/about"
+                data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
+                className="button-with-circle-icon w-inline-block"
+              >
+                <p className="button-text">Know More</p>
+                <p className="button-text-absolute">Know More</p>
+                <div className="button-arrow-wrapper">
+                  <img
+                    width="Auto"
+                    height="Auto"
+                    alt=""
+                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
+                    loading="eager"
+                    className="arrow"
+                  />
+                </div>
+              </a>
             </div>
           </div>
           <div className="features-image-wrapper align-botton slide-down-animation">
