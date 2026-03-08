@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const viewportOptions = { once: true, amount: 0.2, margin: "-80px" };
 const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
@@ -19,8 +20,20 @@ const containerVariants = {
 };
 
 export default function Services() {
+  const router = useRouter();
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+
+  const handleServiceNavigation = (href) => {
+    router.push(href);
+  };
+
+  const handleServiceKeyDown = (event, href) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleServiceNavigation(href);
+    }
+  };
 
   const handleMouseMove = (e) => {
     setCursorPos({ x: e.clientX, y: e.clientY });
@@ -53,6 +66,10 @@ export default function Services() {
             whileTap={{ y: -3, transition: hoverTransition }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
+            onClick={() => handleServiceNavigation('/services/experiential-holidays')}
+            onKeyDown={(event) => handleServiceKeyDown(event, '/services/experiential-holidays')}
+            role="link"
+            tabIndex={0}
           >
             <div className="features-flex">
               <div className="w-full items-center justify-center">
@@ -89,6 +106,10 @@ export default function Services() {
               whileTap={{ y: -3, transition: hoverTransition }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
+              onClick={() => handleServiceNavigation('/services/mice-incentive')}
+              onKeyDown={(event) => handleServiceKeyDown(event, '/services/mice-incentive')}
+              role="link"
+              tabIndex={0}
             >
               <div className="features-flex space-between align-center">
                 <h4 className="">MICE & Events</h4>
@@ -116,6 +137,10 @@ export default function Services() {
               whileTap={{ y: -3, transition: hoverTransition }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
+              onClick={() => handleServiceNavigation('/services/corporate-travels')}
+              onKeyDown={(event) => handleServiceKeyDown(event, '/services/corporate-travels')}
+              role="link"
+              tabIndex={0}
             >
               <div className="features-flex space-between align-center">
                 <h4 className="text-white">Corporate Travel Solutions</h4>

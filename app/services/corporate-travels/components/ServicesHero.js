@@ -4,6 +4,7 @@ export default function ServicesHero() {
   return (
     <div className="">
       <div className="padding-9rem">
+        <div className="space-page-top"></div>
         <div className="title-block">
           <motion.div 
             className="subheading-flex"

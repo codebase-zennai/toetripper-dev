@@ -19,8 +19,8 @@ const NAV_ITEMS = [
         label: 'Experiential Holidays', 
         isNested: true,
         items: [
-          { label: 'Domestic', href: '/packages' },
-          { label: 'International', href: '/packages/international' }
+          { label: 'Domestic', href: '/packages?travelType=domestic' },
+          { label: 'International', href: '/packages?travelType=international' }
         ]
       },
   ]

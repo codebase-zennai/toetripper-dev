@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import PackagesCard from './PackagesCard';
 import { ChevronDown } from 'lucide-react';
 
@@ -14,7 +15,8 @@ const PACKAGES_DATA = [
     destination: "Himachal Pradesh",
     cost: 25000,
     duration: 5,
-    category: "Adventure"
+    category: "Adventure",
+    travelType: 'Domestic'
   },
   {
     id: 2,
@@ -25,7 +27,8 @@ const PACKAGES_DATA = [
     destination: "Goa",
     cost: 15000,
     duration: 3,
-    category: "Beach"
+    category: "Beach",
+    travelType: 'Domestic'
   },
   {
     id: 3,
@@ -36,7 +39,8 @@ const PACKAGES_DATA = [
     destination: "Rajasthan",
     cost: 30000,
     duration: 7,
-    category: "Cultural"
+    category: "Cultural",
+    travelType: 'Domestic'
   },
   {
     id: 4,
@@ -47,7 +51,8 @@ const PACKAGES_DATA = [
     destination: "Kerala",
     cost: 35000,
     duration: 6,
-    category: "Wellness"
+    category: "Wellness",
+    travelType: 'Domestic'
   },
   {
     id: 5,
@@ -58,7 +63,8 @@ const PACKAGES_DATA = [
     destination: "Rajasthan",
     cost: 22000,
     duration: 4,
-    category: "Adventure"
+    category: "Adventure",
+    travelType: 'Domestic'
   },
   {
     id: 6,
@@ -69,7 +75,8 @@ const PACKAGES_DATA = [
     destination: "Northeast India",
     cost: 40000,
     duration: 8,
-    category: "Cultural"
+    category: "Cultural",
+    travelType: 'Domestic'
   },
   {
     id: 7,
@@ -80,7 +87,8 @@ const PACKAGES_DATA = [
     destination: "Goa",
     cost: 18000,
     duration: 5,
-    category: "Beach"
+    category: "Beach",
+    travelType: 'Domestic'
   },
   {
     id: 8,
@@ -91,7 +99,8 @@ const PACKAGES_DATA = [
     destination: "Himachal Pradesh",
     cost: 28000,
     duration: 6,
-    category: "Adventure"
+    category: "Adventure",
+    travelType: 'Domestic'
   },
   {
     id: 9,
@@ -102,12 +111,14 @@ const PACKAGES_DATA = [
     destination: "Uttar Pradesh",
     cost: 12000,
     duration: 3,
-    category: "Cultural"
+    category: "Cultural",
+    travelType: 'Domestic'
   }
 ];
 
 const DESTINATIONS = ['All', ...new Set(PACKAGES_DATA.map(p => p.destination))];
 const CATEGORIES = ['All', ...new Set(PACKAGES_DATA.map(p => p.category))];
+const TRAVEL_TYPES = ['All', 'Domestic', 'International'];
 const PRICE_RANGES = [
   { label: 'All', min: 0, max: Infinity },
   { label: 'Under ₹20,000', min: 0, max: 20000 },
@@ -123,12 +134,25 @@ const SORT_OPTIONS = [
   { label: 'Duration: Longest', value: 'duration-desc' }
 ];
 
+const URL_TRAVEL_TYPE_MAP = {
+  domestic: 'Domestic',
+  international: 'International'
+};
+
 export default function PackagesGrid() {
+  const searchParams = useSearchParams();
   const [selectedDestination, setSelectedDestination] = useState('All');
+  const [selectedTravelType, setSelectedTravelType] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedPriceRange, setSelectedPriceRange] = useState(PRICE_RANGES[0]);
   const [sortBy, setSortBy] = useState('recommended');
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    const travelTypeParam = searchParams.get('travelType')?.toLowerCase();
+    const mappedTravelType = URL_TRAVEL_TYPE_MAP[travelTypeParam] || 'All';
+    setSelectedTravelType(mappedTravelType);
+  }, [searchParams]);
 
   const filteredAndSortedPackages = useMemo(() => {
     let result = [...PACKAGES_DATA];
@@ -136,6 +160,10 @@ export default function PackagesGrid() {
     // Apply filters
     if (selectedDestination !== 'All') {
       result = result.filter(pkg => pkg.destination === selectedDestination);
+    }
+
+    if (selectedTravelType !== 'All') {
+      result = result.filter(pkg => pkg.travelType === selectedTravelType);
     }
 
     if (selectedCategory !== 'All') {
@@ -168,16 +196,18 @@ export default function PackagesGrid() {
     }
 
     return result;
-  }, [selectedDestination, selectedCategory, selectedPriceRange, sortBy]);
+  }, [selectedDestination, selectedTravelType, selectedCategory, selectedPriceRange, sortBy]);
 
   const activeFilterCount = [
     selectedDestination !== 'All',
+    selectedTravelType !== 'All',
     selectedCategory !== 'All',
     selectedPriceRange.label !== 'All'
   ].filter(Boolean).length;
 
   const resetFilters = () => {
     setSelectedDestination('All');
+    setSelectedTravelType('All');
     setSelectedCategory('All');
     setSelectedPriceRange(PRICE_RANGES[0]);
     setSortBy('recommended');
@@ -254,6 +284,25 @@ export default function PackagesGrid() {
                     onClick={() => setSelectedCategory(cat)}
                   >
                     {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <label className="font-semibold text-sm text-black/80 uppercase tracking-wider">Travel Type</label>
+              <div className="flex flex-wrap gap-2">
+                {TRAVEL_TYPES.map(type => (
+                  <button
+                    key={type}
+                    className={`py-2 px-4 border rounded-[20px] text-sm cursor-pointer transition-all duration-200 ${
+                      selectedTravelType === type
+                        ? 'bg-[#111] text-white border-black hover:bg-[#333]'
+                        : 'bg-white text-black border-black/20 hover:border-black/40 hover:bg-black/2'
+                    }`}
+                    onClick={() => setSelectedTravelType(type)}
+                  >
+                    {type}
                   </button>
                 ))}
               </div>

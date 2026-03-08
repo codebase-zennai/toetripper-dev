@@ -4,6 +4,7 @@ export default function ServicesHero() {
   return (
     <div className="">
       <div className="padding-9rem">
+        <div className="space-page-top"></div>
         <div className="title-block">
           <motion.div 
             className="subheading-flex"
@@ -30,7 +31,7 @@ export default function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            EXPERIENTIAL HOLIDAYS
+            EXPERIENTIAL <br></br> HOLIDAYS
           </motion.h1>
           <motion.h5 
             className="max-width-20rem"
@@ -42,15 +43,15 @@ export default function ServicesHero() {
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
-            href="#Contact"
+            href="/packages"
             data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
             className="button-with-circle-icon w-inline-block"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="button-text">Design My Holiday</p>
-            <p className="button-text-absolute">Design My Holiday</p>
+            <p className="button-text">Explore Packages</p>
+            <p className="button-text-absolute">Explore Packages</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"

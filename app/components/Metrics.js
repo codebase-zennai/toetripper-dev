@@ -1,39 +1,61 @@
 'use client';
 
+import { animate, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+
+const METRICS = [
+  { id: 'journeys', value: 36, suffix: 'K', label: 'Journeys Planned' },
+  { id: 'clients', value: 28, label: 'Corporate Clients' },
+  { id: 'destinations', value: 14, label: 'Global Destinations' },
+  { id: 'experience', value: 15, label: 'Years of Experience' }
+];
+
+function CounterMetric({ value, label, suffix = '' }) {
+  const metricRef = useRef(null);
+  const isInView = useInView(metricRef, { once: true, amount: 0.5 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) {
+      return;
+    }
+
+    const controls = animate(0, value, {
+      duration: 1.4,
+      ease: 'easeOut',
+      onUpdate: (latest) => {
+        setDisplayValue(Math.round(latest));
+      }
+    });
+
+    return () => controls.stop();
+  }, [isInView, value]);
+
+  return (
+    <div ref={metricRef} className="metrics-block">
+      <h2 className="metrics-text">
+        {displayValue}
+        {suffix}
+      </h2>
+      <p>{label}</p>
+    </div>
+  );
+}
+
 export default function Metrics() {
   return (
     <div className=""> 
       <div className="background-black rounded-corners">
         <div className="space-7rem"></div>
         <div className="metrics-wrapper text-site-white">
-          <div
-            data-w-id="611319a8-5885-5a98-7ea0-fcd288e08620"
-            className="metrics-block"
-          >
-            <h2 className="metrics-text">36K</h2>
-            <p>Journeys Planned</p>
-          </div>
-          <div
-            data-w-id="611319a8-5885-5a98-7ea0-fcd288e08625"
-            className="metrics-block"
-          >
-            <h2 className="metrics-text">28</h2>
-            <p>Corporate Clients</p>
-          </div>
-          <div
-            data-w-id="611319a8-5885-5a98-7ea0-fcd288e0862a"
-            className="metrics-block"
-          >
-            <h2 className="metrics-text">14</h2>
-            <p>Global Destinations</p>
-          </div>
-          <div
-            data-w-id="611319a8-5885-5a98-7ea0-fcd288e0862f"
-            className="metrics-block"
-          >
-            <h2 className="metrics-text">15</h2>
-            <p>Years of Experience</p>
-          </div>
+          {METRICS.map((metric) => (
+            <CounterMetric
+              key={metric.id}
+              value={metric.value}
+              suffix={metric.suffix}
+              label={metric.label}
+            />
+          ))}
         </div>
         <div className="space-7rem"></div>
       </div>
