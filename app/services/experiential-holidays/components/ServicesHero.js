@@ -30,7 +30,7 @@ export default function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            MICE & EVENTS
+            EXPERIENTIAL HOLIDAYS
           </motion.h1>
           <motion.h5 
             className="max-width-20rem"
@@ -38,7 +38,7 @@ export default function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
           >
-            End-to-End MICE & Event Execution
+            Curated Journeys. Designed Around You.
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
@@ -49,8 +49,8 @@ export default function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="button-text">Contact Us</p>
-            <p className="button-text-absolute">Contact Us</p>
+            <p className="button-text">Design My Holiday</p>
+            <p className="button-text-absolute">Design My Holiday</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"

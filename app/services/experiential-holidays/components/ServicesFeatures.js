@@ -5,52 +5,69 @@ import { Briefcase, Check, Award } from 'lucide-react';
 
 const sections = [
   {
-    title: 'Our MICE Scope',
-    heading: 'Comprehensive Event Services',
-    description: 'From intimate leadership offsites to large-scale international conferences, we specialize in a diverse range of MICE events.',
+    title: 'How We Design Your Holiday',
+    heading: 'Intentional Travel for Families, Couples, and Small Groups',
+    description: 'Not rushed. Not checklist-driven. Not template-based. Toe Tripper designs holidays for families, couples, and small groups who value intentional travel.',
     items: [
-      'Leadership offsites',
-      'Annual conferences',
-      'Dealer meets',
-      'Incentive travel programs',
-      'Product launches',
-      'Exhibitions',
-      'International meetings',
+      'Why you are travelling',
+      'Who you are travelling with',
+      'Your pace preference',
+      'Food and lifestyle choices',
+      'Budget comfort',
+      'Smart routing',
+      'Right-duration stays',
+      'Carefully selected hotels',
+      'Experience-led inclusions',
+      'Balanced day pacing',
     ],
     icon: Briefcase,
     image: '/images/explore1.jpg',
     reverse: false,
   },
   {
-    title: 'What We Handle',
-    heading: 'Full-Spectrum Event Management',
-    description: 'From destination planning to post-event follow-up, we manage every detail with precision and accountability.',
+    title: 'What We Manage',
+    heading: 'End-to-End Holiday Operations',
+    description: 'We coordinate all essential travel layers so your journey feels seamless from start to finish.',
     items: [
-      'Destination & venue sourcing',
-      'Travel & accommodation logistics',
-      'Vendor coordination',
-      'Event planning support',
-      'On-ground execution',
-      'Post-event reconciliation',
+      'International and domestic flights',
+      'Hotels and boutique stays',
+      'Local logistics',
+      'Visas and insurance',
+      'Activity and experience bookings',
     ],
     icon: Check,
     image: '/images/explore2.jpg',
     reverse: true,
   },
   {
-    title: 'Why Organisations Trust Us',
-    heading: 'Built on Reliability & Results',
-    description: 'Our reputation is earned through flawless execution, accountability, expertise, and dependable crisis management.',
+    title: 'Our Travel Philosophy',
+    heading: 'Experience-Weighted Spending',
+    description: 'Premium does not mean excess. Affordable does not mean compromise. We focus on experience-weighted spending, placing your budget where it truly enhances the journey.',
     items: [
-      'Single accountable partner',
-      'Vendor network built on reliability',
-      'Budget-conscious planning',
-      'Structured execution timelines',
-      'Calm crisis handling',
+      'Budget placed where it improves experience',
+      'Quality without unnecessary excess',
+      'Value without compromise on essentials',
     ],
     icon: Award,
     image: '/images/explore1.jpg',
     reverse: false,
+  },
+  {
+    title: 'Travel Styles We Support',
+    heading: 'Tailored for How You Want to Travel',
+    description: 'We support diverse travel styles with curated recommendations and practical planning.',
+    items: [
+      'Luxury travel',
+      'Family holidays',
+      'Honeymoons',
+      'Spiritual and wellness journeys',
+      'Europe and international itineraries',
+      'Japan, Bali, and curated Asia routes',
+      'India experiential circuits',
+    ],
+    icon: Briefcase,
+    image: '/images/explore2.jpg',
+    reverse: true,
   },
 ];
 
@@ -149,8 +166,8 @@ export default function ServicesFeatures() {
         {/* CTA Button */}
         <div className="flex justify-center">
           <Link href="/contact" className="button-with-circle-icon w-inline-block">
-            <p className="button-text">Plan Your Corporate Event</p>
-            <p className="button-text-absolute">Plan Your Corporate Event</p>
+            <p className="button-text">Design My Holiday</p>
+            <p className="button-text-absolute">Design My Holiday</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"

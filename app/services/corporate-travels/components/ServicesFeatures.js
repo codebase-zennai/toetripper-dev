@@ -5,52 +5,64 @@ import { Briefcase, Check, Award } from 'lucide-react';
 
 const sections = [
   {
-    title: 'Our MICE Scope',
-    heading: 'Comprehensive Event Services',
-    description: 'From intimate leadership offsites to large-scale international conferences, we specialize in a diverse range of MICE events.',
+    title: 'What We Manage',
+    heading: 'Travel Management That Works Like an Extension of Your Team',
+    description: 'Toe Tripper operates as your outsourced corporate travel desk, not as a transactional booking agency. We centralise and manage your travel requirements under one accountable structure.',
     items: [
-      'Leadership offsites',
-      'Annual conferences',
-      'Dealer meets',
-      'Incentive travel programs',
-      'Product launches',
-      'Exhibitions',
-      'International meetings',
+      'Domestic and international flight bookings',
+      'Hotel bookings',
+      'Visa and travel insurance coordination',
+      'Ground logistics and transfers',
+      'Urgent and last-minute travel',
+      'Executive and CXO movement',
+      'Multi-city and complex itineraries',
     ],
     icon: Briefcase,
     image: '/images/explore1.jpg',
     reverse: false,
   },
   {
-    title: 'What We Handle',
-    heading: 'Full-Spectrum Event Management',
-    description: 'From destination planning to post-event follow-up, we manage every detail with precision and accountability.',
+    title: 'Benefits for Corporates',
+    heading: 'Benefits for Corporates',
+    description: 'Reduced internal load, stronger cost control, and a consistent travel experience for your teams.',
     items: [
-      'Destination & venue sourcing',
-      'Travel & accommodation logistics',
-      'Vendor coordination',
-      'Event planning support',
-      'On-ground execution',
-      'Post-event reconciliation',
+      'Reduced internal load: your HR and Admin teams spend less time coordinating vendors and managing escalations.',
+      'Cost visibility and control: clear, structured travel planning aligned with policy and budget frameworks.',
+      'Consistent brand experience: every employee and executive travels in a way that reflects your organisation\'s standards.',
+      'Dedicated support: human-led escalation handling when urgency matters most.',
     ],
     icon: Check,
     image: '/images/explore2.jpg',
     reverse: true,
   },
   {
-    title: 'Why Organisations Trust Us',
-    heading: 'Built on Reliability & Results',
-    description: 'Our reputation is earned through flawless execution, accountability, expertise, and dependable crisis management.',
+    title: 'Corporate Travel Desk Model',
+    heading: 'Corporate Travel Desk Model',
+    description: 'We can begin with a pilot structure and scale into a full travel desk partnership based on volume and trust.',
     items: [
-      'Single accountable partner',
-      'Vendor network built on reliability',
-      'Budget-conscious planning',
-      'Structured execution timelines',
-      'Calm crisis handling',
+      'Structured onboarding and account mapping',
+      'Single accountable coordination framework',
+      'Scalable operating model aligned to travel volume',
+      'Set up designed for long-term partnership outcomes',
     ],
     icon: Award,
     image: '/images/explore1.jpg',
     reverse: false,
+  },
+  {
+    title: 'CXO & VIP TRAVEL',
+    heading: 'High-touch, discreet, and reliable planning for leadership teams and board members.',
+    description: 'Precision without noise. High-touch, discreet, and reliable planning for leadership teams and board members.',
+    items: [
+      'Priority handling',
+      'Premium hotel curation',
+      'Confidential coordination',
+      'Efficient routing',
+      'Smooth ground transitions',
+    ],
+    icon: Award,
+    image: '/images/explore2.jpg',
+    reverse: true,
   },
 ];
 
@@ -149,8 +161,8 @@ export default function ServicesFeatures() {
         {/* CTA Button */}
         <div className="flex justify-center">
           <Link href="/contact" className="button-with-circle-icon w-inline-block">
-            <p className="button-text">Plan Your Corporate Event</p>
-            <p className="button-text-absolute">Plan Your Corporate Event</p>
+            <p className="button-text">Set Up a Corporate Travel Desk</p>
+            <p className="button-text-absolute">Set Up a Corporate Travel Desk</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"
