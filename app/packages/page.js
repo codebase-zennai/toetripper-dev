@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import "./packages.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -13,7 +14,9 @@ export default function Services() {
       <>
         <Navbar />
         <PackagesHero />
-        <PackagesGrid />
+        <Suspense>
+          <PackagesGrid />
+        </Suspense>
         <NewsletterCTA />
         <Footer />
       </>
