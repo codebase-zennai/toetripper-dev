@@ -1,12 +1,23 @@
-'use client';
+"use client";
 
 import { CircleQuestionMark, Search } from "lucide-react";
 
 export default function Explore() {
   return (
-    <section className="section">
+    <div>
       <div className="padding-4-5rem">
-        <div id="explore" className="card-flex">
+        <div className="h-screen items-center flex justify center bg-black text-white">
+          <div className="flex flex-col gap-20">
+            <h1 className="text-center">
+              Not a Booking Vendor. <br></br>A Structured Travel Partner.
+            </h1>
+            <p className="text-center px-120">
+              We do not compete on discounts or mass inventory. We compete on
+              clarity, execution discipline, and long-term trust.
+            </p>
+          </div>
+        </div>
+        {/* <div id="explore" className="card-flex">
           <div className="features-image-wrapper slide-from-left-animation">
             <div className="cut-out-wrapper">
               <img
@@ -59,14 +70,14 @@ export default function Explore() {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="space-7rem"></div>
         <div className="card-flex reverse-on-tab">
           <div className="large-card">
             <div className="card-text-block slide-up-animation">
               <div className="subheading-flex">
                 <div className="icon-wrapper background-primary">
-                  <CircleQuestionMark className="text-white"/>
+                  <CircleQuestionMark className="text-white" />
                 </div>
                 <h5>Our Approach</h5>
               </div>
@@ -75,9 +86,11 @@ export default function Explore() {
                 <span className="italics"> apart.</span>
               </h2>
               <p>
-                We craft bespoke itineraries through trusted global partnerships and local expertise, ensuring transparent pricing and human support at every stage of your journey.
+                We craft bespoke itineraries through trusted global partnerships
+                and local expertise, ensuring transparent pricing and human
+                support at every stage of your journey.
               </p>
-                            <a
+              <a
                 href="/about"
                 data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
                 className="button-with-circle-icon w-inline-block"
@@ -109,7 +122,7 @@ export default function Explore() {
             <img
               sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
               alt="woman and man  sitting on a chair"
-                src="/images/explore2.jpg"
+              src="/images/explore2.jpg"
               loading="lazy"
               className="features-image align-top"
             />
@@ -117,6 +130,6 @@ export default function Explore() {
         </div>
         <div className="space-7rem"></div>
       </div>
-    </section>
+    </div>
   );
 }

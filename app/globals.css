@@ -3376,7 +3376,7 @@ blockquote {
 
 .spinner-image {
   filter: invert();
-  background-image: url("https://cdn.prod.website-files.com/66e3df8d47eb3991ca9dbef7/66e40a6e5320234d221100f0_Circle.svg");
+  background-image: url("/images/Circle.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
