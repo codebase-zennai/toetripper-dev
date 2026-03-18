@@ -58,7 +58,7 @@ export default function NewsletterCTA() {
         <div className="space-7rem"></div>
         <div className="space-7rem"></div>
         <div className="space-7rem"></div>
-        <div className="w-layout-blockcontainer cta-container w-container">
+        <div className="w-layout-blockcontainer cta-container w-container pt-20 ">
           <div className="cta-wrapper">
             <div className="cta-card slide-down-animation">
               <div className="cta-content-wrapper">

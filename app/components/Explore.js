@@ -1,21 +1,38 @@
 "use client";
 
 import { CircleQuestionMark, Search } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Explore() {
   return (
     <div>
       <div className="padding-4-5rem">
         <div className="h-screen items-center flex justify center bg-black text-white">
-          <div className="flex flex-col gap-20">
-            <h1 className="text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col gap-20"
+          >
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+              className="text-center"
+            >
               Not a Booking Vendor. <br></br>A Structured Travel Partner.
-            </h1>
-            <p className="text-center px-120">
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="text-center px-110"
+            >
               We do not compete on discounts or mass inventory. We compete on
               clarity, execution discipline, and long-term trust.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
         {/* <div id="explore" className="card-flex">
           <div className="features-image-wrapper slide-from-left-animation">
