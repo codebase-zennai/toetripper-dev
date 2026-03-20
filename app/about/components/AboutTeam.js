@@ -49,27 +49,9 @@ export default function AboutTeam() {
               ref={(el) => (teamRefs.current[0] = el)}
               className="team-image slide-from-left-animation"
             >
-              <div className="cut-out-wrapper">
-                <img
-                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f25f231d9a991540f23a96_Top%20Left%20Long%20Dark.svg"
-                  loading="lazy"
-                  alt="Cut out SVG"
-                  className="cut-out-image"
-                />
-              </div>
-              <div className="cut-out-wrapper align-bottom-right">
-                <img
-                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66f25f236650d29c73be169c_Bottom%20Right%20Dark.svg"
-                  loading="lazy"
-                  alt="Cut out SVG"
-                  className="cut-out-image"
-                />
-              </div>
               <img
-                sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 596px, 41vw"
-                srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-500.webp 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane-p-800.webp 800w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane.webp 960w"
-                alt="woman sitting on a chair"
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e5a693adf8275599be0cd0_Jane.webp"
+                alt="Travel destination"
+                src="/images/home.jpg"
                 loading="lazy"
                 className="features-image"
               />
@@ -172,7 +154,7 @@ export default function AboutTeam() {
                         
                       </div>
                       <div className="flex m-10 justify-center">
-                        <h2 className="text-white text-center"> We do not chase volume</h2>
+                        <h3 className="text-white text-center"> We do not chase volume</h3>
                       </div>
                     </div>
                   </div>

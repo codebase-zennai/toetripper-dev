@@ -9,7 +9,10 @@
   --color-dark-gray: #c7c7c7;
 }
 
-
+:root {
+  --primary: #193B9D;
+  --secondary: #F4A300;
+}
 
 /* ===== Shared Animation Keyframes ===== */
 @keyframes fadeInUp {
