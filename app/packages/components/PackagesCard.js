@@ -50,7 +50,7 @@ export default function PackagesCard({
             )}
             <div className="flex items-center gap-2 text-sm text-black/75">
               <DockIcon className="h-4 w-4 shrink-0" />
-              <span className="truncate">Category</span>
+              <span className="truncate">Cat</span>
             </div>
           </div>
 
