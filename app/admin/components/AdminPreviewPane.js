@@ -11,7 +11,7 @@ export default function AdminPreviewPane({ previewPackage }) {
           <PackagesCard
             title={previewPackage.title}
             description={previewPackage.description}
-            imageSrc={previewPackage.imageSrc || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+            imageSrc={previewPackage.imageSrc || '/image.png'}
             href={previewPackage.href || '#'}
             destination={previewPackage.destination}
             cost={previewPackage.cost}

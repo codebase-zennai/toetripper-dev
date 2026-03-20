@@ -14,6 +14,7 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
               value={editingPackage.title}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              placeholder="e.g. Mountain Escape"
             />
           </div>
           <div>
@@ -24,6 +25,7 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
               value={editingPackage.destination}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              placeholder="e.g. Himachal Pradesh"
             />
           </div>
           <div>
@@ -34,6 +36,7 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
               value={editingPackage.category}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              placeholder="e.g. Adventure, Beach"
             />
           </div>
           <div className="md:col-span-2">
@@ -106,6 +109,7 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
             onChange={handleInputChange}
             rows={2}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="e.g. Curated mountain stays, scenic drives, and slow-travel moments built for recharge."
           />
         </div>
 
