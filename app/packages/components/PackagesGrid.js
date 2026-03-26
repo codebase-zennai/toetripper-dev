@@ -5,116 +5,13 @@ import { useSearchParams } from 'next/navigation';
 import PackagesCard from './PackagesCard';
 import { ChevronDown } from 'lucide-react';
 
-const PACKAGES_DATA = [
-  {
-    id: 1,
-    title: "Hill Trails Escape",
-    description: "Curated mountain stays, scenic drives, and slow-travel moments built for recharge.",
-    imageSrc: "/images/explore1.jpg",
-    href: "/packages/hill-trails",
-    destination: "Himachal Pradesh",
-    cost: 25000,
-    duration: 5,
-    category: "Adventure",
-    travelType: 'Domestic'
-  },
-  {
-    id: 2,
-    title: "Coastal Weekend",
-    description: "Short, breezy getaways with boutique stays, local food, and easy transfers.",
-    imageSrc: "/images/explore2.jpg",
-    href: "/packages/coastal-weekend",
-    destination: "Goa",
-    cost: 15000,
-    duration: 3,
-    category: "Beach",
-    travelType: 'Domestic'
-  },
-  {
-    id: 3,
-    title: "City + Culture",
-    description: "Museum stops, heritage walks, and curated dining—planned end to end.",
-    imageSrc: "/images/home.jpg",
-    href: "/packages/city-culture",
-    destination: "Rajasthan",
-    cost: 30000,
-    duration: 7,
-    category: "Cultural",
-    travelType: 'Domestic'
-  },
-  {
-    id: 4,
-    title: "Kerala Backwaters",
-    description: "Houseboat stays, village visits, and Ayurvedic wellness in serene waterways.",
-    imageSrc: "/images/explore1.jpg",
-    href: "/packages/kerala-backwaters",
-    destination: "Kerala",
-    cost: 35000,
-    duration: 6,
-    category: "Wellness",
-    travelType: 'Domestic'
-  },
-  {
-    id: 5,
-    title: "Desert Safari Adventure",
-    description: "Camel rides, dune bashing, and traditional camps under starlit skies.",
-    imageSrc: "/images/explore2.jpg",
-    href: "/packages/desert-safari",
-    destination: "Rajasthan",
-    cost: 22000,
-    duration: 4,
-    category: "Adventure",
-    travelType: 'Domestic'
-  },
-  {
-    id: 6,
-    title: "Northeast Explorer",
-    description: "Misty hills, monasteries, and local cuisines across Meghalaya and Sikkim.",
-    imageSrc: "/images/home.jpg",
-    href: "/packages/northeast-explorer",
-    destination: "Northeast India",
-    cost: 40000,
-    duration: 8,
-    category: "Cultural",
-    travelType: 'Domestic'
-  },
-  {
-    id: 7,
-    title: "Mumbai to Goa Road Trip",
-    description: "Coastal drives, beach hopping, and seafood trails along the Konkan coast.",
-    imageSrc: "/images/explore1.jpg",
-    href: "/packages/mumbai-goa-roadtrip",
-    destination: "Goa",
-    cost: 18000,
-    duration: 5,
-    category: "Beach",
-    travelType: 'Domestic'
-  },
-  {
-    id: 8,
-    title: "Himalayan Trekking",
-    description: "High-altitude trails, mountain villages, and spectacular valley views.",
-    imageSrc: "/images/explore2.jpg",
-    href: "/packages/himalayan-trek",
-    destination: "Himachal Pradesh",
-    cost: 28000,
-    duration: 6,
-    category: "Adventure",
-    travelType: 'Domestic'
-  },
-  {
-    id: 9,
-    title: "Spiritual Varanasi",
-    description: "Ghat walks, temple visits, and ancient rituals along the holy Ganges.",
-    imageSrc: "/images/home.jpg",
-    href: "/packages/spiritual-varanasi",
-    destination: "Uttar Pradesh",
-    cost: 12000,
-    duration: 3,
-    category: "Cultural",
-    travelType: 'Domestic'
-  }
-];
+import { DETAILED_PACKAGES } from '../../../lib/db/packages';
+
+const PACKAGES_DATA = Object.entries(DETAILED_PACKAGES).map(([slug, data]) => ({
+  slug,
+  ...data,
+  travelType: data.travelType || 'Domestic'
+}));
 
 const DESTINATIONS = ['All', ...new Set(PACKAGES_DATA.map(p => p.destination))];
 const CATEGORIES = ['All', ...new Set(PACKAGES_DATA.map(p => p.category))];
@@ -141,6 +38,7 @@ const URL_TRAVEL_TYPE_MAP = {
 
 export default function PackagesGrid() {
   const searchParams = useSearchParams();
+  const [mounted, setMounted] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState('All');
   const [selectedTravelType, setSelectedTravelType] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -149,10 +47,13 @@ export default function PackagesGrid() {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const travelTypeParam = searchParams.get('travelType')?.toLowerCase();
     const mappedTravelType = URL_TRAVEL_TYPE_MAP[travelTypeParam] || 'All';
     setSelectedTravelType(mappedTravelType);
   }, [searchParams]);
+
+  if (!mounted) return null;
 
   const filteredAndSortedPackages = useMemo(() => {
     let result = [...PACKAGES_DATA];
