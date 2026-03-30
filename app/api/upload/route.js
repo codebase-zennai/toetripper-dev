@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { supabaseAdmin } from '../../../lib/supabase/server';
 
 export async function POST(request) {
   try {
@@ -13,40 +12,80 @@ export async function POST(request) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    
-    // Sanitize the file name to avoid weird characters
-    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_'); 
-    
-    // Make sure we have a valid target directory name
     const validSlug = packageSlug || 'default-package';
-    
-    // The directory will be: public/assets/:packagename
-    const publicDir = path.join(process.cwd(), 'public');
-    const targetDir = path.join(publicDir, 'assets', validSlug);
-    
-    // Create directory recursively if it doesn't already exist
-    await mkdir(targetDir, { recursive: true });
-    
-    // Guaranteed 1 image per package: purge existing files in this directory before saving the new one
-    try {
-      const { readdir, unlink } = await import('fs/promises');
-      const existingFiles = await readdir(targetDir);
-      for (const fileItem of existingFiles) {
-        await unlink(path.join(targetDir, fileItem));
-      }
-    } catch (e) {
-      // Ignore errors if directory is perfectly clean or edge cases
+    const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const storagePath = `${validSlug}/${Date.now()}_${sanitizedName}`;
+
+    // Delete existing images for this package (1 image per package rule)
+    const { data: existingFiles } = await supabaseAdmin
+      .storage
+      .from('package-images')
+      .list(validSlug);
+
+    if (existingFiles && existingFiles.length > 0) {
+      const filesToRemove = existingFiles.map(f => `${validSlug}/${f.name}`);
+      await supabaseAdmin.storage.from('package-images').remove(filesToRemove);
     }
-    
-    const filePath = path.join(targetDir, originalName);
-    await writeFile(filePath, buffer);
-    
-    // This is the URL path that can be requested via the browser
-    const publicUrl = `/assets/${validSlug}/${originalName}`;
-    
+
+    // Upload new image to Supabase Storage (S3)
+    const { error: uploadError } = await supabaseAdmin
+      .storage
+      .from('package-images')
+      .upload(storagePath, buffer, {
+        contentType: file.type,
+        upsert: true
+      });
+
+    if (uploadError) throw uploadError;
+
+    // Get the public URL
+    const { data: urlData } = supabaseAdmin
+      .storage
+      .from('package-images')
+      .getPublicUrl(storagePath);
+
+    const publicUrl = urlData.publicUrl;
+
+    // Update the package's image_url in the database
+    await supabaseAdmin
+      .from('packages')
+      .update({ image_url: publicUrl })
+      .eq('slug', validSlug);
+
+    // Also store metadata in package_images table
+    const { data: pkg } = await supabaseAdmin
+      .from('packages')
+      .select('id')
+      .eq('slug', validSlug)
+      .single();
+
+    if (pkg) {
+      // Remove old image entries for this package
+      await supabaseAdmin
+        .from('package_images')
+        .delete()
+        .eq('package_id', pkg.id);
+
+      // Insert new image entry
+      await supabaseAdmin
+        .from('package_images')
+        .insert({
+          package_id: pkg.id,
+          storage_path: storagePath,
+          public_url: publicUrl,
+          original_filename: sanitizedName,
+          mime_type: file.type,
+          size_bytes: buffer.length,
+          is_primary: true
+        });
+    }
+
     return NextResponse.json({ success: true, url: publicUrl });
   } catch (error) {
     console.error('Error uploading file:', error);
-    return NextResponse.json({ error: 'Upload failed', details: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Upload failed', details: error.message },
+      { status: 500 }
+    );
   }
 }

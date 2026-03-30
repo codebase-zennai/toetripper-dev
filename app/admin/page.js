@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WebflowClientOnly from '../components/WebflowClientOnly';
-import { DETAILED_PACKAGES } from '../../lib/db/packages';
 
 import AdminLogin from './components/AdminLogin';
 import PackageList from './components/PackageList';
@@ -23,11 +22,35 @@ export default function AdminPage() {
   const [error, setError] = useState('');
 
   // Admin state
-  const [packages, setPackages] = useState(
-    Object.entries(DETAILED_PACKAGES).map(([slug, data]) => ({ slug, ...data }))
-  );
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [editingPackage, setEditingPackage] = useState(null);
   const [selectedPackageSlug, setSelectedPackageSlug] = useState(null);
+
+  // Fetch packages from Supabase on login
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchPackages();
+    }
+  }, [isLoggedIn]);
+
+  const fetchPackages = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/packages?status=all');
+      const data = await res.json();
+      if (data.success) {
+        setPackages(data.data);
+      } else {
+        toast.error('Failed to fetch packages from database.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Network error fetching packages.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -52,12 +75,12 @@ export default function AdminPage() {
       cost: 0,
       duration: 0,
     });
-    setSelectedPackageSlug(''); // Hide preview or show empty preview
+    setSelectedPackageSlug('');
   };
 
   const handleEditClick = (pkg) => {
     setEditingPackage({ ...pkg });
-    setSelectedPackageSlug(pkg.slug); // automatically select for preview
+    setSelectedPackageSlug(pkg.slug);
   };
 
   const handleDeleteClick = async (pkg) => {
@@ -72,28 +95,24 @@ export default function AdminPage() {
     });
 
     if (result.isConfirmed) {
-      const updatedPackages = packages.filter((p) => p.slug !== pkg.slug);
-      
-      // Optimistic Local update
-      setPackages(updatedPackages);
-      if (selectedPackageSlug === pkg.slug) {
-        setSelectedPackageSlug(null);
-      }
-
-      // Backend sync
       try {
         const res = await fetch('/api/packages', {
-          method: 'POST',
+          method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ packages: updatedPackages })
+          body: JSON.stringify({ slug: pkg.slug })
         });
-        
-        if (!res.ok) {
-          toast.error('Failed to safely delete on server database. Hard refresh to reset the UI cache.');
-        } else {
+
+        if (res.ok) {
+          // Remove from local state
+          setPackages(prev => prev.filter(p => p.slug !== pkg.slug));
+          if (selectedPackageSlug === pkg.slug) {
+            setSelectedPackageSlug(null);
+          }
           toast.success(`Package "${pkg.title}" permanently deleted.`);
+        } else {
+          toast.error('Failed to delete package from database.');
         }
-      } catch(err) {
+      } catch (err) {
         console.error(err);
         toast.error('Network Error connecting to server backend');
       }
@@ -109,38 +128,51 @@ export default function AdminPage() {
   };
 
   const handleSave = async () => {
-    let updatedPackages;
-    let createdSlug = null;
-    
+    let slugToUse = editingPackage.slug;
+
     if (editingPackage.isNew) {
-      createdSlug = editingPackage.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `new-package-${Date.now()}`;
-      const newPackage = { ...editingPackage, slug: createdSlug };
-      delete newPackage.isNew;
-      
-      updatedPackages = [newPackage, ...packages];
-    } else {
-      updatedPackages = packages.map((pkg) => (pkg.slug === editingPackage.slug ? editingPackage : pkg));
+      slugToUse = editingPackage.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `new-package-${Date.now()}`;
     }
 
-    // Update Local UI
-    setPackages(updatedPackages);
-    if (createdSlug) setSelectedPackageSlug(createdSlug);
-    setEditingPackage(null);
+    const packagePayload = {
+      slug: slugToUse,
+      title: editingPackage.title,
+      description: editingPackage.description,
+      fullDescription: editingPackage.fullDescription || '',
+      imageSrc: editingPackage.imageSrc,
+      destination: editingPackage.destination,
+      cost: editingPackage.cost,
+      duration: editingPackage.duration,
+      category: editingPackage.category,
+      travelType: editingPackage.travelType || 'Domestic',
+      bestTime: editingPackage.bestTime || '',
+      difficulty: editingPackage.difficulty || 'Easy',
+      groupSize: editingPackage.groupSize || '',
+      highlights: editingPackage.highlights || [],
+      itinerary: editingPackage.itinerary || [],
+      included: editingPackage.included || [],
+      excluded: editingPackage.excluded || [],
+      status: editingPackage.status || 'published',
+    };
 
-    // Save to Backend to Persist across the site
     try {
       const res = await fetch('/api/packages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ packages: updatedPackages })
+        body: JSON.stringify(packagePayload)
       });
-      
+
       if (res.ok) {
-        toast.success('Package successfully saved to the website!');
+        toast.success('Package successfully saved to the database!');
+        setEditingPackage(null);
+        // Refresh the list from database
+        await fetchPackages();
+        setSelectedPackageSlug(slugToUse);
       } else {
-        toast.error('Failed to sync to website database.');
+        const errorData = await res.json();
+        toast.error(`Failed to save: ${errorData.details || 'Unknown error'}`);
       }
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       toast.error('Network Error connecting to server.');
     }
@@ -206,7 +238,11 @@ export default function AdminPage() {
                         </button>
                       </div>
                     </div>
-                    {editingPackage ? (
+                    {loading ? (
+                      <div className="flex items-center justify-center py-20">
+                        <div className="text-lg text-gray-500">Loading packages from database...</div>
+                      </div>
+                    ) : editingPackage ? (
                       <PackageEditor
                         editingPackage={editingPackage}
                         handleInputChange={handleInputChange}

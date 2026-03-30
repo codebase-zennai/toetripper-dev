@@ -7,6 +7,7 @@ import ServicesHero from "./components/ServicesHero";
 import ServicesFeatures from "./components/ServicesFeatures";
 import WebflowClientOnly from "../../components/WebflowClientOnly";
 import Metrics from "../../components/Metrics";
+import NewsletterCTAMice from "@/app/components/NewsletterCTAMice";
 
 export default function Services() {
   return (
@@ -16,7 +17,7 @@ export default function Services() {
         <ServicesHero />
         <ServicesFeatures />
         {/* <Metrics /> */}
-        <NewsletterCTA />
+        <NewsletterCTAMice />
         <Footer />
       </>
     </WebflowClientOnly>
