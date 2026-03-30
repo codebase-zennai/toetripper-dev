@@ -5,16 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import PackagesCard from './PackagesCard';
 import { ChevronDown } from 'lucide-react';
 
-import { DETAILED_PACKAGES } from '../../../lib/db/packages';
-
-const PACKAGES_DATA = Object.entries(DETAILED_PACKAGES).map(([slug, data]) => ({
-  slug,
-  ...data,
-  travelType: data.travelType || 'Domestic'
-}));
-
-const DESTINATIONS = ['All', ...new Set(PACKAGES_DATA.map(p => p.destination))];
-const CATEGORIES = ['All', ...new Set(PACKAGES_DATA.map(p => p.category))];
 const TRAVEL_TYPES = ['All', 'Domestic', 'International'];
 const PRICE_RANGES = [
   { label: 'All', min: 0, max: Infinity },
@@ -38,7 +28,8 @@ const URL_TRAVEL_TYPE_MAP = {
 
 export default function PackagesGrid() {
   const searchParams = useSearchParams();
-  const [mounted, setMounted] = useState(false);
+  const [packagesData, setPackagesData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedDestination, setSelectedDestination] = useState('All');
   const [selectedTravelType, setSelectedTravelType] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -46,17 +37,38 @@ export default function PackagesGrid() {
   const [sortBy, setSortBy] = useState('recommended');
   const [showFilters, setShowFilters] = useState(false);
 
+  // Fetch packages from Supabase API
   useEffect(() => {
-    setMounted(true);
     const travelTypeParam = searchParams.get('travelType')?.toLowerCase();
     const mappedTravelType = URL_TRAVEL_TYPE_MAP[travelTypeParam] || 'All';
     setSelectedTravelType(mappedTravelType);
+
+    async function fetchPackages() {
+      try {
+        const res = await fetch('/api/packages?status=published');
+        const data = await res.json();
+        if (data.success) {
+          setPackagesData(data.data.map(pkg => ({
+            ...pkg,
+            travelType: pkg.travelType || 'Domestic'
+          })));
+        }
+      } catch (err) {
+        console.error('Failed to fetch packages:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPackages();
   }, [searchParams]);
 
-  if (!mounted) return null;
+  // Derive filter options from fetched data
+  const DESTINATIONS = ['All', ...new Set(packagesData.map(p => p.destination).filter(Boolean))];
+  const CATEGORIES = ['All', ...new Set(packagesData.map(p => p.category).filter(Boolean))];
 
   const filteredAndSortedPackages = useMemo(() => {
-    let result = [...PACKAGES_DATA];
+    let result = [...packagesData];
 
     // Apply filters
     if (selectedDestination !== 'All') {
@@ -83,6 +95,9 @@ export default function PackagesGrid() {
         result.sort((a, b) => a.cost - b.cost);
         break;
       case 'price-desc':
+        // Derive filter options from fetched data (always call hooks at top level)
+        const DESTINATIONS = useMemo(() => ['All', ...new Set(packagesData.map(p => p.destination).filter(Boolean))], [packagesData]);
+        const CATEGORIES = useMemo(() => ['All', ...new Set(packagesData.map(p => p.category).filter(Boolean))], [packagesData]);
         result.sort((a, b) => b.cost - a.cost);
         break;
       case 'duration-asc':
@@ -92,12 +107,11 @@ export default function PackagesGrid() {
         result.sort((a, b) => b.duration - a.duration);
         break;
       default:
-        // Keep original order for recommended
         break;
     }
 
     return result;
-  }, [selectedDestination, selectedTravelType, selectedCategory, selectedPriceRange, sortBy]);
+  }, [packagesData, selectedDestination, selectedTravelType, selectedCategory, selectedPriceRange, sortBy]);
 
   const activeFilterCount = [
     selectedDestination !== 'All',
@@ -113,6 +127,18 @@ export default function PackagesGrid() {
     setSelectedPriceRange(PRICE_RANGES[0]);
     setSortBy('recommended');
   };
+
+  if (loading) {
+    return (
+      <section className="bg-linear-to-b mb-40 px-20" id="packages">
+        <div className="padding-9rem">
+          <div className="flex items-center justify-center py-20">
+            <div className="text-lg text-gray-500">Loading packages...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-linear-to-b mb-40 px-20" id="packages"> 
@@ -248,7 +274,7 @@ export default function PackagesGrid() {
                 title={pkg.title}
                 description={pkg.description}
                 imageSrc={pkg.imageSrc}
-                href={pkg.href}
+                href={pkg.href || `/packages/${pkg.slug}`}
                 cost={pkg.cost}
                 duration={pkg.duration}
                 destination={pkg.destination}

@@ -2,11 +2,11 @@
 import "./services.css";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import NewsletterCTA from "../../components/NewsletterCTA";
 import ServicesHero from "./components/ServicesHero";
 import ServicesFeatures from "./components/ServicesFeatures";
 import WebflowClientOnly from "../../components/WebflowClientOnly";
 import Metrics from "../../components/Metrics";
+import NewsletterCTACorporate from "@/app/components/NewsletterCTACorporate";
 
 export default function Services() {
   return (
@@ -16,7 +16,7 @@ export default function Services() {
         <ServicesHero />
         <ServicesFeatures />
         {/* <Metrics /> */}
-        <NewsletterCTA />
+        <NewsletterCTACorporate />
         <Footer />
       </>
     </WebflowClientOnly>
