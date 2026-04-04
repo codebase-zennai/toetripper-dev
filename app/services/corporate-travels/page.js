@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import ServicesHero from "./components/ServicesHero";
 import ServicesFeatures from "./components/ServicesFeatures";
+import ServicesBento from "../../components/ServicesBento";
 import WebflowClientOnly from "../../components/WebflowClientOnly";
 import Metrics from "../../components/Metrics";
 import NewsletterCTACorporate from "@/app/components/NewsletterCTACorporate";
@@ -14,8 +15,8 @@ export default function Services() {
       <>
         <Navbar />
         <ServicesHero />
+        <ServicesBento />
         <ServicesFeatures />
-        {/* <Metrics /> */}
         <NewsletterCTACorporate />
         <Footer />
       </>
