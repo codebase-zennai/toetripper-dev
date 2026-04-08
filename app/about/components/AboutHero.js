@@ -36,12 +36,12 @@ export default function AboutHero() {
             ABOUT US
           </motion.h1>
           <motion.h5 
-            className="max-width-20rem"
+            className="max-width-31rem" 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
           >
-            Travel should feel structured, reliable, and meaningful, not chaotic or transactional.
+            Travel should feel structured, reliable, and meaningful, not  chaotic or transactional.
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
