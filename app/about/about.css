@@ -46,14 +46,39 @@
 }
 
 @media (max-width: 767px) {
+  .about-stick {
+    height: auto;
+    min-height: 70vh;
+    align-items: stretch;
+  }
+
+  .height-200vw {
+    min-height: auto;
+  }
+
   .about-image {
-    width: 280px;
-    height: 400px;
+    width: min(75vw, 280px);
+    height: min(100vw, 400px);
   }
   
   .about-images-carousel {
     gap: 1rem;
     padding: 0 1rem;
+    min-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 479px) {
+  .about-image {
+    width: min(78vw, 240px);
+    height: min(104vw, 320px);
+  }
+
+  .about-images-carousel {
+    gap: 0.75rem;
+    padding: 0 0.5rem;
   }
 }
 

@@ -7,19 +7,19 @@ export default function Explore() {
   return (
     <div>
       <div className="padding-4-5rem">
-        <div className="h-screen items-center flex justify center bg-black text-white">
+        <div className="min-h-screen items-center flex justify-center bg-black text-white px-4 py-10 sm:px-6">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col gap-20"
+            className="flex flex-col gap-10 md:gap-16"
           >
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-              className="text-center"
+              className="text-center text-3xl leading-tight sm:text-4xl md:text-5xl"
             >
               Not a Booking Vendor. <br></br>A Structured Travel Partner.
             </motion.h1>
@@ -27,7 +27,7 @@ export default function Explore() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="text-center px-110"
+              className="mx-auto max-w-3xl text-center px-2 sm:px-6"
             >
               We do not compete on discounts or mass inventory. We compete on
               clarity, execution discipline, and long-term trust.

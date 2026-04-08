@@ -26,7 +26,7 @@ export default function PackagesCard({
             src={imageSrc}
             alt={title}
             loading="lazy"
-            className="h-[27rem] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="h-[18rem] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[22rem] md:h-[27rem]"
           />
         </Link>
 
@@ -43,7 +43,7 @@ export default function PackagesCard({
             </p>
 
             {destination && (
-              <div className="flex items-center gap-2 mt-15 text-sm text-black/75">
+              <div className="mt-3 flex items-center gap-2 text-sm text-black/75">
                 <MapPin className="h-4 w-4 shrink-0" />
                 <span className="truncate">{destination}</span>
               </div>

@@ -101,7 +101,7 @@ export default function CustomizeItineraryModal({
       <div
         className="relative mx-4 flex w-full max-w-3xl flex-col overflow-hidden bg-white shadow-2xl"
         style={{
-          maxHeight: '90vh',
+          maxHeight: 'calc(100dvh - 2rem)',
           animation: 'modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
@@ -115,7 +115,10 @@ export default function CustomizeItineraryModal({
         </button>
 
         {/* Scrollable content */}
-        <div className="overflow-y-auto" style={{ maxHeight: '90vh' }}>
+        <div
+          className="overflow-y-auto"
+          style={{ maxHeight: 'calc(100dvh - 2rem)', WebkitOverflowScrolling: 'touch' }}
+        >
           {/* Tagline header */}
           <div
             className="px-6 pb-6 pt-8 md:px-10 md:pt-10"

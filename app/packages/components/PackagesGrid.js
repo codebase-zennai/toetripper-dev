@@ -95,9 +95,6 @@ export default function PackagesGrid() {
         result.sort((a, b) => a.cost - b.cost);
         break;
       case 'price-desc':
-        // Derive filter options from fetched data (always call hooks at top level)
-        const DESTINATIONS = useMemo(() => ['All', ...new Set(packagesData.map(p => p.destination).filter(Boolean))], [packagesData]);
-        const CATEGORIES = useMemo(() => ['All', ...new Set(packagesData.map(p => p.category).filter(Boolean))], [packagesData]);
         result.sort((a, b) => b.cost - a.cost);
         break;
       case 'duration-asc':
@@ -130,7 +127,7 @@ export default function PackagesGrid() {
 
   if (loading) {
     return (
-      <section className="bg-linear-to-b mb-40 px-20" id="packages">
+      <section className="bg-linear-to-b mb-24 md:mb-40 px-4 sm:px-8 lg:px-20" id="packages">
         <div className="padding-9rem">
           <div className="flex items-center justify-center py-20">
             <div className="text-lg text-gray-500">Loading packages...</div>
@@ -141,11 +138,11 @@ export default function PackagesGrid() {
   }
 
   return (
-    <section className="bg-linear-to-b mb-40 px-20" id="packages"> 
+    <section className="bg-linear-to-b mb-24 md:mb-40 px-4 sm:px-8 lg:px-20" id="packages"> 
       <div className="padding-9rem">
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 p-5 bg-white border border-black/8  mb-6 rounded-xl">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 p-4 sm:p-5 bg-white border border-black/8 mb-6 rounded-xl">
           <button 
             className="filter-bt flex items-center gap-2 py-2.5 px-5 bg-black border-none rounded-lg font-semibold cursor-pointer transition-colors duration-200 hover:bg-[#333]"
             onClick={() => setShowFilters(!showFilters)}

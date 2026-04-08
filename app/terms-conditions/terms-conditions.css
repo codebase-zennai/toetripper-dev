@@ -80,3 +80,26 @@
     font-size: 1.3rem;
   }
 }
+
+@media (max-width: 479px) {
+  .legal-hero {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .legal-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .legal-subtitle,
+  .legal-section p,
+  .legal-section ul li {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .legal-content {
+    max-width: 100%;
+    padding: 1.5rem 0.75rem;
+  }
+}

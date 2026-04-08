@@ -6805,3 +6805,58 @@
 .section {
   padding-inline: 5rem;
 }
+
+@media screen and (max-width: 991px) {
+  .section {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section {
+    padding-inline: 1rem;
+  }
+
+  .tt-navbar-logo img {
+    width: clamp(170px, 48vw, 260px);
+    height: auto;
+  }
+
+  .tt-navbar-nav {
+    width: min(82vw, 320px);
+  }
+
+  .utilities-grid-thirds,
+  .metrics-grid-quarter {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .hero-image-wrapper,
+  .features-image-wrapper,
+  .about-image,
+  .team-image,
+  .reviews-slide,
+  .posts-card,
+  .blog-image-wrapper,
+  .services-video {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-line {
+    width: 100%;
+  }
+
+  .sign-up-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .utilities-grid-thirds,
+  .metrics-grid-quarter {
+    grid-template-columns: 1fr;
+  }
+}
