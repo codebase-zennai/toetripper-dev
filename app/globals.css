@@ -73,6 +73,26 @@
   }
 }
 
+@keyframes earthTextureSpin {
+  from {
+    background-position: 0% 48%;
+  }
+
+  to {
+    background-position: -200% 48%;
+  }
+}
+
+@keyframes earthCloudSpin {
+  from {
+    background-position: 0% 48%;
+  }
+
+  to {
+    background-position: -200% 48%;
+  }
+}
+
 /* ===== Shared Animation Classes ===== */
 .animate-on-scroll {
   opacity: 0;
@@ -3101,6 +3121,11 @@
     display: flex;
   }
 
+  .tt-navbar-item--dropdown:hover>.tt-dropdown,
+  .tt-navbar-item--dropdown:focus-within>.tt-dropdown {
+    display: flex;
+  }
+
   .tt-dropdown::before {
     content: '';
     position: absolute;
@@ -3311,8 +3336,45 @@
       display: flex;
     }
 
+    .tt-navbar-nav--open .tt-navbar-item--dropdown {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .tt-navbar-nav--open .tt-navbar-item--dropdown>.tt-dropdown {
+      position: static;
+      display: none;
+      box-shadow: none;
+      background-color: transparent;
+      min-width: 100%;
+      width: 100%;
+      padding: 0.5rem 0 0.5rem 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .tt-navbar-nav--open .tt-navbar-item--dropdown>.tt-dropdown.tt-dropdown--open {
+      display: flex;
+    }
+
+    .tt-navbar-nav--open .tt-dropdown-sub {
+      position: static;
+      display: none;
+      box-shadow: none;
+      background-color: transparent;
+      margin-left: 0;
+      padding: 0.25rem 0 0.25rem 1rem;
+      min-width: 100%;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .tt-navbar-nav--open .tt-dropdown-sub.tt-dropdown-sub--open {
+      display: flex;
+    }
+
     .tt-navbar-item {
       width: 100%;
+      align-items: flex-start;
     }
 
     .tt-navbar-link {
@@ -3327,6 +3389,12 @@
       padding: 0.5rem 0 0.5rem 1rem;
       min-width: 100%;
       background-color: transparent;
+      margin-top: 0.2rem;
+    }
+
+    .tt-navbar-item--dropdown:hover>.tt-dropdown,
+    .tt-navbar-item--dropdown:focus-within>.tt-dropdown {
+      display: none;
     }
 
     .tt-dropdown-heading {
@@ -3354,6 +3422,10 @@
 
     .tt-chevron-icon {
       display: inline-block;
+    }
+
+    .tt-dropdown-link {
+      line-height: 1.45;
     }
   }
 
@@ -3394,8 +3466,9 @@
 
   .spinner-wrapper {
     z-index: 2;
-    border: 0.83vw solid var(--light-gray);
-    background-color: var(--primary);
+    border: 0.83vw solid rgba(255, 255, 255, 0.78);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(232, 238, 246, 0.92) 36%, rgba(202, 214, 230, 0.98) 100%);
     border-radius: 100%;
     flex-direction: column;
     justify-content: center;
@@ -3408,20 +3481,74 @@
     position: absolute;
     inset: 23% auto 0% -11%;
     overflow: hidden;
+    box-shadow:
+      0 1rem 2.2rem rgba(15, 23, 42, 0.18),
+      inset 0 0.18rem 0.45rem rgba(255, 255, 255, 0.72);
   }
 
-  .spinner-image {
-    filter: invert();
-    background-image: url("/images/Circle.svg");
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .earth-spinner {
     width: 7.8vw;
     height: 7.8vw;
-    display: flex;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+
+  .earth-spinner__glow,
+  .earth-spinner__sphere,
+  .earth-spinner__texture,
+  .earth-spinner__clouds,
+  .earth-spinner__shade {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+  }
+
+  .earth-spinner__glow {
+    inset: -5%;
+    background:
+      radial-gradient(circle, rgba(60, 144, 255, 0.18) 0%, rgba(60, 144, 255, 0.08) 42%, rgba(60, 144, 255, 0) 72%);
+    filter: blur(0.35vw);
+    opacity: 0.7;
+  }
+
+  .earth-spinner__sphere {
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 28% 26%, #f5fbff 0%, #d9eeff 10%, #6da2da 28%, #173d71 58%, #020814 100%);
+    box-shadow:
+      inset -0.95vw -0.75vw 1.75vw rgba(3, 18, 47, 0.88),
+      inset 0.55vw 0.55vw 0.95vw rgba(255, 255, 255, 0.28),
+      0 0.5vw 1vw rgba(5, 5, 5, 0.18);
+  }
+
+  .earth-spinner__texture {
+    inset: 4%;
+    background-image: url("/Earth_3D/textures/earth albedo.jpg");
+    background-position: 0% 48%;
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    opacity: 0.98;
+    filter: saturate(1.02) contrast(1.06) brightness(0.94);
+    animation: earthTextureSpin 14s linear infinite;
+  }
+
+  .earth-spinner__clouds {
+    inset: 4%;
+    background-image: url("/Earth_3D/textures/clouds earth.png");
+    background-position: 0% 48%;
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    mix-blend-mode: screen;
+    opacity: 0.22;
+    animation: earthCloudSpin 22s linear infinite;
+  }
+
+  .earth-spinner__shade {
+    background:
+      radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08) 18%, rgba(255, 255, 255, 0) 34%),
+      radial-gradient(circle at 76% 78%, rgba(1, 7, 22, 0), rgba(1, 7, 22, 0.24) 40%, rgba(1, 7, 22, 0.76) 74%, rgba(1, 7, 22, 0.94) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 30%, rgba(0, 0, 0, 0.2) 64%, rgba(0, 0, 0, 0.52) 100%);
   }
 
   .hero-image-wrapper {
@@ -5378,7 +5505,7 @@
       left: -7%;
     }
 
-    .spinner-image {
+    .earth-spinner {
       width: 7rem;
       height: 7rem;
     }
@@ -6106,6 +6233,10 @@
     .spinner-wrapper {
       top: 33%;
       left: -12%;
+    }
+
+    .earth-spinner__glow {
+      filter: blur(0.35rem);
     }
 
     .hero-image-wrapper {

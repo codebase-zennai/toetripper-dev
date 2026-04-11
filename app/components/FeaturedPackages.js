@@ -56,27 +56,30 @@ export default function FeaturedPackages() {
             Discover our most popular getaways curated for unforgettable experiences
           </p>
         </div>
+      </div>
 
-        <div className="relative w-full max-w-[100vw] overflow-hidden">
-          {/* Infinite Scroll Marquee Container */}
-          <div className="flex w-max animate-marquee pt-6 pb-10 md:pt-10 md:pb-12 items-center">
-            {SCROLL_ITEMS.map((dest, idx) => (
-              <div
-                key={`${dest.id}-${idx}`}
-                className="flex-none flex justify-center pb-4 min-w-[220px] sm:min-w-[260px] md:min-w-[320px] lg:min-w-[400px] pr-5 sm:pr-8 md:pr-12"
-              >
-                <Link href={dest.href} className="group flex flex-col items-center gap-6 no-underline w-full">
-                  <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 background-primary rounded-full flex items-center justify-center transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)] group-hover:bg-secondary">
-                    <dest.Icon className="text-white w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 transition-transform duration-500 group-hover:scale-110" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300 whitespace-nowrap">
-                    {dest.destination}
-                  </h3>
-                </Link>
-              </div>
-            ))}
-          </div>
+      <div className="relative w-screen overflow-hidden">
+        {/* Infinite Scroll Marquee Container */}
+        <div className="flex flex-nowrap w-max animate-marquee pt-6 pb-10 md:pt-10 md:pb-12 items-center">
+          {SCROLL_ITEMS.map((dest, idx) => (
+            <div
+              key={`${dest.id}-${idx}`}
+              className="flex-none flex justify-center pb-4 min-w-[220px] sm:min-w-[260px] md:min-w-[320px] lg:min-w-[400px] pr-5 sm:pr-8 md:pr-12"
+            >
+              <Link href={dest.href} className="group flex flex-col items-center gap-6 no-underline w-full">
+                <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 background-primary rounded-full flex items-center justify-center transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)] group-hover:bg-secondary">
+                  <dest.Icon className="text-white w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 transition-transform duration-500 group-hover:scale-110" />
+                </div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300 whitespace-nowrap">
+                  {dest.destination}
+                </h3>
+              </Link>
+            </div>
+          ))}
         </div>
+      </div>
+
+      <div className="px-4 sm:px-6">
 
         <div className="flex justify-center mt-12">
           <Link
@@ -94,11 +97,19 @@ export default function FeaturedPackages() {
             100% { transform: translateX(-50%); }
           }
           .animate-marquee {
-            animation: marquee 30s linear infinite;
+            animation: marquee 30s linear infinite !important;
+            will-change: transform;
           }
           /* Pauses animation ONLY when hovering directly over an individual destination item */
           .animate-marquee:has(.group:hover) {
             animation-play-state: paused;
+          }
+          
+          /* Ensure animation works on all screen sizes */
+          @media (max-width: 768px) {
+            .animate-marquee {
+              animation: marquee 25s linear infinite !important;
+            }
           }
         `}} />
       </div>
