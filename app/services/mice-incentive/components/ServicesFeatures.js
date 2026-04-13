@@ -1,26 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Briefcase, Check, Award } from 'lucide-react';
+import { Check, Award } from 'lucide-react';
 
 const sections = [
-  {
-    title: 'Our MICE Scope',
-    heading: 'Comprehensive Event Services',
-    description: 'From intimate leadership offsites to large-scale international conferences, we specialize in a diverse range of MICE events.',
-    items: [
-      'Leadership offsites',
-      'Annual conferences',
-      'Dealer meets',
-      'Incentive travel programs',
-      'Product launches',
-      'Exhibitions',
-      'International meetings',
-    ],
-    icon: Briefcase,
-    image: '/images/explore1.jpg',
-    reverse: false,
-  },
   {
     title: 'What We Handle',
     heading: 'Full-Spectrum Event Management',
