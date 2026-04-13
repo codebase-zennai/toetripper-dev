@@ -95,8 +95,8 @@ export default function Services() {
             <div className="features-flex-wrapper">
             <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
-              className="features-card-wide bg-white"
-              style={{ cursor: isHovering ? 'none' : 'pointer' }}
+              className="features-card-wide"
+              style={{ cursor: isHovering ? 'none' : 'pointer', backgroundColor: '#ffffff' }}
               variants={createBentoVariants({ y: 30 })}
               initial="hidden"
               whileInView="visible"
@@ -126,8 +126,8 @@ export default function Services() {
             </div>
             <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
-              className="features-card-wide bg-black"
-              style={{ cursor: isHovering ? 'none' : 'pointer' }}
+              className="features-card-wide"
+              style={{ cursor: isHovering ? 'none' : 'pointer', backgroundColor: '#050505' }}
               variants={createBentoVariants({ y: 30 })}
               initial="hidden"
               whileInView="visible"

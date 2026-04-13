@@ -204,7 +204,8 @@ export default function AboutTeam() {
                   </div>
 
                   <motion.div
-                    className="features-card-wide bg-[#F4A300]" 
+                    className="features-card-wide"
+                    style={{ backgroundColor: '#F4A300' }}
                     variants={createBentoVariants({ y: 30 })}
                     initial="hidden"
                     whileInView="visible"
