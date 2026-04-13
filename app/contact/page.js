@@ -6,8 +6,54 @@ import Footer from "../components/Footer";
 import WebflowClientOnly from "../components/WebflowClientOnly";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      // Create FormData for Web3Forms
+      const form = new FormData();
+      form.append('access_key', 'daf9a9ea-4b7c-4b7e-b541-5e80800c84d8');
+      form.append('name', formData.name);
+      form.append('email', formData.email);
+      form.append('message', formData.message);
+      form.append('subject', `New Contact Form Submission from ${formData.name}`);
+      form.append('from_name', 'Toe Tripper Contact Form');
+      form.append('to_email', 'info@toetripper.com');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: form,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error(result.message || 'Failed to send message');
+      }
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(error.message || 'Failed to send message. Please try again.');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
   return (
     <WebflowClientOnly>
       <>
@@ -62,22 +108,51 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <form className="contact-form-minimal" aria-label="Appointment contact form">
+                <form className="contact-form-minimal" onSubmit={handleSubmit} aria-label="Appointment contact form">
                   <div className="contact-field-row">
                     <label htmlFor="name">Name</label>
-                    <input id="name" name="name" type="text" placeholder="Your name" required />
+                    <input 
+                      id="name" 
+                      name="name" 
+                      type="text" 
+                      placeholder="Your name" 
+                      value={formData.name}
+                      onChange={handleChange}
+                      disabled={status === 'submitting'}
+                      required 
+                    />
                   </div>
                   <div className="contact-field-row">
                     <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                    <input 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      placeholder="you@example.com" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={status === 'submitting'}
+                      required 
+                    />
                   </div>
                   <div className="contact-field-row">
                     <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" rows={4} placeholder="Tell us what you want to plan" required />
+                    <textarea 
+                      id="message" 
+                      name="message" 
+                      rows={4} 
+                      placeholder="Tell us what you want to plan" 
+                      value={formData.message}
+                      onChange={handleChange}
+                      disabled={status === 'submitting'}
+                      required 
+                    />
                   </div>
-                  <button type="submit" className="contact-submit-btn">
-                    Send Enquiry
+                  <button type="submit" className="contact-submit-btn" disabled={status === 'submitting'}>
+                    {status === 'submitting' ? 'Sending...' : 'Send Enquiry'}
                   </button>
+                  {status === 'success' && <p style={{ color: '#10b981', marginTop: '1rem' }}>✓ Message sent successfully!</p>}
+                  {status === 'error' && <p style={{ color: '#ef4444', marginTop: '1rem' }}>✗ {errorMessage}</p>}
                 </form>
 
                 <div className="contact-info-grid" aria-label="Contact details">

@@ -33,19 +33,39 @@ export default function NewsletterCTA() {
     setStatus('submitting');
 
     try {
-      // Add your form submission logic here (e.g., API call)
-      // For now, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      // Create FormData for Web3Forms (client-side)
+      const form = new FormData();
+      form.append('access_key', 'daf9a9ea-4b7c-4b7e-b541-5e80800c84d8');
+      form.append('name', values.name);
+      form.append('email', `${values.name.toLowerCase().replace(/\s+/g, '.')}@newsletter.toetripper.com`);
+      form.append('phone', values.phone);
+      form.append('destination', values.destination);
+      form.append('travelTiming', values.travelTiming);
+      form.append('travellers', values.travellers);
+      form.append('budget', values.budget);
+      form.append('message', values.message);
+      form.append('form_type', 'general');
+      form.append('subject', `New Newsletter Signup (General) from ${values.name}`);
+      form.append('from_name', 'Toe Tripper Newsletter');
+      form.append('to_email', 'info@toetripper.com');
 
-      setStatus('success');
-      resetForm();
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: form,
+      });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => setStatus('idle'), 5000);
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        resetForm();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error(result.message || 'Failed to submit form');
+      }
     } catch (error) {
+      console.error('Form error:', error);
       setStatus('error');
-
-      // Reset error message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     } finally {
       setSubmitting(false);

@@ -68,14 +68,44 @@ export default function CustomizeItineraryModal({
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setStatus('submitting');
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      // Submit directly from browser to avoid server-side bot checks.
+      const form = new FormData();
+      form.append('access_key', 'daf9a9ea-4b7c-4b7e-b541-5e80800c84d8');
+      form.append('name', values.name);
+      form.append(
+        'email',
+        `${values.name.toLowerCase().replace(/\s+/g, '.')}@itinerary.toetripper.com`
+      );
+      form.append('phone', values.phone);
+      form.append('destination', values.destination);
+      form.append('travelTiming', values.travelTiming);
+      form.append('travellers', values.travellers);
+      form.append('budget', values.budget);
+      form.append('message', values.message);
+      form.append('form_type', 'customize_itinerary');
+      form.append('subject', `New Itinerary Request from ${values.name}`);
+      form.append('from_name', 'Toe Tripper Itinerary');
+      form.append('to_email', 'info@toetripper.com');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: form,
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.message || 'Failed to submit form');
+      }
+
       setStatus('success');
       resetForm();
       setTimeout(() => {
         setStatus('idle');
         onClose();
       }, 3000);
-    } catch {
+    } catch (error) {
+      console.error('Form error:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     } finally {
