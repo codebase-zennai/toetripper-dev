@@ -439,6 +439,16 @@
     flex-wrap: wrap;
   }
 
+  .card-flex {
+    flex-direction: column;
+    align-items: stretch;
+    grid-row-gap: 1rem;
+  }
+
+  .card-flex.reverse-on-tab {
+    flex-direction: column-reverse;
+  }
+
   .large-card {
     min-width: 100%;
     max-width: 100%;
@@ -454,6 +464,11 @@
   .features-image-wrapper {
     min-height: 18rem;
     max-height: 18rem;
+    flex: none !important;
+  }
+
+  .card-text-block {
+    width: 100%;
   }
 
   .services-video {

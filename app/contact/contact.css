@@ -225,6 +225,17 @@
     padding: 1rem;
   }
 
+  .contact-field-row input,
+  .contact-field-row textarea {
+    font-size: 16px;
+  }
+
+  .contact-submit-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
   .contact-info-grid {
     grid-template-columns: 1fr;
   }

@@ -6997,3 +6997,34 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .cta-container {
+    max-height: none !important;
+  }
+
+  .cta-card {
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  .cta-form {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .consent-checkbox {
+    display: flex;
+    width: 100%;
+  }
+
+  .cta-actions {
+    width: 100%;
+  }
+
+  .cta-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
