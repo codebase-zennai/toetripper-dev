@@ -159,7 +159,18 @@
 }
 
 .features-card-wide.background-dark-gray {
-  background-color: var(--dark-gray);
+  background-color: #F4A300;
+}
+
+.features-card-wide.background-primary h4,
+.features-card-wide.background-primary h5,
+.features-card-wide.background-primary svg {
+  color: var(--white);
+}
+
+.features-card-wide.background-primary .outline-black {
+  -webkit-text-stroke: 0;
+  color: var(--white);
 }
 
 /* Features Flex */
@@ -452,5 +463,69 @@
   .services-video {
     min-height: 11.5rem;
     max-height: 11.5rem;
+  }
+}
+
+/* Experiential-only Bento Overrides */
+.experiential-bento .features-card-small,
+.experiential-bento .features-card-wide {
+  overflow: hidden;
+}
+
+.experiential-bento .features-card-small h5,
+.experiential-bento .features-card-wide h5 {
+  margin: 0 0 0.8vw;
+  line-height: 1.15;
+}
+
+.experiential-bento .features-card-small h4 {
+  font-size: 1.5vw;
+  line-height: 1.18;
+  letter-spacing: -0.03vw;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.experiential-bento .features-card-wide h4 {
+  font-size: 1.78vw;
+  line-height: 1.2;
+  letter-spacing: -0.04vw;
+  width: 68%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.experiential-bento .features-card-wide h5 {
+  font-size: 0.86vw;
+  line-height: 1.35;
+  letter-spacing: 0.04vw;
+}
+
+@media screen and (max-width: 991px) {
+  .experiential-bento .features-card-small h4 {
+    font-size: 1.3rem;
+    letter-spacing: -0.02rem;
+  }
+
+  .experiential-bento .features-card-wide h4 {
+    font-size: 1.55rem;
+    width: 72%;
+  }
+
+  .experiential-bento .features-card-wide h5 {
+    font-size: 0.95rem;
+    letter-spacing: 0.02rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .experiential-bento .features-card-small h4,
+  .experiential-bento .features-card-wide h4 {
+    font-size: 1.55rem;
+    width: 100%;
+  }
+
+  .experiential-bento .features-card-wide h5 {
+    font-size: 0.9rem;
   }
 }

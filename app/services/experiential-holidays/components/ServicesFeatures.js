@@ -5,26 +5,6 @@ import { Briefcase, Check, Award } from 'lucide-react';
 
 const sections = [
   {
-    title: 'How We Design Your Holiday',
-    heading: 'Intentional Travel for Families, Couples, and Small Groups',
-    description: 'Not rushed. Not checklist-driven. Not template-based. Toe Tripper designs holidays for families, couples, and small groups who value intentional travel.',
-    items: [
-      'Why you are travelling',
-      'Who you are travelling with',
-      'Your pace preference',
-      'Food and lifestyle choices',
-      'Budget comfort',
-      'Smart routing',
-      'Right-duration stays',
-      'Carefully selected hotels',
-      'Experience-led inclusions',
-      'Balanced day pacing',
-    ],
-    icon: Briefcase,
-    image: '/images/explore1.jpg',
-    reverse: false,
-  },
-  {
     title: 'What We Manage',
     heading: 'End-to-End Holiday Operations',
     description: 'We coordinate all essential travel layers so your journey feels seamless from start to finish.',

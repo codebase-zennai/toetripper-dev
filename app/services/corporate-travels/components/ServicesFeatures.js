@@ -5,23 +5,6 @@ import { Briefcase, Check, Award } from 'lucide-react';
 
 const sections = [
   {
-    title: 'What We Manage',
-    heading: 'Travel Management That Works Like an Extension of Your Team',
-    description: 'Toe Tripper operates as your outsourced corporate travel desk, not as a transactional booking agency. We centralise and manage your travel requirements under one accountable structure.',
-    items: [
-      'Domestic and international flight bookings',
-      'Hotel bookings',
-      'Visa and travel insurance coordination',
-      'Ground logistics and transfers',
-      'Urgent and last-minute travel',
-      'Executive and CXO movement',
-      'Multi-city and complex itineraries',
-    ],
-    icon: Briefcase,
-    image: '/images/explore1.jpg',
-    reverse: false,
-  },
-  {
     title: 'Benefits for Corporates',
     heading: 'Benefits for Corporates',
     description: 'Reduced internal load, stronger cost control, and a consistent travel experience for your teams.',

@@ -201,7 +201,18 @@
 }
 
 .features-card-wide.background-dark-gray {
-  background-color: var(--dark-gray);
+  background-color: #F4A300;
+}
+
+.features-card-wide.background-primary h4,
+.features-card-wide.background-primary h5,
+.features-card-wide.background-primary svg {
+  color: var(--white);
+}
+
+.features-card-wide.background-primary .outline-black {
+  -webkit-text-stroke: 0;
+  color: var(--white);
 }
 
 /* Features Flex */
