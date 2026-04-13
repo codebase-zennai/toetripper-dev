@@ -53,11 +53,11 @@ export default function NewsletterCTACorporate() {
               <div className="cta-content-wrapper">
                 <div className="cta-text-section">
                   <h2 className="text-white">
-                    Set Up Your<span className="italics">Corporate Desk</span>
+                    Let's Setup Your <span className="italics">Corporate Desk</span>
                   </h2>
                   <div className="space-1rem"></div>
                   <p className="text-white">
-                    Share your event requirements and our team will get in touch to curate a personalized solution for your organization.
+                    Share your travel requirements and our team will get in touch to curate a personalized solution for your organization.
                   </p>
                 </div>
                 <div className="cta-form-section">
@@ -103,7 +103,7 @@ export default function NewsletterCTACorporate() {
                             />
                             <ErrorMessage name="company" component="div" className="field-error" />
                           </div>
-                          <div className="form-field">
+                          {/* <div className="form-field">
                             <label htmlFor="eventType">Type of Event</label>
                             <Field
                               type="text"
@@ -113,8 +113,8 @@ export default function NewsletterCTACorporate() {
                               disabled={isSubmitting}
                             />
                             <ErrorMessage name="eventType" component="div" className="field-error" />
-                          </div>
-                          <div className="form-field">
+                          </div> */}
+                          {/* <div className="form-field">
                             <label htmlFor="eventDate">Event Date</label>
                             <Field
                               type="date"
@@ -124,8 +124,8 @@ export default function NewsletterCTACorporate() {
                             />
                             <small className="helper-text">Select your event date</small>
                             <ErrorMessage name="eventDate" component="div" className="field-error" />
-                          </div>
-                          <div className="form-field">
+                          </div> */}
+                          {/* <div className="form-field">
                             <label htmlFor="attendees">Number of Attendees</label>
                             <Field
                               type="number"
@@ -147,7 +147,7 @@ export default function NewsletterCTACorporate() {
                               disabled={isSubmitting}
                             />
                             <small className="helper-text">Optional but helpful</small>
-                          </div>
+                          </div> */}
                           <div className="form-field form-field-wide">
                             <label htmlFor="message">Message (optional)</label>
                             <Field
