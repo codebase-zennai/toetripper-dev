@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PackagesCard from './PackagesCard';
 import { ChevronDown } from 'lucide-react';
+import { parseCategoryTags } from '../../../lib/utils/categoryTags';
 
 const TRAVEL_TYPES = ['All', 'Domestic', 'International'];
 const PRICE_RANGES = [
@@ -65,7 +66,14 @@ export default function PackagesGrid() {
 
   // Derive filter options from fetched data
   const DESTINATIONS = ['All', ...new Set(packagesData.map(p => p.destination).filter(Boolean))];
-  const CATEGORIES = ['All', ...new Set(packagesData.map(p => p.category).filter(Boolean))];
+  const CATEGORIES = [
+    'All',
+    ...new Set(
+      packagesData
+        .flatMap((p) => parseCategoryTags(p.category))
+        .filter(Boolean)
+    )
+  ];
 
   const filteredAndSortedPackages = useMemo(() => {
     let result = [...packagesData];
@@ -80,7 +88,7 @@ export default function PackagesGrid() {
     }
 
     if (selectedCategory !== 'All') {
-      result = result.filter(pkg => pkg.category === selectedCategory);
+      result = result.filter((pkg) => parseCategoryTags(pkg.category).includes(selectedCategory));
     }
 
     if (selectedPriceRange.label !== 'All') {
@@ -264,7 +272,7 @@ export default function PackagesGrid() {
 
         {/* Results Grid */}
         {filteredAndSortedPackages.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {filteredAndSortedPackages.map((pkg) => (
               <PackagesCard
                 key={pkg.id}
@@ -275,6 +283,7 @@ export default function PackagesGrid() {
                 cost={pkg.cost}
                 duration={pkg.duration}
                 destination={pkg.destination}
+                category={pkg.category}
               />
             ))}
           </div>

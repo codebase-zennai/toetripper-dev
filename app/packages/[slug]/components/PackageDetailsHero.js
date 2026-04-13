@@ -1,8 +1,11 @@
 'use client';
 
 import { MapPin, Calendar, IndianRupee, Users, AlertCircle } from 'lucide-react';
+import { sanitizeRichText } from '../../../../lib/utils/richText';
 
 export default function PackageDetailsHero({ package: pkg }) {
+  const safeFullDescription = sanitizeRichText(pkg.fullDescription || '');
+
   return (
     <section className="relative w-full bg-black text-white py-12 md:py-16 lg:py-20">
       {/* Background Image with Overlay */}
@@ -29,9 +32,10 @@ export default function PackageDetailsHero({ package: pkg }) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             {pkg.title}
           </h1>
-          <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-            {pkg.fullDescription}
-          </p>
+          <div
+            className="text-lg md:text-xl text-white/90 leading-relaxed [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+            dangerouslySetInnerHTML={{ __html: safeFullDescription }}
+          />
         </div>
 
         {/* Key Details Grid */}
