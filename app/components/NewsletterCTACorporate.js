@@ -53,7 +53,7 @@ export default function NewsletterCTACorporate() {
               <div className="cta-content-wrapper">
                 <div className="cta-text-section">
                   <h2 className="text-white">
-                    Let's Plan Your <span className="italics">Corporate Event</span>
+                    Set Up Your<span className="italics">Corporate Desk</span>
                   </h2>
                   <div className="space-1rem"></div>
                   <p className="text-white">
