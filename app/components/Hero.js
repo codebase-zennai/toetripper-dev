@@ -2,16 +2,15 @@
 
 import { motion } from "framer-motion";
 import { IceCream } from "lucide-react";
+import RotatingGlobe from "./RotatingGlobe";
 
 const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
 const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
 const spinnerTransition = { duration: 6, ease: "easeInOut", repeat: Infinity };
 const headingItems = [
-  "Travel Desk",
-  "Travel Desk",
-  "Travel Desk",
-  "Travel Desk",
-  "Travel Desk",
+  "Corporate Travel Management",
+  "Experiential Holiday",
+  "MICE and Incentive",
 ];
 
 const heroBlockVariants = {
@@ -31,7 +30,7 @@ const cardGroupVariants = {
 
 export default function Hero() {
   return (
-    <section className="section ">
+    <section className="section" style={{ backgroundColor: '#e7e7e9' }}>
       <div className="padding-4-5rem">
         <div className="hero-flex">
           <motion.div
@@ -210,12 +209,7 @@ export default function Hero() {
                 animate={{ y: [0, -6, 0], rotateZ: [0, 2, 0], scale: [1, 1.03, 1] }}
                 transition={spinnerTransition}
               >
-                <span className="earth-spinner__glow" aria-hidden="true"></span>
-                <span className="earth-spinner__sphere" aria-hidden="true">
-                  <span className="earth-spinner__texture"></span>
-                  <span className="earth-spinner__clouds"></span>
-                  <span className="earth-spinner__shade"></span>
-                </span>
+                <RotatingGlobe />
               </motion.div>
             </a>
           </motion.div>
