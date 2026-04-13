@@ -13,6 +13,8 @@ export default function RotatingGlobe() {
     const root = am5.Root.new(chartRef.current);
     root.setThemes([am5themes_Animated.new(root)]);
     root._logo?.dispose();
+    root.dom.style.background = '#e7e7e9';
+    root.dom.style.borderRadius = '9999px';
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
@@ -23,6 +25,14 @@ export default function RotatingGlobe() {
       })
     );
 
+    chart.chartContainer.set(
+      'background',
+      am5.RoundedRectangle.new(root, {
+        fill: am5.color(0x193b9d),
+        fillOpacity: 1,
+      })
+    );
+
     const backgroundSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
@@ -30,11 +40,11 @@ export default function RotatingGlobe() {
     );
 
     backgroundSeries.mapPolygons.template.setAll({
-      fill: am5.color(0x1c64f2),
+      fill: am5.color(0xffffff),
       fillOpacity: 0.95,
-      stroke: am5.color(0x9bc4ff),
+      stroke: am5.color(0xffffff),
       strokeWidth: 0.6,
-      strokeOpacity: 0.4,
+      strokeOpacity: 0.55,
     });
 
     const graticuleSeries = chart.series.push(
@@ -45,17 +55,17 @@ export default function RotatingGlobe() {
 
     graticuleSeries.mapLines.template.setAll({
       stroke: am5.color(0xffffff),
-      strokeOpacity: 0.15,
+      strokeOpacity: 0.22,
     });
 
     chart.set('rotationX', -80);
-    chart.set('rotationY', 12);
+    chart.set('rotationY', -10);
 
     chart.animate({
       key: 'rotationX',
       from: -80,
       to: 280,
-      duration: 24000,
+      duration: 12000,
       loops: Infinity,
       easing: am5.ease.linear,
     });

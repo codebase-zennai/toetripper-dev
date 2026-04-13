@@ -3466,8 +3466,7 @@
 
   .spinner-wrapper {
     z-index: 2;
-    border: 0.83vw solid rgba(255, 255, 255, 0.78);
-    background: #e7e7e9;
+    background: #e7e7e9 !important;
     border-radius: 100%;
     flex-direction: column;
     justify-content: center;
@@ -3480,9 +3479,6 @@
     position: absolute;
     inset: 23% auto 0% -11%;
     overflow: hidden;
-    box-shadow:
-      0 1rem 2.2rem rgba(15, 23, 42, 0.18),
-      inset 0 0.18rem 0.45rem rgba(255, 255, 255, 0.72);
   }
 
   .earth-spinner {
@@ -3493,6 +3489,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    background: #e7e7e9 !important;
   }
 
   .earth-globe {
@@ -3500,7 +3497,7 @@
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    background: #e7e7e9;
+    background: #e7e7e9 !important;
   }
 
   .earth-spinner__glow,

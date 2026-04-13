@@ -6,7 +6,6 @@ import RotatingGlobe from "./RotatingGlobe";
 
 const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
 const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
-const spinnerTransition = { duration: 6, ease: "easeInOut", repeat: Infinity };
 const headingItems = [
   "Corporate Travel Management",
   "Experiential Holiday",
@@ -206,8 +205,6 @@ export default function Hero() {
               <motion.div
                 data-w-id="5df85663-d46d-b744-b25a-bb603e0e3bfa"
                 className="earth-spinner"
-                animate={{ y: [0, -6, 0], rotateZ: [0, 2, 0], scale: [1, 1.03, 1] }}
-                transition={spinnerTransition}
               >
                 <RotatingGlobe />
               </motion.div>
