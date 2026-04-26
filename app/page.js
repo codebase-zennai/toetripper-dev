@@ -7,7 +7,7 @@ import Brands from "./components/Brands";
 import Services from "./components/Services";
 import Explore from "./components/Explore";
 import Metrics from "./components/Metrics";
-import BlogPosts from "./components/BlogPosts";
+import BlogPosts from "./components/BlogPosts"; // kept — used by /blog routes
 import NewsletterCTA from "./components/NewsletterCTA";
 import Footer from "./components/Footer";
 import WebflowClientOnly from "./components/WebflowClientOnly";
@@ -24,7 +24,7 @@ export default function Home() {
         <Explore />
         {/* <Brands /> */}
         <Metrics />
-        {/* <BlogPosts /> */}
+        {/* TrendingDestinations grid removed — destinations are in the FeaturedPackages marquee above */}
         <NewsletterCTA />
         <Footer />
       </>

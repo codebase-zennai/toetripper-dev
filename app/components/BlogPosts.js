@@ -23,7 +23,7 @@ export default function BlogPosts() {
           <div role="list" className="posts-flex w-dyn-items">
             <div role="listitem" className="w-dyn-item">
               <a
-                href="/post/investing-starters-advice-101"
+                href="/blog/investing-starters-advice-101"
                 className="featured-card w-inline-block"
               >
                 <div className="image-wrapper-small">
@@ -74,7 +74,7 @@ export default function BlogPosts() {
             </div>
             <div role="listitem" className="w-dyn-item">
               <a
-                href="/post/how-much-money-should-i-save"
+                href="/blog/how-much-money-should-i-save"
                 className="featured-card w-inline-block"
               >
                 <div className="image-wrapper-small">
@@ -127,7 +127,7 @@ export default function BlogPosts() {
             </div>
             <div role="listitem" className="w-dyn-item">
               <a
-                href="/post/how-to-diversify-your-portfolio"
+                href="/blog/how-to-diversify-your-portfolio"
                 className="featured-card w-inline-block"
               >
                 <div className="image-wrapper-small">

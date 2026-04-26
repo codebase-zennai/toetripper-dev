@@ -141,23 +141,6 @@ export default function ServicesFeatures() {
           );
         })}
 
-        {/* CTA Button */}
-        <div className="flex justify-center">
-          <Link href="/contact" className="button-with-circle-icon w-inline-block">
-            <p className="button-text">Set Up a Corporate Travel Desk</p>
-            <p className="button-text-absolute">Set Up a Corporate Travel Desk</p>
-            <div className="button-arrow-wrapper">
-              <img
-                width="Auto"
-                height="Auto"
-                alt=""
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
-                loading="eager"
-                className="arrow"
-              />
-            </div>
-          </Link>
-        </div>
       </div>
     </section>
   );

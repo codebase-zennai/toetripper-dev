@@ -107,45 +107,70 @@
 .flip-from-bottom-animation {
   opacity: 0;
   transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .flip-from-bottom-animation.animated {
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* On destination/blog pages, show immediately (Webflow ix2 may not fire) */
+.destination-page-active .flip-from-bottom-animation,
+.destination-page-active .slide-up-animation,
+.destination-page-active .slide-from-left-animation,
+.destination-page-active .slide-from-right-animation {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 .slide-from-left-animation {
   opacity: 0;
   transform: translateX(-50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .slide-from-left-animation.animated {
+  opacity: 1;
+  transform: translateX(0);
   animation: fadeInLeft 0.8s ease-out forwards;
 }
 
 .slide-from-right-animation {
   opacity: 0;
   transform: translateX(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .slide-from-right-animation.animated {
+  opacity: 1;
+  transform: translateX(0);
   animation: fadeInRight 0.8s ease-out forwards;
 }
 
 .slide-down-animation {
   opacity: 0;
   transform: translateY(-30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .slide-down-animation.animated {
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeInDown 0.8s ease-out forwards;
 }
 
 .slide-up-animation {
   opacity: 0;
   transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .slide-up-animation.animated {
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
@@ -7027,4 +7052,561 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ============================================================
+   Blog Post Detail Page
+   ============================================================ */
+
+/* Rich text body — matches .blog-post from page.html */
+.blog-post.w-richtext h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  line-height: 1.9rem;
+  font-weight: 700;
+  color: #050505;
+}
+
+.blog-post.w-richtext p {
+  font-size: 1.05rem;
+  line-height: 1.85rem;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.blog-post.w-richtext blockquote {
+  border-left: 4px solid var(--primary);
+  background: #f4f6ff;
+  border-radius: 0 12px 12px 0;
+  padding: 1.2rem 1.8rem;
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Blog post header wrapper — centered layout matching reference page.html */
+.blog-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.blog-wrapper .badge-post {
+  margin-bottom: 0.5rem;
+}
+
+.blog-wrapper h4 {
+  font-size: clamp(2rem, 2.78vw, 3.2rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: #050505;
+  font-weight: 500;
+  letter-spacing: -0.07vw;
+  text-transform: capitalize;
+}
+
+.blog-wrapper .max-width-30rem {
+  color: #555;
+  font-size: clamp(1rem, 1.11vw, 1.3rem);
+  line-height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.blog-wrapper p {
+  font-size: clamp(1rem, 1.11vw, 1.3rem);
+  line-height: 1.75rem;
+}
+
+.blog-wrapper h5 {
+  font-size: clamp(0.85rem, 0.89vw, 1.1rem);
+  letter-spacing: 0.14vw;
+  text-transform: uppercase;
+}
+
+/* Blog block (meta row: icon + country) */
+.blog-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.56vw;
+}
+
+/* Hero image — sized & centered to match page.html reference */
+.blog-image-wrapper {
+  border-radius: var(--border-radius, 24px);
+  overflow: hidden;
+  position: relative;
+  /* Match page.html: 66.7vw wide, 41.7vw tall */
+  min-width: min(66.7vw, 100%);
+  max-width: 100%;
+  width: 100%;
+  min-height: clamp(280px, 41.7vw, 700px);
+  max-height: clamp(280px, 41.7vw, 700px);
+  margin-left: auto;
+  margin-right: auto;
+  background: #111;
+}
+
+.blog-image-wrapper .image-absolute {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Actions bar: back button + share icons */
+.blog-post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.blog-share-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.blog-share-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #555;
+  margin: 0;
+}
+
+.blog-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: #050505;
+  color: #f5f5f5;
+  transition: background-color 0.25s, transform 0.2s;
+  text-decoration: none;
+}
+
+.blog-share-btn:hover {
+  background-color: var(--primary);
+  transform: scale(1.08);
+}
+
+/* "Post not found" state */
+.blog-post-not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.blog-post-not-found h2 {
+  font-size: 2.5rem;
+  color: #050505;
+}
+
+/* Related posts section — inherits .posts-flex, .featured-card etc. */
+
+/* Responsive tweaks for blog post page */
+@media screen and (max-width: 991px) {
+  .blog-post.w-richtext h4 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
+  .blog-post-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .blog-image-wrapper {
+    min-height: clamp(220px, 50vw, 500px);
+    max-height: clamp(220px, 50vw, 500px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .blog-wrapper h4 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    line-height: 1.25;
+  }
+
+  .blog-image-wrapper {
+    min-height: clamp(200px, 56vw, 420px);
+    max-height: clamp(200px, 56vw, 420px);
+  }
+
+  .blog-share-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .blog-image-wrapper {
+    min-height: 56vw;
+    max-height: 56vw;
+  }
+}
+
+/* ============================================================
+   Trending Destinations Section
+   ============================================================ */
+
+/* Masonry-style responsive grid */
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Individual destination card — clickable link */
+.destination-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Image wrapper — fixed aspect ratio */
+.destination-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+}
+
+/* Destination image */
+.destination-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.destination-card:hover .destination-card-img {
+  transform: scale(1.04);
+}
+
+/* Badge over image (bottom-left) */
+.destination-card-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background-color: #dbec62;
+  border-radius: 24px;
+  padding: 0.4rem 0.85rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Country tag */
+.destination-country-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.destination-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Tagline below destination name */
+.destination-card-tagline {
+  font-size: 0.9rem;
+  color: #999;
+  margin: 0.1rem 0 0;
+  line-height: 1.4;
+}
+
+/* Responsive: 3 columns on tablet */
+@media screen and (max-width: 1200px) {
+  .destinations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .destinations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .destinations-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .destination-card-img-wrap {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ============================================================
+   Destination Detail Page
+   ============================================================ */
+
+/* Map pin icon wrapper in destination header */
+.destination-detail-meta-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* "Plan This Trip" in-page CTA banner */
+.destination-plan-cta {
+  background: linear-gradient(135deg, var(--primary) 0%, #0d2670 100%);
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.destination-plan-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.destination-plan-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.destination-plan-cta-inner h4 {
+  color: white;
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem;
+}
+
+.destination-plan-cta-inner p {
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.destination-plan-cta-inner .button-subscribe {
+  background-color: #dbec62;
+  color: #050505;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-radius: 8px;
+  padding: 0.9rem 2.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.25s, transform 0.2s;
+}
+
+.destination-plan-cta-inner .button-subscribe:hover {
+  background-color: #fff;
+  transform: scale(1.03);
+}
+
+@media screen and (max-width: 767px) {
+  .destination-plan-cta {
+    padding: 2rem;
+  }
+
+  .destination-plan-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .destination-plan-cta-inner .button-subscribe {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* ============================================================
+   Space utility classes (from page.html reference)
+   ============================================================ */
+
+/* Navbar offset spacer — keeps content below fixed navbar */
+.space-page-top {
+  min-height: clamp(70px, 11.11vw, 160px);
+}
+
+.space-0-5rem {
+  min-height: 0.56vw;
+}
+
+.space-1rem {
+  min-height: clamp(0.6rem, 1.1vw, 1.2rem);
+}
+
+.space-2rem {
+  min-height: clamp(1.2rem, 2.2vw, 2.5rem);
+}
+
+.space-4rem {
+  min-height: clamp(2rem, 4.4vw, 5rem);
+}
+
+.space-7rem {
+  min-height: clamp(3.5rem, 7.8vw, 9rem);
+}
+
+/* Blog post body — width matches page.html reference */
+.blog-post {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-post.w-richtext h4 {
+  font-size: clamp(1.2rem, 1.67vw, 2rem);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+  color: #050505;
+}
+
+.blog-post.w-richtext p {
+  font-size: clamp(0.95rem, 1.11vw, 1.25rem);
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post.w-richtext blockquote {
+  border-left: 4px solid var(--primary, #193B9D);
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  font-size: clamp(1rem, 1.11vw, 1.3rem);
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .blog-post {
+    width: 100%;
+  }
+}
+
+/* Prose styles used by Tiptap editor output */
+.prose {
+  color: inherit;
+  line-height: 1.6;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose li {
+  margin: 0.25rem 0;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0.5em 0;
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 0.4em 0;
+}
+
+.prose code {
+  background: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.prose p {
+  margin: 0.5em 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid #d1d5db;
+  padding-left: 1em;
+  margin: 0.5em 0;
+  color: #6b7280;
+  font-style: italic;
 }
