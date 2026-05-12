@@ -39,6 +39,9 @@ export default function DestinationList({
                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
                       {destination.status}
                     </span>
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                      {destination.linkType || 'blog'}
+                    </span>
                     {destination.showInTrending && (
                       <span className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                         Trending

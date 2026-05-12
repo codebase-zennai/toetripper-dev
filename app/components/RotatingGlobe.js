@@ -40,9 +40,9 @@ export default function RotatingGlobe() {
     );
 
     backgroundSeries.mapPolygons.template.setAll({
-      fill: am5.color(0xffffff),
+      fill: am5.color(0xF4A300),
       fillOpacity: 0.95,
-      stroke: am5.color(0xffffff),
+      stroke: am5.color(0xF4A300),
       strokeWidth: 0.6,
       strokeOpacity: 0.55,
     });

@@ -142,6 +142,8 @@ export default function AdminPage() {
       status: 'draft',
       showInTrending: true,
       sortOrder: 0,
+      linkType: 'blog',
+      instagramUrl: '',
     });
     setSelectedDestinationSlug('');
   };
@@ -423,9 +425,16 @@ export default function AdminPage() {
 
   const handleSaveDestination = async () => {
     const slugToUse = editingDestination.slug || slugify(editingDestination.name);
+    const destinationLinkType = editingDestination.linkType === 'instagram' ? 'instagram' : 'blog';
+    const instagramUrl = (editingDestination.instagramUrl || '').trim();
 
     if (!editingDestination.name || !slugToUse) {
       toast.error('Destination name is required.');
+      return;
+    }
+
+    if (destinationLinkType === 'instagram' && !instagramUrl) {
+      toast.error('Instagram URL is required when link type is Instagram.');
       return;
     }
 
@@ -436,6 +445,8 @@ export default function AdminPage() {
         body: JSON.stringify({
           ...editingDestination,
           slug: slugToUse,
+          linkType: destinationLinkType,
+          instagramUrl,
         }),
       });
 
@@ -553,12 +564,19 @@ export default function AdminPage() {
           <div className="p-6 space-y-3">
             <div className="flex items-center gap-2 flex-wrap text-xs uppercase tracking-wide text-gray-500">
               <span>{previewDestination.status}</span>
+              <span>{previewDestination.linkType || 'blog'}</span>
               {previewDestination.showInTrending ? <span>Trending</span> : null}
               {previewDestination.badge ? <span>{previewDestination.badge}</span> : null}
             </div>
             <h3 className="text-2xl font-bold text-black">{previewDestination.name || 'Untitled destination'}</h3>
             <p className="text-sm text-gray-600">{previewDestination.tagline || 'Add a tagline to see the preview summary.'}</p>
-            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: previewDestination.contentHtml || '<p>No content yet.</p>' }} />
+            {previewDestination.linkType === 'instagram' ? (
+              <p className="text-sm text-gray-600">
+                Instagram Redirect URL: {previewDestination.instagramUrl || 'Add an Instagram URL.'}
+              </p>
+            ) : (
+              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: previewDestination.contentHtml || '<p>No content yet.</p>' }} />
+            )}
           </div>
         </div>
       );

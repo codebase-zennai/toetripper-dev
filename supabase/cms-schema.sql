@@ -59,6 +59,8 @@ create table if not exists public.destinations (
   excerpt text default '',
   read_time text default '',
   content_html text default '',
+  link_type text not null default 'blog' check (link_type in ('blog', 'instagram')),
+  instagram_url text default '',
   status text not null default 'draft' check (status in ('draft', 'published')),
   show_in_trending boolean not null default true,
   sort_order integer not null default 0,
@@ -69,6 +71,12 @@ create table if not exists public.destinations (
 create index if not exists destinations_status_idx on public.destinations (status);
 create index if not exists destinations_trending_idx on public.destinations (show_in_trending, status);
 create index if not exists destinations_sort_order_idx on public.destinations (sort_order asc);
+
+alter table public.destinations
+  add column if not exists link_type text not null default 'blog' check (link_type in ('blog', 'instagram'));
+
+alter table public.destinations
+  add column if not exists instagram_url text default '';
 
 drop trigger if exists set_destinations_updated_at on public.destinations;
 create trigger set_destinations_updated_at

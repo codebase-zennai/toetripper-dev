@@ -35,6 +35,12 @@ export default function DestinationPage() {
         if (!active) return;
 
         const currentDestination = detailPayload.success ? detailPayload.data : null;
+
+        if (currentDestination?.linkType === 'instagram' && currentDestination?.instagramUrl) {
+          window.location.href = currentDestination.instagramUrl;
+          return;
+        }
+
         setDestination(currentDestination);
         setRelatedDestinations(
           (relatedPayload.success ? relatedPayload.data : [])
@@ -188,43 +194,88 @@ export default function DestinationPage() {
                 <div role="list" className="posts-flex">
                   {relatedDestinations.map((item) => (
                     <div role="listitem" key={item.slug} className="w-dyn-item">
-                      <Link href={`/destinations/${item.slug}`} className="featured-card w-inline-block">
-                        <div className="image-wrapper-small">
-                          <img
-                            width="Auto"
-                            height="Auto"
-                            alt={item.name}
-                            src={item.cardImage || item.heroImage}
-                            loading="eager"
-                            className="image-absolute"
-                            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                          />
-                          <div className="plus-wrapper">
+                      {(item.linkType === 'instagram' && item.instagramUrl) ? (
+                        <a
+                          href={item.instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="featured-card w-inline-block"
+                        >
+                          <div className="image-wrapper-small">
                             <img
-                              width="24"
-                              height="24"
-                              alt=""
-                              src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e517d167d5eeb317efa720_add.svg"
-                              loading="lazy"
-                              className="plus"
+                              width="Auto"
+                              height="Auto"
+                              alt={item.name}
+                              src={item.cardImage || item.heroImage}
+                              loading="eager"
+                              className="image-absolute"
+                              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                             />
-                          </div>
-                        </div>
-                        <div className="featured-details-flex">
-                          <div className="posts-avatar-flex">
-                            <div className="avatar-text-block">
-                              <h5 className="whitespace-nowrap text-site-white">{item.country}</h5>
-                              <div className="avatar-line" />
+                            <div className="plus-wrapper">
+                              <img
+                                width="24"
+                                height="24"
+                                alt=""
+                                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e517d167d5eeb317efa720_add.svg"
+                                loading="lazy"
+                                className="plus"
+                              />
                             </div>
                           </div>
-                          <div className="posts-block">
-                            <div className="badge-post">
-                              <h5 className="whitespace-nowrap text-site-black">{item.badge || 'Destination'}</h5>
+                          <div className="featured-details-flex">
+                            <div className="posts-avatar-flex">
+                              <div className="avatar-text-block">
+                                <h5 className="whitespace-nowrap text-site-white">{item.country}</h5>
+                                <div className="avatar-line" />
+                              </div>
+                            </div>
+                            <div className="posts-block">
+                              <div className="badge-post">
+                                <h5 className="whitespace-nowrap text-site-black">{item.badge || 'Destination'}</h5>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <h4 className="text-site-white">{item.name}</h4>
-                      </Link>
+                          <h4 className="text-site-white">{item.name}</h4>
+                        </a>
+                      ) : (
+                        <Link href={`/destinations/${item.slug}`} className="featured-card w-inline-block">
+                          <div className="image-wrapper-small">
+                            <img
+                              width="Auto"
+                              height="Auto"
+                              alt={item.name}
+                              src={item.cardImage || item.heroImage}
+                              loading="eager"
+                              className="image-absolute"
+                              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                            />
+                            <div className="plus-wrapper">
+                              <img
+                                width="24"
+                                height="24"
+                                alt=""
+                                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e517d167d5eeb317efa720_add.svg"
+                                loading="lazy"
+                                className="plus"
+                              />
+                            </div>
+                          </div>
+                          <div className="featured-details-flex">
+                            <div className="posts-avatar-flex">
+                              <div className="avatar-text-block">
+                                <h5 className="whitespace-nowrap text-site-white">{item.country}</h5>
+                                <div className="avatar-line" />
+                              </div>
+                            </div>
+                            <div className="posts-block">
+                              <div className="badge-post">
+                                <h5 className="whitespace-nowrap text-site-black">{item.badge || 'Destination'}</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <h4 className="text-site-white">{item.name}</h4>
+                        </Link>
+                      )}
                     </div>
                   ))}
                 </div>

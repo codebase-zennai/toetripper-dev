@@ -53,26 +53,54 @@ export default function FeaturedPackages() {
               key={`${dest.slug}-${idx}`}
               className="flex-none flex justify-center pb-4 min-w-55 sm:min-w-65 md:min-w-80 lg:min-w-100 pr-5 sm:pr-8 md:pr-12"
             >
-              <Link href={`/destinations/${dest.slug}`} className="group flex flex-col items-center gap-6 no-underline w-full">
-                {/* Circle with destination photo */}
-                <div className="dest-circle-wrap group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)]">
-                  <img
-                    src={dest.cardImage || dest.heroImage}
-                    alt={dest.name}
-                    className="dest-circle-img group-hover:scale-110"
-                  />
-                </div>
+              {(dest.linkType === 'instagram' && dest.instagramUrl) ? (
+                <a
+                  href={dest.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-6 no-underline w-full"
+                >
+                  {/* Circle with destination photo */}
+                  <div className="dest-circle-wrap group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)]">
+                    <img
+                      src={dest.cardImage || dest.heroImage}
+                      alt={dest.name}
+                      className="dest-circle-img group-hover:scale-110"
+                    />
+                  </div>
 
-                {/* Name + country */}
-                <div className="flex flex-col items-center gap-1">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300 whitespace-nowrap">
-                    {dest.name}
-                  </h3>
-                  <p className="text-sm text-black/50 font-medium tracking-wide uppercase">
-                    {dest.country}
-                  </p>
-                </div>
-              </Link>
+                  {/* Name + country */}
+                  <div className="flex flex-col items-center gap-1">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300 whitespace-nowrap">
+                      {dest.name}
+                    </h3>
+                    <p className="text-sm text-black/50 font-medium tracking-wide uppercase">
+                      {dest.country}
+                    </p>
+                  </div>
+                </a>
+              ) : (
+                <Link href={`/destinations/${dest.slug}`} className="group flex flex-col items-center gap-6 no-underline w-full">
+                  {/* Circle with destination photo */}
+                  <div className="dest-circle-wrap group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)]">
+                    <img
+                      src={dest.cardImage || dest.heroImage}
+                      alt={dest.name}
+                      className="dest-circle-img group-hover:scale-110"
+                    />
+                  </div>
+
+                  {/* Name + country */}
+                  <div className="flex flex-col items-center gap-1">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300 whitespace-nowrap">
+                      {dest.name}
+                    </h3>
+                    <p className="text-sm text-black/50 font-medium tracking-wide uppercase">
+                      {dest.country}
+                    </p>
+                  </div>
+                </Link>
+              )}
             </div>
           ))}
         </div>

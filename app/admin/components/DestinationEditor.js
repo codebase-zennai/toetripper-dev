@@ -32,6 +32,8 @@ export default function DestinationEditor({
   handleSave,
   handleCancel,
 }) {
+  const isInstagramLink = (editingDestination.linkType || 'blog') === 'instagram';
+
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6">
       <div>
@@ -57,9 +59,6 @@ export default function DestinationEditor({
         <FieldShell label="Tagline">
           <BaseInput name="tagline" value={editingDestination.tagline} onChange={handleInputChange} placeholder="Island of the Gods" />
         </FieldShell>
-        <FieldShell label="Read Time">
-          <BaseInput name="readTime" value={editingDestination.readTime} onChange={handleInputChange} placeholder="5 min read" />
-        </FieldShell>
         <FieldShell label="Hero Image URL">
           <BaseInput name="heroImage" value={editingDestination.heroImage} onChange={handleInputChange} placeholder="https://..." />
         </FieldShell>
@@ -80,18 +79,45 @@ export default function DestinationEditor({
         <FieldShell label="Sort Order">
           <BaseInput name="sortOrder" value={editingDestination.sortOrder} onChange={handleInputChange} placeholder="0" type="number" />
         </FieldShell>
+        <FieldShell label="Destination Link Type" helper="Blog opens internal destination page. Instagram redirects to the external URL.">
+          <select
+            name="linkType"
+            value={editingDestination.linkType || 'blog'}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black bg-white"
+          >
+            <option value="blog">Blog</option>
+            <option value="instagram">Instagram Link</option>
+          </select>
+        </FieldShell>
+        <FieldShell label="Instagram URL" helper="Required when Destination Link Type is Instagram. Example: https://instagram.com/...">
+          <BaseInput
+            name="instagramUrl"
+            value={editingDestination.instagramUrl}
+            onChange={handleInputChange}
+            placeholder="https://instagram.com/..."
+            type="url"
+          />
+        </FieldShell>
+        {!isInstagramLink ? (
+          <FieldShell label="Read Time">
+            <BaseInput name="readTime" value={editingDestination.readTime} onChange={handleInputChange} placeholder="5 min read" />
+          </FieldShell>
+        ) : null}
       </div>
 
-      <FieldShell label="Excerpt">
-        <textarea
-          name="excerpt"
-          value={editingDestination.excerpt || ''}
-          onChange={handleInputChange}
-          rows={3}
-          placeholder="Short summary for cards and previews"
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-        />
-      </FieldShell>
+      {!isInstagramLink ? (
+        <FieldShell label="Excerpt">
+          <textarea
+            name="excerpt"
+            value={editingDestination.excerpt || ''}
+            onChange={handleInputChange}
+            rows={3}
+            placeholder="Short summary for cards and previews"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          />
+        </FieldShell>
+      ) : null}
 
       <div className="flex items-center gap-3">
         <input
@@ -105,13 +131,15 @@ export default function DestinationEditor({
         <label htmlFor="showInTrending" className="text-sm text-gray-700">Show this destination in trending sections</label>
       </div>
 
-      <FieldShell label="Destination Content">
-        <RichTextEditor
-          value={editingDestination.contentHtml}
-          onChange={handleContentChange}
-          placeholder="Write the full destination story here..."
-        />
-      </FieldShell>
+      {!isInstagramLink ? (
+        <FieldShell label="Destination Content">
+          <RichTextEditor
+            value={editingDestination.contentHtml}
+            onChange={handleContentChange}
+            placeholder="Write the full destination story here..."
+          />
+        </FieldShell>
+      ) : null}
 
       <div className="flex gap-3">
         <button

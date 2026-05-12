@@ -18,6 +18,8 @@ function normalizeDestinationRow(row) {
     status: row.status || 'draft',
     showInTrending: Boolean(row.show_in_trending),
     sortOrder: row.sort_order || 0,
+    linkType: row.link_type || 'blog',
+    instagramUrl: row.instagram_url || '',
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -75,10 +77,19 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const resolvedSlug = body.slug || slugify(body.name);
+    const linkType = body.linkType === 'instagram' ? 'instagram' : 'blog';
+    const instagramUrl = (body.instagramUrl || '').trim();
 
     if (!body.name || !resolvedSlug) {
       return NextResponse.json(
         { error: 'Name is required' },
+        { status: 400 }
+      );
+    }
+
+    if (linkType === 'instagram' && !instagramUrl) {
+      return NextResponse.json(
+        { error: 'Instagram URL is required when link type is instagram' },
         { status: 400 }
       );
     }
@@ -97,6 +108,8 @@ export async function POST(request) {
       status: body.status || 'draft',
       show_in_trending: Boolean(body.showInTrending),
       sort_order: Number(body.sortOrder) || 0,
+      link_type: linkType,
+      instagram_url: linkType === 'instagram' ? instagramUrl : '',
     };
 
     const { data, error } = await supabaseAdmin
