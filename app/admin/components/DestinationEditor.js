@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import RichTextEditor from './RichTextEditor';
 
 function FieldShell({ label, children, helper }) {
@@ -22,6 +23,100 @@ function BaseInput({ name, value, onChange, placeholder, type = 'text' }) {
       placeholder={placeholder}
       className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
     />
+  );
+}
+
+function ImageInputField({ label, fieldName, value, destinationSlug, imageType, handleInputChange }) {
+  const [mode, setMode] = useState(value && !value.startsWith('blob:') ? 'url' : 'url');
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Show immediate local preview
+    const localUrl = URL.createObjectURL(file);
+    handleInputChange({ target: { name: fieldName, value: localUrl } });
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('destinationSlug', destinationSlug || 'destination-draft');
+      formData.append('imageType', imageType);
+
+      const res = await fetch('/api/upload/destination-image', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          handleInputChange({ target: { name: fieldName, value: data.url } });
+        }
+      } else {
+        console.error('Destination image upload failed');
+      }
+    } catch (err) {
+      console.error('Destination image upload error', err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <FieldShell label={label}>
+      <div className="space-y-2">
+        {/* Mode toggle */}
+        <div className="flex rounded-md overflow-hidden border border-gray-300 w-fit">
+          <button
+            type="button"
+            onClick={() => setMode('url')}
+            className={`px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer ${mode === 'url' ? 'bg-black text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+          >
+            URL
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode('upload')}
+            className={`px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer border-l border-gray-300 ${mode === 'upload' ? 'bg-black text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+          >
+            Upload
+          </button>
+        </div>
+
+        {mode === 'url' ? (
+          <BaseInput
+            name={fieldName}
+            value={value}
+            onChange={handleInputChange}
+            placeholder="https://..."
+            type="url"
+          />
+        ) : (
+          <div className="flex items-center gap-4">
+            {value && (
+              <div className="w-20 h-20 rounded-md overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                <img src={value} alt="Preview" className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                disabled={uploading}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800 file:cursor-pointer disabled:opacity-60"
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                {uploading ? 'Uploading…' : 'Pick an image from your computer to upload it automatically.'}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </FieldShell>
   );
 }
 
@@ -59,12 +154,22 @@ export default function DestinationEditor({
         <FieldShell label="Tagline">
           <BaseInput name="tagline" value={editingDestination.tagline} onChange={handleInputChange} placeholder="Island of the Gods" />
         </FieldShell>
-        <FieldShell label="Hero Image URL">
-          <BaseInput name="heroImage" value={editingDestination.heroImage} onChange={handleInputChange} placeholder="https://..." />
-        </FieldShell>
-        <FieldShell label="Card Image URL">
-          <BaseInput name="cardImage" value={editingDestination.cardImage} onChange={handleInputChange} placeholder="https://..." />
-        </FieldShell>
+        <ImageInputField
+          label="Hero Image"
+          fieldName="heroImage"
+          value={editingDestination.heroImage}
+          destinationSlug={editingDestination.slug || editingDestination.name}
+          imageType="hero"
+          handleInputChange={handleInputChange}
+        />
+        <ImageInputField
+          label="Card Image"
+          fieldName="cardImage"
+          value={editingDestination.cardImage}
+          destinationSlug={editingDestination.slug || editingDestination.name}
+          imageType="card"
+          handleInputChange={handleInputChange}
+        />
         <FieldShell label="Status">
           <select
             name="status"

@@ -5,6 +5,7 @@ import { sanitizeRichText } from '../../../../lib/utils/richText';
 
 export default function PackageDetailsHero({ package: pkg }) {
   const safeFullDescription = sanitizeRichText(pkg.fullDescription || '');
+  const bookNowHref = pkg.getYourGuideLink?.trim() || '/contact';
 
   return (
     <section className="relative w-full bg-black text-white py-12 md:py-16 lg:py-20">
@@ -15,7 +16,7 @@ export default function PackageDetailsHero({ package: pkg }) {
           alt={pkg.title}
           className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-black via-black/80 to-transparent"></div>
       </div>
 
       {/* Content */}
@@ -74,13 +75,21 @@ export default function PackageDetailsHero({ package: pkg }) {
         </div>
 
         {/* CTA Button */}
-        <div className="mt-12 flex gap-4">
-          <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-200">
-            Book This Package
-          </button>
-          <button className="px-8 py-4 border-2 border-white hover:bg-white/10 text-white font-semibold rounded-lg transition-colors duration-200">
-            Request Customization
-          </button>
+        <div className="mt-12 flex flex-col sm:flex-row gap-4">
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white hover:bg-white/10 text-white font-semibold rounded-lg transition-colors duration-200"
+          >
+            Customize Your Itinerary
+          </a>
+          <a
+            href={bookNowHref}
+            target={pkg.getYourGuideLink ? '_blank' : undefined}
+            rel={pkg.getYourGuideLink ? 'noopener noreferrer' : undefined}
+            className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-200"
+          >
+            Book Now
+          </a>
         </div>
       </div>
     </section>

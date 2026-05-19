@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '../../../lib/supabase/server';
 
+function normalizeTravelType(value) {
+  const normalizedValue = String(value || '').trim().toLowerCase();
+  if (normalizedValue === 'international') return 'International';
+  return 'Domestic';
+}
+
+function getTravelTypeFromPackageRow(pkg) {
+  const normalizedTravelType = normalizeTravelType(pkg.travel_type);
+  if (pkg.travel_type) return normalizedTravelType;
+
+  const normalizedCategory = String(pkg.category || '').toLowerCase();
+  if (normalizedCategory.includes('international')) return 'International';
+  if (normalizedCategory.includes('domestic')) return 'Domestic';
+
+  return normalizedTravelType;
+}
+
 // GET — Fetch all packages (with related data)
 export async function GET(request) {
   try {
@@ -42,7 +59,8 @@ export async function GET(request) {
       cost: pkg.cost,
       duration: pkg.duration,
       category: pkg.category,
-      travelType: pkg.travel_type,
+      travelType: getTravelTypeFromPackageRow(pkg),
+      getYourGuideLink: pkg.get_your_guide_link || '',
       bestTime: pkg.best_time,
       difficulty: pkg.difficulty,
       groupSize: pkg.group_size,
@@ -86,6 +104,7 @@ export async function POST(request) {
       duration,
       category,
       travelType,
+      getYourGuideLink,
       bestTime,
       difficulty,
       groupSize,
@@ -108,7 +127,8 @@ export async function POST(request) {
       cost: Number(cost) || 0,
       duration: Number(duration) || 1,
       category: category || '',
-      travel_type: travelType || 'Domestic',
+      travel_type: normalizeTravelType(travelType),
+      get_your_guide_link: (getYourGuideLink || '').trim(),
       best_time: bestTime || '',
       difficulty: difficulty || 'Easy',
       group_size: groupSize || '',

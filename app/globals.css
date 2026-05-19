@@ -6692,13 +6692,15 @@
     }
 
     .features-card-large {
-      justify-content: space-between;
-      align-items: center;
-      min-width: 100%;
-      max-width: 100%;
-      min-height: 15rem;
-      max-height: 15rem;
-      padding: 2rem;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      height: auto !important;
+      padding: 2rem !important;
     }
 
     .features-arrow-image {
@@ -6717,11 +6719,12 @@
 
     .features-card-wide,
     .features-card-small {
-      min-width: 100%;
-      max-width: 100%;
-      min-height: 15rem;
-      max-height: 15rem;
-      padding: 2rem;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      height: auto !important;
+      padding: 2rem !important;
     }
 
     .metrics-wrapper {
@@ -6842,7 +6845,7 @@
 
     .cta-wrapper {
       grid-template-columns: 1fr;
-      top: -19rem;
+      top: -5rem;
     }
 
     .max-width-30rem {
@@ -7017,6 +7020,7 @@
 }
 
 @media screen and (max-width: 479px) {
+
   .utilities-grid-thirds,
   .metrics-grid-quarter {
     grid-template-columns: 1fr;
@@ -7423,7 +7427,7 @@
 }
 
 .destination-plan-cta-inner p {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
   font-size: 0.95rem;
 }

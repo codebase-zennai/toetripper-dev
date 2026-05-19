@@ -93,36 +93,36 @@ export default function Services() {
           </motion.div>
           <div className="features-block">
             <div className="features-flex-wrapper">
-            <motion.div
-              data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
-              className="features-card-wide"
-              style={{ cursor: isHovering ? 'none' : 'pointer', backgroundColor: '#ffffff' }}
-              variants={createBentoVariants({ y: 30 })}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOptions}
-              transition={{ ...baseTransition, delay: 0.18 }}
-              whileHover={{ y: -5, transition: hoverTransition }}
-              whileTap={{ y: -3, transition: hoverTransition }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              onClick={() => handleServiceNavigation('/services/mice-incentive')}
-              onKeyDown={(event) => handleServiceKeyDown(event, '/services/mice-incentive')}
-              role="link"
-              tabIndex={0}
-            >
-              <div className="features-flex space-between align-center">
-                <h4 className="">MICE & Events</h4>
-                <HeartHandshake
-                  size={125}
-                  strokeWidth={1}
-                  className=""
-                />
-              </div>
-              <h5 className="">
-                Alerts to safely participate in the market
-              </h5>
-            </motion.div>
+              <motion.div
+                data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
+                className="features-card-wide"
+                style={{ cursor: isHovering ? 'none' : 'pointer', backgroundColor: '#ffffff' }}
+                variants={createBentoVariants({ y: 30 })}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOptions}
+                transition={{ ...baseTransition, delay: 0.18 }}
+                whileHover={{ y: -5, transition: hoverTransition }}
+                whileTap={{ y: -3, transition: hoverTransition }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                onClick={() => handleServiceNavigation('/services/mice-incentive')}
+                onKeyDown={(event) => handleServiceKeyDown(event, '/services/mice-incentive')}
+                role="link"
+                tabIndex={0}
+              >
+                <div className="features-flex space-between align-center">
+                  <h4 className="">MICE & Events</h4>
+                  <HeartHandshake
+                    size={125}
+                    strokeWidth={1}
+                    className=""
+                  />
+                </div>
+                <h5 className="">
+                  Alerts to safely participate in the market
+                </h5>
+              </motion.div>
             </div>
             <motion.div
               data-w-id="e08b3125-39b3-ccaa-a963-34378cadaf48"
@@ -158,7 +158,7 @@ export default function Services() {
         </div>
         <div className="space-7rem"></div>
       </motion.div>
-      
+
       <AnimatePresence>
         {isHovering && (
           <motion.div

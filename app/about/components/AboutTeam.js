@@ -151,7 +151,7 @@ export default function AboutTeam() {
                       <div className="flex justify-center">
                         {/* <TargetIcon size={200} strokeWidth={0.5} className="text-white" /> */}
                         <Gem size={200} strokeWidth={0.5} className="text-white" />
-                        
+
                       </div>
                       <div className="flex m-10 justify-center">
                         <h3 className="text-white text-center"> We do not chase volume</h3>

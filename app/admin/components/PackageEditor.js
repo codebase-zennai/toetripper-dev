@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import RichTextEditor from './RichTextEditor';
 import { parseCategoryTags, formatCategoryTags } from '../../../lib/utils/categoryTags';
 
+const TRAVEL_TYPE_OPTIONS = ['Domestic', 'International'];
+
 export default function PackageEditor({ editingPackage, handleInputChange, handleSave, handleCancel }) {
   if (!editingPackage) return null;
 
@@ -170,6 +172,30 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
               )}
             </div>
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Travel Type</label>
+            <select
+              name="travelType"
+              value={editingPackage.travelType || 'Domestic'}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white"
+            >
+              {TRAVEL_TYPE_OPTIONS.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Get Your Guide Link</label>
+            <input
+              type="url"
+              name="getYourGuideLink"
+              value={editingPackage.getYourGuideLink || ''}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              placeholder="https://www.getyourguide.com/..."
+            />
+          </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
             <div className="flex items-center gap-4">
@@ -299,17 +325,6 @@ export default function PackageEditor({ editingPackage, handleInputChange, handl
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     placeholder="e.g. 6"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Travel Type</label>
-                  <input
-                    type="text"
-                    name="travelType"
-                    value={editingPackage.travelType || ''}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="e.g. Domestic"
                   />
                 </div>
                 <div>

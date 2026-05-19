@@ -27,6 +27,12 @@ const URL_TRAVEL_TYPE_MAP = {
   international: 'International'
 };
 
+function normalizeTravelType(value) {
+  const normalizedValue = String(value || '').trim().toLowerCase();
+  if (normalizedValue === 'international') return 'International';
+  return 'Domestic';
+}
+
 export default function PackagesGrid() {
   const searchParams = useSearchParams();
   const [packagesData, setPackagesData] = useState([]);
@@ -51,7 +57,8 @@ export default function PackagesGrid() {
         if (data.success) {
           setPackagesData(data.data.map(pkg => ({
             ...pkg,
-            travelType: pkg.travelType || 'Domestic'
+            travelType: normalizeTravelType(pkg.travelType),
+            getYourGuideLink: pkg.getYourGuideLink || ''
           })));
         }
       } catch (err) {
@@ -284,6 +291,8 @@ export default function PackagesGrid() {
                 duration={pkg.duration}
                 destination={pkg.destination}
                 category={pkg.category}
+                travelType={pkg.travelType}
+                getYourGuideLink={pkg.getYourGuideLink}
               />
             ))}
           </div>
