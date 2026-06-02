@@ -75,9 +75,6 @@ export default function Footer() {
                 />
               </a>
             </div>
-            <p className="max-width-17vw text-site-white">
-              Navigate the Markets, Secure Your Future.
-            </p>
           </div>
           <div className="footer-right-flex">
             <div className="footer-wrapper">
