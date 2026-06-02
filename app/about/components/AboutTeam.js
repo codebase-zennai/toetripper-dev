@@ -50,8 +50,8 @@ export default function AboutTeam() {
               className="team-image slide-from-left-animation"
             >
               <img
-                alt="Travel destination"
-                src="/images/home.jpg"
+                alt="Founder image"
+                src="/images/founder.jpg"
                 loading="lazy"
                 className="features-image"
               />

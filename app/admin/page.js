@@ -13,6 +13,8 @@ import BlogList from './components/BlogList';
 import BlogEditor from './components/BlogEditor';
 import DestinationList from './components/DestinationList';
 import DestinationEditor from './components/DestinationEditor';
+import TestimonialManager from './components/TestimonialManager';
+import GalleryManager from './components/GalleryManager';
 import { slugify } from '../../lib/utils/slugify';
 
 // React-Toastify and SweetAlert2
@@ -23,6 +25,8 @@ import Swal from 'sweetalert2';
 const ADMIN_TABS = [
   { id: 'packages', label: 'Packages' },
   { id: 'destinations', label: 'Destinations' },
+  { id: 'testimonials', label: 'Testimonials' },
+  { id: 'gallery', label: 'Gallery' },
 ];
 
 export default function AdminPage() {
@@ -507,6 +511,14 @@ export default function AdminPage() {
           handleDeleteClick={handleDeleteClick}
         />
       );
+    }
+
+    if (activeTab === 'testimonials') {
+      return <TestimonialManager />;
+    }
+
+    if (activeTab === 'gallery') {
+      return <GalleryManager />;
     }
 
     return editingDestination ? (

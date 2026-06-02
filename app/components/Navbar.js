@@ -24,17 +24,28 @@ const NAV_ITEMS = [
       },
   ]
   },
+  {
+    id: 'testimonials',
+    label: 'Testimonials',
+    isDropdown: true,
+    items: [
+      { label: 'Feedback', href: '/feedback' },
+      { label: 'Gallery', href: '/gallery' }
+    ]
+  },
   { id: 'contact', label: 'Contact', href: '/contact' }
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileTestimonialsOpen, setMobileTestimonialsOpen] = useState(false);
   const [mobileSubOpen, setMobileSubOpen] = useState(null);
 
   const handleCloseAll = () => {
     setMobileMenuOpen(false);
     setMobileServicesOpen(false);
+    setMobileTestimonialsOpen(false);
     setMobileSubOpen(null);
   };
 
@@ -50,6 +61,10 @@ export default function Navbar() {
       }
       return next;
     });
+  };
+
+  const toggleMobileTestimonials = () => {
+    setMobileTestimonialsOpen((prev) => !prev);
   };
 
   return (
@@ -68,6 +83,11 @@ export default function Navbar() {
         <nav className={`tt-navbar-nav${mobileMenuOpen ? ' tt-navbar-nav--open' : ''}`}>
           {NAV_ITEMS.map((item) => {
             if (item.isDropdown) {
+              const isServiceDropdown = item.id === 'service';
+              const isTestimonialsDropdown = item.id === 'testimonials';
+              const dropdownOpen = isServiceDropdown ? mobileServicesOpen : isTestimonialsDropdown ? mobileTestimonialsOpen : false;
+              const toggleDropdown = isServiceDropdown ? toggleMobileServices : isTestimonialsDropdown ? toggleMobileTestimonials : () => {};
+              
               return (
                 <div
                   key={item.id}
@@ -83,8 +103,8 @@ export default function Navbar() {
                     type="button"
                     className="tt-navbar-link tt-navbar-link--chevron"
                     aria-haspopup="true"
-                    aria-expanded={mobileServicesOpen}
-                    onClick={toggleMobileServices}
+                    aria-expanded={dropdownOpen}
+                    onClick={toggleDropdown}
                     style={mobileMenuOpen ? {
                       width: '100%',
                       justifyContent: 'space-between',
@@ -96,7 +116,7 @@ export default function Navbar() {
                   </button>
 
                   <div
-                    className={`tt-dropdown${mobileServicesOpen ? ' tt-dropdown--open' : ''}`}
+                    className={`tt-dropdown${dropdownOpen ? ' tt-dropdown--open' : ''}`}
                     style={mobileMenuOpen ? {
                       position: 'static',
                       display: mobileServicesOpen ? 'flex' : 'none',
