@@ -7,9 +7,9 @@ import RotatingGlobe from "./RotatingGlobe";
 const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
 const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
 const headingItems = [
-  "Corporate Travel Management",
-  "Experiential Holiday",
-  "MICE and Incentive",
+  "Corporate Travel",
+  "Curated Holiday",
+  "MICE Events",
 ];
 
 const heroBlockVariants = {
@@ -57,7 +57,7 @@ export default function Hero() {
               <p className="hero-text">
                 You Dream. <span className="italics">We Deliver.</span>
               </p>
-              <div className="hero-line"></div>
+              {/* <div className="hero-line"></div> */}
             </div>
             </div>
             <motion.div
