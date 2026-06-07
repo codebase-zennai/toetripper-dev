@@ -26,11 +26,11 @@ const NAV_ITEMS = [
   },
   {
     id: 'testimonials',
-    label: 'Testimonials',
+    label: 'Stories',
     isDropdown: true,
     items: [
-      { label: 'Feedback', href: '/feedback' },
-      { label: 'Gallery', href: '/gallery' }
+      { label: 'Cherished Travel Moments', href: '/feedback' },
+      { label: 'Photo Booth', href: '/gallery' }
     ]
   },
   { id: 'contact', label: 'Contact', href: '/contact' }
@@ -119,7 +119,7 @@ export default function Navbar() {
                     className={`tt-dropdown${dropdownOpen ? ' tt-dropdown--open' : ''}`}
                     style={mobileMenuOpen ? {
                       position: 'static',
-                      display: mobileServicesOpen ? 'flex' : 'none',
+                      display: dropdownOpen ? 'flex' : 'none',
                       minWidth: '100%',
                       width: '100%',
                       boxShadow: 'none',

@@ -3338,6 +3338,7 @@
   @media screen and (max-width: 767px) {
     .tt-navbar-toggle {
       display: block;
+      z-index: 1020;
     }
 
     .tt-navbar-nav {
@@ -3354,7 +3355,7 @@
       padding: 5rem 1.5rem 2rem;
       gap: 0.5rem;
       overflow-y: auto;
-      z-index: 1000;
+      z-index: 1010;
     }
 
     .tt-navbar-nav--open {

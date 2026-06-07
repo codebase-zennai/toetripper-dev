@@ -17,7 +17,7 @@ const sections = [
       'Post-event reconciliation',
     ],
     icon: Check,
-    image: '/images/explore2.jpg',
+    image: '/images/mice_event_management.jpg',
     reverse: true,
   },
   {
@@ -32,7 +32,7 @@ const sections = [
       'Calm crisis handling',
     ],
     icon: Award,
-    image: '/images/explore1.jpg',
+    image: '/images/mice_trust.jpg',
     reverse: false,
   },
 ];

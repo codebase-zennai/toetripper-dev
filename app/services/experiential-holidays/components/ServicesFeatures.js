@@ -16,7 +16,7 @@ const sections = [
       'Activity and experience bookings',
     ],
     icon: Check,
-    image: '/images/explore2.jpg',
+    image: '/images/holiday_ops.jpg',
     reverse: true,
   },
   {
@@ -29,7 +29,7 @@ const sections = [
       'Value without compromise on essentials',
     ],
     icon: Award,
-    image: '/images/explore1.jpg',
+    image: '/images/travel_philosophy.jpg',
     reverse: false,
   },
   {
@@ -46,7 +46,7 @@ const sections = [
       'India experiential circuits',
     ],
     icon: Briefcase,
-    image: '/images/explore2.jpg',
+    image: '/images/travel_styles.jpg',
     reverse: true,
   },
 ];

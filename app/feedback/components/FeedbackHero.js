@@ -33,7 +33,7 @@ export default function FeedbackHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            TESTIMONIALS & FEEDBACK
+            Real Journeys, REal Stories
           </motion.h1>
           <motion.h5 
             className="max-width-31rem" 

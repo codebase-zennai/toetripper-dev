@@ -39,7 +39,7 @@ export async function POST(req) {
         description: description || null,
         image_url,
         tags: Array.isArray(tags) ? tags : (tags ? [tags] : []),
-        is_published: false,
+        is_published: true,
       },
     ]).select();
 

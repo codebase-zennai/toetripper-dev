@@ -33,7 +33,7 @@ export default function GalleryHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            GALLERY
+            PHOTO BOOTH
           </motion.h1>
           <motion.h5 
             className="max-width-31rem" 
@@ -52,8 +52,8 @@ export default function GalleryHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="button-text">Explore Gallery</p>
-            <p className="button-text-absolute">Explore Gallery</p>
+            <p className="button-text">Explore Photo Booth</p>
+            <p className="button-text-absolute">Explore Photo Booth</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"

@@ -7,91 +7,95 @@ import "./feedback.css";
 import NewsletterCTA from '../components/NewsletterCTA';
 import FeedbackHero from './components/FeedbackHero';
 import Footer from '../components/Footer';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Instagram, Linkedin, MessageSquareText, PlusCircle, Star, ThumbsUp, ExternalLink, ShieldCheck, Heart, Share2 } from 'lucide-react';
+
+function getEmbedUrl(url) {
+  if (!url) return null;
+  
+  // Instagram parsing
+  const instaMatch = url.match(/instagram\.com\/(?:p|reel)\/([a-zA-Z0-9_-]+)/i);
+  if (instaMatch) {
+    return `https://www.instagram.com/p/${instaMatch[1]}/embed`;
+  }
+  
+  // LinkedIn parsing
+  const linkedinMatch = url.match(/linkedin\.com\/posts\/[a-zA-Z0-9_-]+(?:-|_)(\d+)/i) || 
+                        url.match(/linkedin\.com\/posts\/activity-(\d+)/i) ||
+                        url.match(/linkedin\.com\/feed\/update\/urn:li:activity:(\d+)/i) ||
+                        url.match(/linkedin\.com\/feed\/update\/urn:li:share:(\d+)/i);
+  if (linkedinMatch) {
+    return `https://www.linkedin.com/embed/feed/update/urn:li:share/${linkedinMatch[1]}`;
+  }
+  
+  if (url.includes('instagram.com/p/') || url.includes('instagram.com/reel/') || url.includes('linkedin.com/embed')) {
+    return url;
+  }
+  
+  return null;
+}
 
 export default function Feedback() {
-  const [email, setEmail] = useState('');
+  const [formType, setFormType] = useState('direct'); // 'direct' or 'social'
   const [status, setStatus] = useState('idle');
   const [feedbackForm, setFeedbackForm] = useState({
     name: '',
     email: '',
     rating: 5,
-    message: ''
+    message: '',
+    socialLink: ''
   });
   const [formStatus, setFormStatus] = useState('idle');
 
-  // Testimonials carousel data + pagination (fetched from Supabase via API)
+  // Testimonials state
   const [testimonials, setTestimonials] = useState([]);
-  const itemsPerPage = 4;
-  const [page, setPage] = useState(0);
-  const totalPages = Math.max(1, Math.ceil(testimonials.length / itemsPerPage));
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch testimonials from our API (which reads Supabase)
+  // Fetch testimonials from DB only — no fallback data
   useEffect(() => {
     let mounted = true;
-
-    const fallback = [
-      { name: 'Sarah Johnson', destination: 'Bali, Indonesia', rating: 5, text: 'Toe Tripper made my dream vacation come true! Every detail was perfectly planned and executed.' },
-      { name: 'Mike Chen', destination: 'Swiss Alps', rating: 5, text: 'The corporate travel experience was seamless. Professional, reliable, and genuinely caring.' },
-      { name: 'Emily Rodriguez', destination: 'Japan Explorer', rating: 5, text: 'Best travel company I\'ve worked with. They understand what meaningful travel really means.' },
-      { name: 'David Thompson', destination: 'Iceland Adventure', rating: 5, text: 'Exceptional service from start to finish. Toe Tripper truly delivers on their promise.' },
-      { name: 'Aisha Khan', destination: 'Morocco', rating: 5, text: 'An unforgettable cultural journey — highly recommended.' },
-      { name: 'Carlos Mendes', destination: 'Portugal', rating: 5, text: 'Seamless planning and thoughtful local experiences.' },
-      { name: 'Lina Park', destination: 'South Korea', rating: 5, text: 'They took care of every little detail with care.' },
-      { name: 'Tom Baker', destination: 'Canada', rating: 5, text: 'Excellent support throughout the trip.' },
-      { name: 'Nora Ahmed', destination: 'Egypt', rating: 5, text: 'A deeply memorable and well-curated itinerary.' },
-      { name: 'Oliver Grant', destination: 'New Zealand', rating: 5, text: 'Adventure-focused and safe — great guides.' },
-      { name: 'Priya Mehra', destination: 'Sri Lanka', rating: 5, text: 'Thoughtful routing and warm local partnerships.' },
-      { name: 'Jamal White', destination: 'South Africa', rating: 5, text: 'Impeccable logistics and great value.' },
-      { name: 'Hannah Lee', destination: 'Thailand', rating: 5, text: 'Beautifully organized, great local touches.' },
-      { name: 'Mateo Ruiz', destination: 'Mexico', rating: 5, text: 'Fantastic culinary experiences and smooth transport.' },
-      { name: 'Sofia Petrova', destination: 'Greece', rating: 5, text: 'Romantic and relaxed — everything we wanted.' },
-      { name: 'Ethan Brooks', destination: 'Iceland', rating: 5, text: 'Adventure and comfort balanced perfectly.' }
-    ];
 
     fetch('/api/testimonials')
       .then((res) => res.json())
       .then((data) => {
         if (!mounted) return;
-        if (Array.isArray(data) && data.length > 0) setTestimonials(data);
-        else setTestimonials(fallback);
+        setTestimonials(Array.isArray(data) ? data : []);
+        setIsLoading(false);
       })
       .catch(() => {
         if (!mounted) return;
-        setTestimonials(fallback);
+        setTestimonials([]);
+        setIsLoading(false);
       });
 
     return () => { mounted = false; };
   }, []);
-
-  useEffect(() => {
-    const id = setInterval(() => setPage((p) => (p + 1) % totalPages), 6000);
-    return () => clearInterval(id);
-  }, [totalPages]);
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('submitting');
 
     try {
-        const response = await fetch('/api/testimonials', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: feedbackForm.name,
-            destination: '',
-            rating: feedbackForm.rating,
-            message: feedbackForm.message,
-            image_url: null
-          })
-        });
+      // Determine what to save in the destination field based on the form type
+      const destinationValue = formType === 'social' ? feedbackForm.socialLink : feedbackForm.message.substring(0, 30); // fallback or empty
+      const messageValue = formType === 'social' ? `Social share request: ${feedbackForm.socialLink}` : feedbackForm.message;
+      
+      const response = await fetch('/api/testimonials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: feedbackForm.name,
+          destination: formType === 'social' ? feedbackForm.socialLink : (feedbackForm.message.split(' ').slice(0, 2).join(' ') || 'User Review'),
+          rating: formType === 'social' ? 5 : feedbackForm.rating,
+          message: messageValue,
+          image_url: null
+        })
+      });
 
       if (!response.ok) throw new Error('Failed to submit');
       
       setFormStatus('success');
-      setFeedbackForm({ name: '', email: '', rating: 5, message: '' });
-      // optionally refresh testimonials after submit (commented out to avoid unexpected reflows)
-      // fetch('/api/testimonials').then(r => r.json()).then(d => setTestimonials(d || []));
+      setFeedbackForm({ name: '', email: '', rating: 5, message: '', socialLink: '' });
       
       setTimeout(() => setFormStatus('idle'), 5000);
     } catch (error) {
@@ -100,166 +104,348 @@ export default function Feedback() {
     }
   };
 
+  // Filter testimonials dynamically
+  const socialTestimonials = testimonials.filter(t => getEmbedUrl(t.destination) !== null);
+  const directTestimonials = testimonials.filter(t => getEmbedUrl(t.destination) === null);
+
   return (
     <WebflowClientOnly>
       <>
         <Navbar />
         <FeedbackHero />
         
-        {/* Feedback Section */}
-        <div>
-          <div> 
-            
-            <div className="feedback-container">
-            <div className="space-7rem"></div>
-              {/* Testimonials Display */}
-              <motion.div 
-                className="testimonials-wrapper"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="heading-2">What Our Travelers Say</h2>
-                
-                <div className="testimonials-carousel">
-                  <motion.div
-                    key={page}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div className="testimonials-grid">
-                      {testimonials.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage).map((testimonial, index) => (
-                        <div key={index} className="testimonial-card">
-                          <div className="rating">{[...Array(testimonial.rating)].map((_, i) => <span key={i}>⭐</span>)}</div>
-                          <p className="testimonial-text">{testimonial.text}</p>
-                          <p className="testimonial-author">{testimonial.name}</p>
-                          <p className="testimonial-destination">{testimonial.destination}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  <div className="carousel-controls">
-                    <button type="button" className="carousel-btn" onClick={() => setPage((p) => (p - 1 + totalPages) % totalPages)}>‹</button>
-                    <div className="carousel-dots">
-                      {Array.from({ length: totalPages }).map((_, i) => (
-                        <button key={i} className={`dot ${i === page ? 'active' : ''}`} onClick={() => setPage(i)} aria-label={`Go to page ${i + 1}`} />
-                      ))}
-                    </div>
-                    <button type="button" className="carousel-btn" onClick={() => setPage((p) => (p + 1) % totalPages)}>›</button>
-                  </div>
+        {/* Main Content Sections */}
+        <div className="feedback-container" id="feedback-section">
+          
+          {/* Section 1: Echoes from the Feed (Social Media Testimonials) */}
+          <section className="testimonials-section">
+            <div className="section-header">
+              <div className="subheading-flex">
+                <div className="icon-wrapper background-primary">
+                  <Share2 className="text-white" size={24} strokeWidth={1.5} />
                 </div>
-              </motion.div>
-
-              <motion.div 
-                className="feedback-form-wrapper"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-
-                <div className="feedback-form-layout">
-                  <div className="feedback-form-left">
-                    <form onSubmit={handleFeedbackSubmit} className="feedback-form">
-                <h2 className="heading-2">Share Your Experience</h2>
-                <p className="text-body">Your feedback helps us improve and create better travel experiences for everyone.</p>
-                  <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={feedbackForm.name}
-                      onChange={(e) => setFeedbackForm({...feedbackForm, name: e.target.value})}
-                      required
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={feedbackForm.email}
-                      onChange={(e) => setFeedbackForm({...feedbackForm, email: e.target.value})}
-                      required
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="rating">How would you rate your experience?</label>
-                    <div className="rating-selector">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <button
-                          key={star}
-                          type="button"
-                          className={`star-button ${feedbackForm.rating >= star ? 'active' : ''}`}
-                          onClick={() => setFeedbackForm({...feedbackForm, rating: star})}
-                        >
-                          ⭐
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="message">Your Feedback</label>
-                    <textarea
-                      id="message"
-                      value={feedbackForm.message}
-                      onChange={(e) => setFeedbackForm({...feedbackForm, message: e.target.value})}
-                      required
-                      placeholder="Tell us what you think..."
-                      rows="6"
-                    />
-                  </div>
-
-                  <motion.button
-                    type="submit"
-                    className="button-primary"
-                    disabled={formStatus === 'submitting'}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {formStatus === 'submitting' ? 'Submitting...' : 'Submit Feedback'}
-                  </motion.button>
-
-                  {formStatus === 'success' && (
-                    <motion.p 
-                      className="form-message success"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    >
-                      Thank you! Your feedback has been received.
-                    </motion.p>
-                  )}
-                  {formStatus === 'error' && (
-                    <motion.p 
-                      className="form-message error"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    >
-                      Something went wrong. Please try again.
-                    </motion.p>
-                  )}
-                    </form>
-                  </div>
-
-                  <div className="feedback-form-right">
-                    <div className="feedback-image">
-                      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&auto=format&fit=crop" alt="Travelers" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+                <h5>Echoes from the Feed</h5>
+              </div>
+              <h2 className="w-full wrap-break-word text-3xl sm:text-4xl lg:text-[2.8vw] leading-tight" style={{ color: '#ffffff', marginTop: '0.75rem' }}>
+                Live Social Feed
+              </h2>
+              <p className="w-full text-base sm:text-lg leading-relaxed wrap-break-word" style={{ color: '#a0aec0', fontSize: '0.875rem' }}>
+                Real moments shared live. Direct social updates and posts from our travelers around the globe.
+              </p>
             </div>
 
-          </div>
+            {isLoading ? (
+              <div className="loader-container">
+                <div className="spinner"></div>
+              </div>
+            ) : socialTestimonials.length === 0 ? (
+              <div className="loader-container">
+                <p style={{ color: '#a0aec0', fontSize: '0.9rem', textAlign: 'center', padding: '2rem 0' }}>No social posts have been published yet.</p>
+              </div>
+            ) : (
+              <div className="social-embeds-grid">
+                {socialTestimonials.map((testimonial) => {
+                  const embedUrl = getEmbedUrl(testimonial.destination);
+                  const isInsta = testimonial.destination.includes('instagram.com');
+                  return (
+                    <motion.div 
+                      key={testimonial.id}
+                      className="social-card-wrapper"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="social-card-header">
+                        <div className="platform-badge">
+                          {isInsta ? (
+                            <span className="badge-content insta">
+                              <Instagram size={14} /> Instagram
+                            </span>
+                          ) : (
+                            <span className="badge-content linkedin">
+                              <Linkedin size={14} /> LinkedIn
+                            </span>
+                          )}
+                        </div>
+                        <a 
+                          href={testimonial.destination} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="view-original-btn"
+                          title="View original post"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </div>
+                      
+                      <div className="social-embed-frame">
+                        <iframe
+                          src={embedUrl}
+                          width="100%"
+                          height="480"
+                          frameBorder="0"
+                          scrolling="no"
+                          allowtransparency="true"
+                          allow="encrypted-media"
+                          title={`Social post from ${testimonial.name}`}
+                          className="social-iframe"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="social-card-footer" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.6rem' }}>
+                        <p className="author-name">Posted by {testimonial.name}</p>
+                        <a 
+                          href={isInsta ? "https://www.instagram.com/toetripper_travel_events/" : "https://www.linkedin.com/company/toe-tripper/posts/"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="follow-platform-button"
+                        >
+                          {isInsta ? 'Follow us on Instagram' : 'Follow us on LinkedIn'}
+                        </a>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+
+          <div className="space-7rem"></div>
+
+          {/* Section 2: Corporate & Client Stories (Direct Reviews) */}
+          <section className="testimonials-section">
+            <div className="section-header">
+              <div className="subheading-flex">
+                <div className="icon-wrapper background-primary">
+                  <MessageSquareText className="text-white" size={24} strokeWidth={1.5} />
+                </div>
+                <h5>Corporate & Client Stories</h5>
+              </div>
+              <h2 className="w-full wrap-break-word text-3xl sm:text-4xl lg:text-[2.8vw] leading-tight" style={{ color: '#ffffff', marginTop: '0.75rem' }}>
+                Reviews & Testimonials
+              </h2>
+              <p className="w-full text-base sm:text-lg leading-relaxed wrap-break-word" style={{ color: '#a0aec0', fontSize: '0.875rem' }}>
+                Detailed testimonials and reviews from corporate managers and experiential travelers who experienced seamless journeys with Toe Tripper.
+              </p>
+            </div>
+
+            {isLoading ? (
+              <div className="loader-container">
+                <div className="spinner"></div>
+              </div>
+            ) : directTestimonials.length === 0 ? (
+              <div className="loader-container">
+                <p style={{ color: '#a0aec0', fontSize: '0.9rem', textAlign: 'center', padding: '2rem 0' }}>No client reviews have been published yet.</p>
+              </div>
+            ) : (
+              <div className="direct-reviews-grid">
+                {directTestimonials.map((testimonial, index) => (
+                  <motion.div 
+                    key={testimonial.id || index}
+                    className="direct-review-card"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    whileHover={{ y: -6 }}
+                  >
+                    <div className="card-top">
+                      <div className="stars-row">
+                        {[...Array(testimonial.rating || 5)].map((_, i) => (
+                          <Star key={i} size={16} fill="var(--secondary, #F4A300)" color="var(--secondary, #F4A300)" />
+                        ))}
+                      </div>
+                      <ShieldCheck size={20} className="verified-icon" />
+                    </div>
+                    
+                    <p className="review-message">"{testimonial.message || testimonial.text}"</p>
+                    
+                    <div className="review-meta">
+                      <h4 className="client-name">{testimonial.name}</h4>
+                      {testimonial.destination && (
+                        <span className="client-destination">{testimonial.destination}</span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </section>
+
+          <div className="space-7rem"></div>
+
+          {/* Section 3: Redesigned Feedback Form */}
+          <motion.div 
+            className="feedback-form-section"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="form-layout-wrapper">
+              <div className="form-info-side">
+                <div className="form-info-content">
+                  <span className="form-tagline">Share Your Journey</span>
+                  <h2>How was your Toe Tripper experience?</h2>
+                  <p>Whether it was a massive corporate MICE execution, an efficient VIP corporate transfer, or a hand-crafted experiential holiday, we want to hear your story.</p>
+                  
+                  <div className="form-bullets">
+                    <div className="bullet-item">
+                      <ThumbsUp className="bullet-icon" size={18} />
+                      <p>Helps us maintain flawless planning standards.</p>
+                    </div>
+                    <div className="bullet-item">
+                      <Heart className="bullet-icon" size={18} />
+                      <p>Brings inspiration to travelers searching for unique routes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-input-side">
+                {/* Tabs to select Direct Story vs. Social Post URL */}
+                <div className="form-type-tabs">
+                  <button 
+                    type="button" 
+                    className={`form-tab ${formType === 'direct' ? 'active' : ''}`}
+                    onClick={() => setFormType('direct')}
+                  >
+                    Direct Story
+                  </button>
+                  <button 
+                    type="button" 
+                    className={`form-tab ${formType === 'social' ? 'active' : ''}`}
+                    onClick={() => setFormType('social')}
+                  >
+                    Social Post Link
+                  </button>
+                </div>
+
+                <form onSubmit={handleFeedbackSubmit} className="redesigned-form">
+                  <div className="form-row-group">
+                    <div className="form-field">
+                      <label htmlFor="form-name">Name</label>
+                      <input
+                        type="text"
+                        id="form-name"
+                        value={feedbackForm.name}
+                        onChange={(e) => setFeedbackForm({...feedbackForm, name: e.target.value})}
+                        required
+                        placeholder="Your Name / Organization"
+                      />
+                    </div>
+
+                    <div className="form-field">
+                      <label htmlFor="form-email">Email</label>
+                      <input
+                        type="email"
+                        id="form-email"
+                        value={feedbackForm.email}
+                        onChange={(e) => setFeedbackForm({...feedbackForm, email: e.target.value})}
+                        required
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
+
+                  {formType === 'direct' ? (
+                    <>
+                      <div className="form-row-group">
+                        <div className="form-field">
+                          <label htmlFor="form-destination">Destination / Event Name</label>
+                          <input
+                            type="text"
+                            id="form-destination"
+                            value={feedbackForm.socialLink} // mapping to socialLink temporarily
+                            onChange={(e) => setFeedbackForm({...feedbackForm, socialLink: e.target.value})}
+                            placeholder="e.g., Swiss Alps, Annual MICE 2026"
+                          />
+                        </div>
+
+                        <div className="form-field">
+                          <label>Experience Rating</label>
+                          <div className="form-stars-selector">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <button
+                                key={star}
+                                type="button"
+                                className={`star-select-btn ${feedbackForm.rating >= star ? 'active' : ''}`}
+                                onClick={() => setFeedbackForm({...feedbackForm, rating: star})}
+                                aria-label={`Rate ${star} Stars`}
+                              >
+                                <Star size={20} fill={feedbackForm.rating >= star ? "var(--secondary, #F4A300)" : "transparent"} color={feedbackForm.rating >= star ? "var(--secondary, #F4A300)" : "#666"} />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="form-field">
+                        <label htmlFor="form-message">Your Review</label>
+                        <textarea
+                          id="form-message"
+                          value={feedbackForm.message}
+                          onChange={(e) => setFeedbackForm({...feedbackForm, message: e.target.value})}
+                          required
+                          placeholder="Describe your itinerary experience, logistics, ground coordination, etc..."
+                          rows="5"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="form-field">
+                        <label htmlFor="form-social-link">Instagram or LinkedIn Post URL</label>
+                        <input
+                          type="url"
+                          id="form-social-link"
+                          value={feedbackForm.socialLink}
+                          onChange={(e) => setFeedbackForm({...feedbackForm, socialLink: e.target.value})}
+                          required
+                          placeholder="e.g., https://www.instagram.com/p/DF2TebiyYgD/ or LinkedIn post URL"
+                        />
+                        <p className="field-hint">Paste the URL of your post or reel sharing your journey. We will embed it here!</p>
+                      </div>
+                    </>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="redesigned-submit-btn"
+                    disabled={formStatus === 'submitting'}
+                  >
+                    {formStatus === 'submitting' ? 'Publishing...' : 'Share Review'}
+                  </button>
+
+                  <AnimatePresence>
+                    {formStatus === 'success' && (
+                      <motion.div 
+                        className="form-alert success"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <ShieldCheck size={20} />
+                        <p>Thank you! Your story has been submitted and is currently being published.</p>
+                      </motion.div>
+                    )}
+                    {formStatus === 'error' && (
+                      <motion.div 
+                        className="form-alert error"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <p>Something went wrong with submission. Please verify details and try again.</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </form>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
 
         <NewsletterCTA />

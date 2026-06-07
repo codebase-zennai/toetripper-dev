@@ -15,7 +15,7 @@ const sections = [
       'Dedicated support: human-led escalation handling when urgency matters most.',
     ],
     icon: Check,
-    image: '/images/explore2.jpg',
+    image: '/images/corporate_benefits.jpg',
     reverse: true,
   },
   {
@@ -29,7 +29,7 @@ const sections = [
       'Set up designed for long-term partnership outcomes',
     ],
     icon: Award,
-    image: '/images/explore1.jpg',
+    image: '/images/corporate_desk.jpg',
     reverse: false,
   },
   {
@@ -44,7 +44,7 @@ const sections = [
       'Smooth ground transitions',
     ],
     icon: Award,
-    image: '/images/explore2.jpg',
+    image: '/images/cxo_vip_travel.jpg',
     reverse: true,
   },
 ];

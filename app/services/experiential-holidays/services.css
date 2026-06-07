@@ -382,16 +382,86 @@
 
 /* Responsive - Mobile */
 @media screen and (max-width: 767px) {
-  .features-card-small,
-  .features-card-wide {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: auto;
-    max-height: none;
-    padding: 1.5rem;
+  /* Enforce perfect card layouts on mobile */
+  .features-block,
+  .features-flex-wrapper {
+    width: 100% !important;
   }
 
-  .features-flex,
+  .features-card-small,
+  .features-card-wide {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 200px !important;
+    max-height: none !important;
+    padding: 1.75rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+    border-radius: 24px !important;
+  }
+
+  /* Keep wide card headers side-by-side with icon on mobile */
+  .features-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 1.5rem !important;
+  }
+
+  .features-card-wide svg {
+    flex-shrink: 0 !important;
+  }
+
+  /* Resize icons inside bento cards on mobile */
+  .features-card-small svg,
+  .features-card-wide svg {
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Make bento text sizes readable */
+  .features-card-small h5,
+  .features-card-wide h5,
+  .corporate-bento .features-card-small h5,
+  .corporate-bento .features-card-wide h5,
+  .experiential-bento .features-card-small h5,
+  .experiential-bento .features-card-wide h5 {
+    font-size: 0.85rem !important;
+    line-height: 1.2 !important;
+    margin: 0 0 1rem 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-weight: 600 !important;
+    color: #4b5563 !important;
+  }
+
+  .features-card-wide.background-primary h5,
+  .features-card-wide.background-dark-gray h5 {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .features-card-small h4,
+  .features-card-wide h4,
+  .corporate-bento .features-card-small h4,
+  .corporate-bento .features-card-wide h4,
+  .experiential-bento .features-card-small h4,
+  .experiential-bento .features-card-wide h4 {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
   .metrics-flex,
   .card-flex {
     flex-wrap: wrap;
@@ -436,6 +506,8 @@
 
   .features-flex-wrapper > .features-flex-wrapper {
     flex-direction: column;
+    width: 100% !important;
+    gap: 1rem !important;
   }
 
   .medium-text {

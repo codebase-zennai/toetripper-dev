@@ -13,11 +13,14 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Wealth Bento",
-  description: "Navigate the Markets, Secure Your Future.",
+  title: {
+    default: "Toe Tripper | Corporate Travel, MICE & Experiential Holidays",
+    template: "%s | Toe Tripper",
+  },
+  description: "Toe Tripper is India's leading corporate travel management and MICE specialist, delivering curated experiential holidays and seamless corporate travel solutions.",
   icons: {
-    icon: "https://cdn.prod.website-files.com/66e3df8d47eb3991ca9dbef7/66f277be610869faeab12d72_Favicon.png",
-    apple: "https://cdn.prod.website-files.com/66e3df8d47eb3991ca9dbef7/66f2778d6d3e24b36c798724_Webclip.png",
+    icon: "/Brand Kit for Toe Tripper/Toe Tripper Logo Icon.png",
+    apple: "/Brand Kit for Toe Tripper/Toe Tripper Logo Icon.png",
   },
 };
 

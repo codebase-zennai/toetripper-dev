@@ -17,16 +17,30 @@ import TestimonialManager from './components/TestimonialManager';
 import GalleryManager from './components/GalleryManager';
 import { slugify } from '../../lib/utils/slugify';
 
+// Lucide Icons
+import { 
+  FolderArchive, 
+  MapPin, 
+  MessageSquare, 
+  Image as ImageIcon, 
+  ChevronLeft, 
+  ChevronRight, 
+  LogOut, 
+  LayoutDashboard, 
+  UserCheck, 
+  Plus 
+} from 'lucide-react';
+
 // React-Toastify and SweetAlert2
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
 
 const ADMIN_TABS = [
-  { id: 'packages', label: 'Packages' },
-  { id: 'destinations', label: 'Destinations' },
-  { id: 'testimonials', label: 'Testimonials' },
-  { id: 'gallery', label: 'Gallery' },
+  { id: 'packages', label: 'Packages', icon: FolderArchive },
+  { id: 'destinations', label: 'Destinations', icon: MapPin },
+  { id: 'testimonials', label: 'Stories', icon: MessageSquare },
+  { id: 'gallery', label: 'Photo Booth', icon: ImageIcon },
 ];
 
 export default function AdminPage() {
@@ -35,6 +49,7 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('packages');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   // Admin state
   const [packages, setPackages] = useState([]);
@@ -189,7 +204,6 @@ export default function AdminPage() {
         });
 
         if (res.ok) {
-          // Remove from local state
           setPackages(prev => prev.filter(p => p.slug !== pkg.slug));
           if (selectedPackageSlug === pkg.slug) {
             setSelectedPackageSlug(null);
@@ -383,7 +397,6 @@ export default function AdminPage() {
       if (res.ok) {
         toast.success('Package successfully saved to the database!');
         setEditingPackage(null);
-        // Refresh the list from database
         await fetchPackages();
         setSelectedPackageSlug(slugToUse);
       } else {
@@ -489,7 +502,8 @@ export default function AdminPage() {
     if (loading) {
       return (
         <div className="flex items-center justify-center py-20">
-          <div className="text-lg text-gray-500">Loading content from database...</div>
+          <div className="spinner"></div>
+          <div className="text-sm text-slate-400 ml-3">Loading content from database...</div>
         </div>
       );
     }
@@ -543,24 +557,28 @@ export default function AdminPage() {
   };
 
   const renderSecondaryPreview = () => {
+    if (activeTab === 'testimonials' || activeTab === 'gallery') {
+      return null;
+    }
+
     if (activeTab === 'blogs') {
       if (!previewBlog) {
-        return <div className="bg-white border border-gray-200 rounded-xl p-6 text-sm text-gray-500">Select a blog post to preview it.</div>;
+        return <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-sm text-slate-400">Select a blog post to preview it.</div>;
       }
 
       return (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
           {previewBlog.heroImage ? (
-            <img src={previewBlog.heroImage} alt={previewBlog.title} className="w-full h-48 object-cover" />
+            <img src={previewBlog.heroImage} alt={previewBlog.title} className="w-full h-48 object-cover border-b border-slate-100" />
           ) : null}
-          <div className="p-6 space-y-3">
-            <div className="flex items-center gap-2 flex-wrap text-xs uppercase tracking-wide text-gray-500">
-              <span>{previewBlog.status}</span>
-              {previewBlog.category ? <span>{previewBlog.category}</span> : null}
+          <div className="p-5 space-y-3">
+            <div className="flex items-center gap-2 flex-wrap text-[10px] uppercase tracking-wide text-slate-400">
+              <span className="px-2 py-0.5 bg-slate-100 rounded">{previewBlog.status}</span>
+              {previewBlog.category ? <span className="px-2 py-0.5 bg-slate-100 rounded">{previewBlog.category}</span> : null}
             </div>
-            <h3 className="text-2xl font-bold text-black">{previewBlog.title || 'Untitled blog post'}</h3>
-            <p className="text-sm text-gray-600">{previewBlog.excerpt || 'Add an excerpt to see the preview summary.'}</p>
-            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: previewBlog.contentHtml || '<p>No content yet.</p>' }} />
+            <h3 className="text-base font-bold text-slate-900">{previewBlog.title || 'Untitled blog post'}</h3>
+            <p className="text-xs text-slate-400">{previewBlog.excerpt || 'Add an excerpt to see the preview summary.'}</p>
+            <div className="prose prose-sm max-w-none text-xs text-slate-500" dangerouslySetInnerHTML={{ __html: previewBlog.contentHtml || '<p>No content yet.</p>' }} />
           </div>
         </div>
       );
@@ -568,29 +586,28 @@ export default function AdminPage() {
 
     if (activeTab === 'destinations') {
       if (!previewDestination) {
-        return <div className="bg-white border border-gray-200 rounded-xl p-6 text-sm text-gray-500">Select a destination to preview it.</div>;
+        return <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-sm text-slate-400">Select a destination to preview.</div>;
       }
 
       return (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
           {previewDestination.heroImage ? (
-            <img src={previewDestination.heroImage} alt={previewDestination.name} className="w-full h-48 object-cover" />
+            <img src={previewDestination.heroImage} alt={previewDestination.name} className="w-full h-48 object-cover border-b border-slate-100" />
           ) : null}
-          <div className="p-6 space-y-3">
-            <div className="flex items-center gap-2 flex-wrap text-xs uppercase tracking-wide text-gray-500">
-              <span>{previewDestination.status}</span>
-              <span>{previewDestination.linkType || 'blog'}</span>
-              {previewDestination.showInTrending ? <span>Trending</span> : null}
-              {previewDestination.badge ? <span>{previewDestination.badge}</span> : null}
+          <div className="p-5 space-y-3">
+            <div className="flex items-center gap-2 flex-wrap text-[10px] uppercase tracking-wide text-slate-400">
+              <span className="px-2 py-0.5 bg-slate-100 rounded">{previewDestination.status}</span>
+              <span className="px-2 py-0.5 bg-slate-100 rounded">{previewDestination.linkType || 'blog'}</span>
+              {previewDestination.showInTrending ? <span className="px-2 py-0.5 bg-[#F4A300]/10 text-[#F4A300] rounded font-bold">Trending</span> : null}
             </div>
-            <h3 className="text-2xl font-bold text-black">{previewDestination.name || 'Untitled destination'}</h3>
-            <p className="text-sm text-gray-600">{previewDestination.tagline || 'Add a tagline to see the preview summary.'}</p>
+            <h3 className="text-base font-bold text-slate-900">{previewDestination.name || 'Untitled destination'}</h3>
+            <p className="text-xs text-slate-400">{previewDestination.tagline || 'Add a tagline to see the preview summary.'}</p>
             {previewDestination.linkType === 'instagram' ? (
-              <p className="text-sm text-gray-600">
-                Instagram Redirect URL: {previewDestination.instagramUrl || 'Add an Instagram URL.'}
+              <p className="text-xs text-slate-500 font-mono bg-slate-50 p-2 rounded border border-slate-200 break-all">
+                IG Redirect: {previewDestination.instagramUrl || 'No IG link.'}
               </p>
             ) : (
-              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: previewDestination.contentHtml || '<p>No content yet.</p>' }} />
+              <div className="prose prose-sm max-w-none text-xs text-slate-500" dangerouslySetInnerHTML={{ __html: previewDestination.contentHtml || '<p>No content yet.</p>' }} />
             )}
           </div>
         </div>
@@ -600,98 +617,178 @@ export default function AdminPage() {
     return <AdminPreviewPane previewPackage={previewPackage} />;
   };
 
+  const currentTabLabel = ADMIN_TABS.find(t => t.id === activeTab)?.label || 'Console';
+
   return (
     <WebflowClientOnly>
-      <>
-        <Navbar />
-        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            {!isLoggedIn ? (
-              <AdminLogin
-                username={username}
-                setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
-                error={error}
-                handleLogin={handleLogin}
-              />
-            ) : (
-              <div>
-                <ToastContainer
-                  position="top-right"
-                  autoClose={3000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                />
-                <div className="grid grid-cols-1 gap-8 items-start lg:grid-cols-3">
+      <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col">
+        {!isLoggedIn ? (
+          <AdminLogin
+            username={username}
+            setUsername={setUsername}
+            password={password}
+            setPassword={setPassword}
+            error={error}
+            handleLogin={handleLogin}
+          />
+        ) : (
+          <>
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              theme="light"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
 
-                  {/* Left Column: Editor or List */}
-                  <div className="lg:col-span-2">
-                    <div className="flex justify-between items-center mb-8">
-                      <div>
-                        <h1 className="text-3xl font-bold text-black">Content Admin</h1>
-                        <p className="text-sm text-gray-500 mt-1">Manage packages and destinations from one place.</p>
-                      </div>
-                      <div className="flex gap-4">
-                        {!isEditing && (
-                          <button
-                            onClick={handleAddClick}
-                            className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium cursor-pointer"
-                          >
-                            {activeTab === 'packages' ? 'Add Package' : 'Add Destination'}
-                          </button>
-                        )}
-                        <button
-                          onClick={() => {
-                            setIsLoggedIn(false);
-                            toast.info('Logged out successfully.');
-                          }}
-                          className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-sm font-medium cursor-pointer bg-white"
-                        >
-                          Logout
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 mb-6 flex-wrap">
-                      {ADMIN_TABS.map((tab) => (
-                        <button
-                          key={tab.id}
-                          type="button"
-                          onClick={() => {
-                            setActiveTab(tab.id);
-                            setEditingPackage(null);
-                            setEditingBlog(null);
-                            setEditingDestination(null);
-                          }}
-                          className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${
-                            activeTab === tab.id
-                              ? 'bg-black text-white'
-                              : 'bg-white border border-gray-300 text-gray-700'
-                          }`}
-                        >
-                          {tab.label}
-                        </button>
-                      ))}
-                    </div>
-                    {renderTabBody()}
-                  </div>
-
-                  {/* Right Column: Live Preview */}
-                  <div className="lg:col-span-1 sticky top-32">
-                    {renderSecondaryPreview()}
-                  </div>
+            {/* Premium Admin Header Navbar - Light Theme */}
+            <header className="bg-white border-b border-slate-200 h-16 px-6 flex items-center justify-between z-20 shrink-0 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 bg-[#193B9D] rounded-lg flex items-center justify-center font-bold text-sm tracking-widest text-white shadow-md shadow-[#193B9D]/20">
+                  TT
+                </div>
+                <div>
+                  <h1 className="text-sm font-bold tracking-tight text-slate-900">Toe Tripper</h1>
+                  <p className="text-[10px] text-[#F4A300] uppercase tracking-widest font-semibold">Admin Console</p>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-        <Footer />
-      </>
+
+              <div className="flex items-center gap-4">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-500 font-medium">
+                  <UserCheck size={14} className="text-[#193B9D]" />
+                  <span>Logged in as Administrator</span>
+                </div>
+                <button
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    toast.info('Logged out successfully.');
+                  }}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 rounded-lg transition-all text-xs font-semibold cursor-pointer"
+                >
+                  <LogOut size={13} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            </header>
+
+            {/* Dashboard Workspace */}
+            <div className="flex flex-1 overflow-hidden">
+              
+              {/* Left Collapsible Sidebar - Light Theme */}
+              <aside 
+                className={`bg-white border-r border-slate-200 transition-all duration-300 flex flex-col justify-between select-none shrink-0 shadow-sm ${
+                  sidebarCollapsed ? 'w-[70px]' : 'w-[240px]'
+                }`}
+              >
+                <div className="py-6 px-3 space-y-1">
+                  <p className={`text-[9px] uppercase font-bold tracking-widest text-slate-400 px-3 mb-3 transition-opacity ${
+                    sidebarCollapsed ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
+                  }`}>
+                    Data Entities
+                  </p>
+                  
+                  {ADMIN_TABS.map((tab) => {
+                    const IconComp = tab.icon;
+                    const isActive = activeTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => {
+                          setActiveTab(tab.id);
+                          setEditingPackage(null);
+                          setEditingBlog(null);
+                          setEditingDestination(null);
+                        }}
+                        className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                          isActive 
+                            ? 'bg-[#193B9D] text-white shadow-md shadow-[#193B9D]/20' 
+                            : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                        }`}
+                        title={sidebarCollapsed ? tab.label : undefined}
+                      >
+                        <IconComp size={17} className={isActive ? 'text-[#F4A300]' : 'text-slate-400'} />
+                        {!sidebarCollapsed && <span>{tab.label}</span>}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Sidebar Collapse Toggle Button */}
+                <div className="p-3 border-t border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                    className="w-full flex items-center justify-center p-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-400 hover:text-slate-700 transition-all cursor-pointer"
+                  >
+                    {sidebarCollapsed ? <ChevronRight size={16} /> : (
+                      <div className="flex items-center gap-2 text-xs font-semibold">
+                        <ChevronLeft size={16} />
+                        <span>Collapse</span>
+                      </div>
+                    )}
+                  </button>
+                </div>
+              </aside>
+
+              {/* Main Workspace Frame - Light Theme */}
+              <main className="flex-1 overflow-y-auto bg-slate-50 p-6 sm:p-8 flex flex-col gap-6">
+                
+                {/* Entity Control Header */}
+                <div className="flex justify-between items-center bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900">{currentTabLabel} Management</h2>
+                    <p className="text-xs text-slate-400 mt-0.5">Add, update, or delete {activeTab} information in the system database.</p>
+                  </div>
+                  
+                  {!isEditing && (activeTab === 'packages' || activeTab === 'destinations') && (
+                    <button
+                      onClick={handleAddClick}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-[#193B9D] hover:bg-[#153285] text-white rounded-xl transition-all text-xs font-bold shadow-md shadow-[#193B9D]/20 cursor-pointer"
+                    >
+                      <Plus size={14} />
+                      <span>{activeTab === 'packages' ? 'Add Package' : 'Add Destination'}</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Two-Column Grid Workspace */}
+                <div className="grid grid-cols-1 gap-6 items-start lg:grid-cols-3">
+                  
+                  {/* Left Management Workspace */}
+                  <div className={`space-y-6 ${
+                    (activeTab === 'testimonials' || activeTab === 'gallery') 
+                      ? 'lg:col-span-3' 
+                      : 'lg:col-span-2'
+                  }`}>
+                    <div className={`bg-white border border-slate-200 rounded-2xl shadow-sm min-h-[300px] ${
+                      activeTab === 'gallery' ? 'p-0 overflow-hidden' : 'p-6'
+                    }`}>
+                      {renderTabBody()}
+                    </div>
+                  </div>
+
+                  {/* Right Live Preview Column */}
+                  {!(activeTab === 'testimonials' || activeTab === 'gallery') && (
+                    <div className="lg:col-span-1 sticky top-6">
+                      <div className="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-2.5">Live Preview</div>
+                      {renderSecondaryPreview()}
+                    </div>
+                  )}
+
+                </div>
+
+              </main>
+
+            </div>
+          </>
+        )}
+      </div>
     </WebflowClientOnly>
   );
 }

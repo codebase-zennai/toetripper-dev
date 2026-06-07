@@ -55,7 +55,7 @@ export default function Hero() {
             </div>
             <div className="">
               <p className="hero-text">
-                Journey Beyond <span className="italics">Tickets</span>
+                You Dream. <span className="italics">We Deliver.</span>
               </p>
               <div className="hero-line"></div>
             </div>

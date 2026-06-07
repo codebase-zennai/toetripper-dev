@@ -1,9 +1,75 @@
 import { useState, useEffect } from 'react';
+import { 
+  Instagram, 
+  Linkedin, 
+  Star, 
+  Trash2, 
+  Eye, 
+  EyeOff, 
+  ChevronDown, 
+  ChevronUp, 
+  Plus, 
+  X, 
+  Link2, 
+  MessageSquare, 
+  Share2, 
+  Globe, 
+  ShieldCheck, 
+  User, 
+  Sparkles,
+  AlertCircle,
+  ExternalLink,
+  Loader2
+} from 'lucide-react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
+function getEmbedUrl(url) {
+  if (!url) return null;
+  
+  // Instagram parsing
+  const instaMatch = url.match(/instagram\.com\/(?:p|reel)\/([a-zA-Z0-9_-]+)/i);
+  if (instaMatch) {
+    return `https://www.instagram.com/p/${instaMatch[1]}/embed`;
+  }
+  
+  // LinkedIn parsing
+  const linkedinMatch = url.match(/linkedin\.com\/posts\/[a-zA-Z0-9_-]+(?:-|_)(\d+)/i) || 
+                        url.match(/linkedin\.com\/posts\/activity-(\d+)/i) ||
+                        url.match(/linkedin\.com\/feed\/update\/urn:li:activity:(\d+)/i) ||
+                        url.match(/linkedin\.com\/feed\/update\/urn:li:share:(\d+)/i);
+  if (linkedinMatch) {
+    return `https://www.linkedin.com/embed/feed/update/urn:li:share/${linkedinMatch[1]}`;
+  }
+  
+  if (url.includes('instagram.com/p/') || url.includes('instagram.com/reel/') || url.includes('linkedin.com/embed')) {
+    return url;
+  }
+  
+  return null;
+}
 
 export default function TestimonialManager() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ name: '', destination: '', rating: 5, message: '', image_url: '' });
+  const [showForm, setShowForm] = useState(false);
+  const [formType, setFormType] = useState('direct'); // 'direct' or 'social'
+  
+  // Form State
+  const [form, setForm] = useState({ 
+    name: '', 
+    destination: '', // Will hold location for 'direct' or post URL for 'social'
+    rating: 5, 
+    message: '', 
+    image_url: '' 
+  });
+  
+  // Accordion State
+  const [isSocialExpanded, setIsSocialExpanded] = useState(true);
+  const [isDirectExpanded, setIsDirectExpanded] = useState(true);
+
+  // Card Preview State (Track which social cards have their live preview iframe toggled open)
+  const [previewToggles, setPreviewToggles] = useState({});
 
   const fetchItems = async () => {
     setLoading(true);
@@ -13,71 +79,618 @@ export default function TestimonialManager() {
       setItems(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
+      toast.error('Failed to fetch testimonials.');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { void fetchItems(); }, []);
+  useEffect(() => { 
+    void fetchItems(); 
+  }, []);
 
   const handlePublish = async (id, next) => {
-    await fetch('/api/testimonials', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, is_published: next }) });
-    await fetchItems();
+    try {
+      const res = await fetch('/api/testimonials', { 
+        method: 'PATCH', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ id, is_published: next }) 
+      });
+      if (res.ok) {
+        toast.success(next ? 'Testimonial published!' : 'Testimonial unpublished!');
+        await fetchItems();
+      } else {
+        toast.error('Failed to update testimonial status.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Error updating status.');
+    }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm('Delete this testimonial?')) return;
-    await fetch('/api/testimonials', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
-    await fetchItems();
+  const handleDelete = async (id, name) => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: `You are about to delete the testimonial from "${name}".`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#000',
+      confirmButtonText: 'Yes, delete it!'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch('/api/testimonials', { 
+          method: 'DELETE', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ id }) 
+        });
+        if (res.ok) {
+          toast.success('Testimonial permanently deleted.');
+          await fetchItems();
+        } else {
+          toast.error('Failed to delete testimonial.');
+        }
+      } catch (err) {
+        console.error(err);
+        toast.error('Error deleting testimonial.');
+      }
+    }
   };
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    await fetch('/api/testimonials', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
-    setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
-    await fetchItems();
+    if (!form.name.trim()) {
+      toast.error('Name is required.');
+      return;
+    }
+    if (formType === 'social' && !form.destination.trim()) {
+      toast.error('Social Post URL is required.');
+      return;
+    }
+    if (formType === 'social' && !getEmbedUrl(form.destination)) {
+      toast.error('Invalid Instagram or LinkedIn URL. Please provide a valid post link.');
+      return;
+    }
+    if (formType === 'direct' && !form.message.trim()) {
+      toast.error('Review message is required.');
+      return;
+    }
+
+    try {
+      const payload = {
+        name: form.name,
+        destination: form.destination,
+        rating: formType === 'social' ? 5 : Number(form.rating),
+        message: formType === 'social' 
+          ? (form.message.trim() || `Social share post: ${form.destination}`) 
+          : form.message,
+        image_url: form.image_url || null
+      };
+
+      const res = await fetch('/api/testimonials', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(payload) 
+      });
+
+      if (res.ok) {
+        toast.success('New testimonial successfully added!');
+        setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
+        setShowForm(false);
+        await fetchItems();
+      } else {
+        const errData = await res.json();
+        toast.error(`Failed to add testimonial: ${errData.error || 'Server error'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Error creating testimonial.');
+    }
   };
 
+  const togglePreview = (id) => {
+    setPreviewToggles(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  // Split items into categories
+  const socialTestimonials = items.filter(t => getEmbedUrl(t.destination) !== null);
+  const directTestimonials = items.filter(t => getEmbedUrl(t.destination) === null);
+
   return (
-    <div className="space-y-4">
-      <h3 className="text-xl font-semibold">Testimonials</h3>
+    <div className="space-y-6">
+      
+      {/* Top Banner Control */}
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+          <Sparkles className="text-[#F4A300]" size={18} />
+          <span>Testimonial Manager</span>
+        </h3>
+        
+        <button
+          onClick={() => {
+            setShowForm(!showForm);
+            if (!showForm) {
+              setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
+            }
+          }}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+            showForm 
+              ? 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
+              : 'bg-[#193B9D] hover:bg-[#153285] text-white shadow-md shadow-[#193B9D]/15'
+          }`}
+        >
+          {showForm ? <X size={14} /> : <Plus size={14} />}
+          <span>{showForm ? 'Cancel' : 'Create Story'}</span>
+        </button>
+      </div>
 
-      <form onSubmit={handleAdd} className="space-y-2">
-        <div className="flex gap-2">
-          <input value={form.name} onChange={(e)=>setForm({...form,name:e.target.value})} placeholder="Name" className="flex-1 p-2 border" />
-          <input value={form.destination} onChange={(e)=>setForm({...form,destination:e.target.value})} placeholder="Destination" className="flex-1 p-2 border" />
-        </div>
-        <div className="flex gap-2">
-          <input value={form.image_url} onChange={(e)=>setForm({...form,image_url:e.target.value})} placeholder="Image URL (optional)" className="flex-1 p-2 border" />
-          <select value={form.rating} onChange={(e)=>setForm({...form,rating:Number(e.target.value)})} className="p-2 border">
-            {[5,4,3,2,1].map(r => <option key={r} value={r}>{r} stars</option>)}
-          </select>
-        </div>
-        <textarea value={form.message} onChange={(e)=>setForm({...form,message:e.target.value})} placeholder="Message" className="w-full p-2 border" />
-        <div>
-          <button type="submit" className="px-3 py-2 bg-black text-white rounded">Add Testimonial</button>
-        </div>
-      </form>
+      {/* Form Drawer (Collapsible) */}
+      {showForm && (
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-5">
+          <div className="flex border-b border-slate-200 pb-3 justify-between items-center">
+            <span className="text-[10px] uppercase tracking-widest text-[#193B9D] font-bold">New Testimonial Configuration</span>
+            
+            {/* Form Type Selector */}
+            <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
+              <button
+                type="button"
+                onClick={() => {
+                  setFormType('direct');
+                  setForm(prev => ({ ...prev, destination: '' }));
+                }}
+                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                  formType === 'direct' 
+                    ? 'bg-[#193B9D] text-white' 
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                Direct Story
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setFormType('social');
+                  setForm(prev => ({ ...prev, destination: '' }));
+                }}
+                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                  formType === 'social' 
+                    ? 'bg-[#193B9D] text-white' 
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                Social Embed
+              </button>
+            </div>
+          </div>
 
-      <div>
-        {loading ? <p>Loading…</p> : (
-          <ul className="space-y-2">
-            {items.map(item => (
-              <li key={item.id} className="p-3 bg-white border rounded flex justify-between items-start">
-                <div>
-                  <div className="font-semibold">{item.name} <span className="text-sm text-gray-500">{item.destination}</span></div>
-                  <div className="text-sm text-gray-600">{item.message}</div>
-                  <div className="text-xs text-gray-500 mt-1">Published: {String(item.is_published)}</div>
+          <form onSubmit={handleAdd} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              {/* Reviewer Name */}
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Reviewer Name</label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                    <User size={14} />
+                  </span>
+                  <input 
+                    type="text"
+                    required
+                    value={form.name} 
+                    onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                    placeholder="e.g. Sarah Jenkins" 
+                    className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                  />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <button onClick={()=>handlePublish(item.id, !item.is_published)} className="px-2 py-1 bg-green-500 text-white rounded">{item.is_published ? 'Unpublish' : 'Publish'}</button>
-                  <button onClick={()=>handleDelete(item.id)} className="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
+              </div>
+
+              {/* Destination / Link URL */}
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                  {formType === 'social' ? 'Social Post Link (Instagram / LinkedIn)' : 'Location / Destination'}
+                </label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                    {formType === 'social' ? <Link2 size={14} /> : <Globe size={14} />}
+                  </span>
+                  <input 
+                    type={formType === 'social' ? 'url' : 'text'}
+                    required
+                    value={form.destination} 
+                    onChange={(e) => setForm({ ...form, destination: e.target.value })} 
+                    placeholder={formType === 'social' ? 'https://www.instagram.com/p/...' : 'e.g. Swiss Alps'} 
+                    className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                  />
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              {/* Experience Rating */}
+              {formType === 'direct' && (
+                <div className="space-y-1 md:col-span-1">
+                  <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Experience Rating</label>
+                  <div className="relative">
+                    <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                      <Star size={14} className="text-[#F4A300]" />
+                    </span>
+                    <select 
+                      value={form.rating} 
+                      onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })} 
+                      className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] text-sm text-slate-800 appearance-none cursor-pointer transition-all"
+                    >
+                      {[5, 4, 3, 2, 1].map(r => (
+                        <option key={r} value={r}>{r} Star{r > 1 ? 's' : ''}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              {/* Image URL */}
+              <div className={`space-y-1 ${formType === 'social' ? 'md:col-span-3' : 'md:col-span-2'}`}>
+                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Avatar Image URL (Optional)</label>
+                <input 
+                  type="url"
+                  value={form.image_url} 
+                  onChange={(e) => setForm({ ...form, image_url: e.target.value })} 
+                  placeholder="https://images.unsplash.com/photo-..." 
+                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                />
+              </div>
+
+            </div>
+
+            {/* Review Content / Message */}
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                {formType === 'social' ? 'Notes / Fallback Message (Optional)' : 'Review Message'}
+              </label>
+              <textarea 
+                required={formType === 'direct'}
+                value={form.message} 
+                onChange={(e) => setForm({ ...form, message: e.target.value })} 
+                placeholder={formType === 'social' ? 'Add notes or custom description about this embed...' : 'Describe the client experience and journey feedback...'} 
+                rows="3"
+                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all resize-none"
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end gap-3 pt-2">
+              <button 
+                type="submit" 
+                className="px-5 py-2.5 bg-[#193B9D] hover:bg-[#153285] text-white text-xs font-bold rounded-xl shadow-md shadow-[#193B9D]/15 transition-all cursor-pointer"
+              >
+                Create Testimonial
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Testimonials List Workspaces */}
+      <div className="space-y-4">
+        
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+            <Loader2 className="animate-spin text-[#193B9D]" size={28} />
+            <p className="text-xs text-slate-400">Syncing with database...</p>
+          </div>
+        ) : (
+          <>
+            
+            {/* Accordion 1: Social Media Testimonials */}
+            <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+              <button
+                type="button"
+                onClick={() => setIsSocialExpanded(!isSocialExpanded)}
+                className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-all text-left">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-[#193B9D]/10 border border-[#193B9D]/15 rounded-xl text-[#193B9D]">
+                    <Share2 size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">Social Feed Testimonials</h4>
+                    <p className="text-[10px] text-slate-400">Instagram & LinkedIn post embeds</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-2">
+                    <span className="px-2 py-0.5 bg-slate-100 border border-slate-200 rounded-md text-[10px] font-bold text-slate-500">
+                      {socialTestimonials.length} Total
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#193B9D]/10 border border-[#193B9D]/15 rounded-md text-[10px] font-bold text-[#193B9D]">
+                      {socialTestimonials.filter(t => t.is_published).length} Published
+                    </span>
+                  </div>
+                  {isSocialExpanded ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                </div>
+              </button>
+
+              {isSocialExpanded && (
+                <div className="p-4 border-t border-slate-200 bg-slate-50">
+                  {socialTestimonials.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-8 text-center">
+                      <AlertCircle size={28} className="text-slate-300 mb-2" />
+                      <p className="text-xs text-slate-400">No social testimonials in system.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {socialTestimonials.map((testimonial) => {
+                        const embedUrl = getEmbedUrl(testimonial.destination);
+                        const isInsta = testimonial.destination.includes('instagram.com');
+                        const isLivePreviewOpen = Boolean(previewToggles[testimonial.id]);
+
+                        return (
+                          <div 
+                            key={testimonial.id}
+                            className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-[#193B9D]/30 hover:shadow-sm transition-all gap-4"
+                          >
+                            <div className="space-y-3">
+                              {/* Card Header Info */}
+                              <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-2.5">
+                                  {testimonial.image_url ? (
+                                    <img 
+                                      src={testimonial.image_url} 
+                                      alt={testimonial.name} 
+                                      className="h-8 w-8 rounded-full object-cover border border-white/10"
+                                    />
+                                  ) : (
+                                    <div className="h-8 w-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
+                                      {testimonial.name.charAt(0).toUpperCase()}
+                                    </div>
+                                  )}
+                                  <div>
+                                    <h5 className="text-xs font-bold text-slate-900">{testimonial.name}</h5>
+                                    <span className="inline-flex items-center gap-1 mt-0.5 text-[9px] font-bold text-gray-500 uppercase tracking-wider">
+                                      {isInsta ? (
+                                        <span className="text-pink-500 flex items-center gap-0.5">
+                                          <Instagram size={10} /> Instagram
+                                        </span>
+                                      ) : (
+                                        <span className="text-blue-400 flex items-center gap-0.5">
+                                          <Linkedin size={10} /> LinkedIn
+                                        </span>
+                                      )}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <a 
+                                  href={testimonial.destination}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-slate-400 hover:text-slate-900 p-1 hover:bg-slate-100 rounded-lg border border-slate-200 transition-all"
+                                  title="Open original post"
+                                >
+                                  <ExternalLink size={12} />
+                                </a>
+                              </div>
+
+                              {/* Embed Preview Toggle */}
+                              {embedUrl ? (
+                                <div className="space-y-2">
+                                  <button
+                                    type="button"
+                                    onClick={() => togglePreview(testimonial.id)}
+                                    className="w-full flex items-center justify-center gap-1.5 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-[10px] font-semibold text-slate-500 transition-all cursor-pointer"
+                                  >
+                                    <span>{isLivePreviewOpen ? 'Hide Live Preview' : 'Show Live Preview'}</span>
+                                  </button>
+
+                                  {isLivePreviewOpen && (
+                                    <div className="rounded-lg overflow-hidden border border-slate-200 bg-slate-50">
+                                      <iframe
+                                        src={embedUrl}
+                                        width="100%"
+                                        height="380"
+                                        frameBorder="0"
+                                        scrolling="no"
+                                        allowtransparency="true"
+                                        allow="encrypted-media"
+                                        title={`Verify Social Embed for ${testimonial.name}`}
+                                        loading="lazy"
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                              ) : (
+                                <div className="p-2 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-[10px]">
+                                  Error: Unable to parse URL embed signature.
+                                </div>
+                              )}
+
+                              {/* Testimonial Optional Message */}
+                              {testimonial.message && (
+                                <p className="text-[11px] text-slate-500 italic line-clamp-3">
+                                  "{testimonial.message}"
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Card Footer Actions */}
+                            <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                              <span className={`inline-flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                                testimonial.is_published 
+                                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                                  : 'bg-gray-500/10 text-gray-400 border border-white/5'
+                              }`}>
+                                {testimonial.is_published ? 'Published' : 'Draft'}
+                              </span>
+
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handlePublish(testimonial.id, !testimonial.is_published)}
+                                  className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                                    testimonial.is_published
+                                      ? 'bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-500'
+                                      : 'bg-[#193B9D]/10 border-[#193B9D]/20 hover:bg-[#193B9D]/20 text-[#193B9D]'
+                                  }`}
+                                  title={testimonial.is_published ? 'Unpublish Story' : 'Publish Story'}
+                                >
+                                  {testimonial.is_published ? <EyeOff size={13} /> : <Eye size={13} />}
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(testimonial.id, testimonial.name)}
+                                  className="p-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-500 rounded-lg transition-all cursor-pointer"
+                                  title="Delete Story"
+                                >
+                                  <Trash2 size={13} />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Accordion 2: Direct Stories (Direct Reviews) */}
+            <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+              <button
+                type="button"
+                onClick={() => setIsDirectExpanded(!isDirectExpanded)}
+                className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-all text-left">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-[#193B9D]/10 border border-[#193B9D]/15 rounded-xl text-[#193B9D]">
+                    <MessageSquare size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">Direct Client Stories</h4>
+                    <p className="text-[10px] text-slate-400">Reviews & direct feedback submissions</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-2">
+                    <span className="px-2 py-0.5 bg-slate-100 border border-slate-200 rounded-md text-[10px] font-bold text-slate-500">
+                      {directTestimonials.length} Total
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#193B9D]/10 border border-[#193B9D]/15 rounded-md text-[10px] font-bold text-[#193B9D]">
+                      {directTestimonials.filter(t => t.is_published).length} Published
+                    </span>
+                  </div>
+                  {isDirectExpanded ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                </div>
+              </button>
+
+              {isDirectExpanded && (
+                <div className="p-4 border-t border-slate-200 bg-slate-50">
+                  {directTestimonials.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-8 text-center">
+                      <AlertCircle size={28} className="text-slate-300 mb-2" />
+                      <p className="text-xs text-slate-400">No direct reviews in system.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {directTestimonials.map((testimonial) => {
+                        return (
+                          <div 
+                            key={testimonial.id}
+                            className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-[#193B9D]/30 hover:shadow-sm transition-all gap-4"
+                          >
+                            <div className="space-y-2">
+                              {/* Stars & Verification badge */}
+                              <div className="flex justify-between items-center">
+                                <div className="flex gap-0.5">
+                                  {[...Array(5)].map((_, i) => (
+                                    <Star 
+                                      key={i} 
+                                      size={12} 
+                                      fill={i < (testimonial.rating || 5) ? 'var(--secondary, #F4A300)' : 'transparent'} 
+                                      color={i < (testimonial.rating || 5) ? 'var(--secondary, #F4A300)' : '#666'} 
+                                    />
+                                  ))}
+                                </div>
+                                <ShieldCheck className="text-emerald-400" size={16} />
+                              </div>
+
+                              {/* Review text */}
+                              <p className="text-xs text-slate-700 italic line-clamp-4">
+                                "{testimonial.message}"
+                              </p>
+
+                              {/* Client Details */}
+                              <div className="flex items-center gap-2.5 pt-2">
+                                {testimonial.image_url ? (
+                                  <img 
+                                    src={testimonial.image_url} 
+                                    alt={testimonial.name} 
+                                    className="h-8 w-8 rounded-full object-cover border border-white/10"
+                                  />
+                                ) : (
+                                  <div className="h-8 w-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
+                                    {testimonial.name.charAt(0).toUpperCase()}
+                                  </div>
+                                )}
+                                <div>
+                                  <h5 className="text-xs font-bold text-slate-900">{testimonial.name}</h5>
+                                  {testimonial.destination && (
+                                    <span className="text-[10px] text-slate-400 block">
+                                      {testimonial.destination}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Card Footer Actions */}
+                            <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                              <span className={`inline-flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                                testimonial.is_published 
+                                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                                  : 'bg-gray-500/10 text-gray-400 border border-white/5'
+                              }`}>
+                                {testimonial.is_published ? 'Published' : 'Draft'}
+                              </span>
+
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handlePublish(testimonial.id, !testimonial.is_published)}
+                                  className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                                    testimonial.is_published
+                                      ? 'bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-500'
+                                      : 'bg-[#193B9D]/10 border-[#193B9D]/20 hover:bg-[#193B9D]/20 text-[#193B9D]'
+                                  }`}
+                                  title={testimonial.is_published ? 'Unpublish Story' : 'Publish Story'}
+                                >
+                                  {testimonial.is_published ? <EyeOff size={13} /> : <Eye size={13} />}
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(testimonial.id, testimonial.name)}
+                                  className="p-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-500 rounded-lg transition-all cursor-pointer"
+                                  title="Delete Story"
+                                >
+                                  <Trash2 size={13} />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+          </>
         )}
       </div>
+
     </div>
   );
 }

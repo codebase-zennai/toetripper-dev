@@ -40,7 +40,7 @@ export async function POST(req) {
         rating: rating ? Number(rating) : 5,
         message,
         image_url: image_url || null,
-        is_published: false
+        is_published: true
       },
     ]).select();
 
