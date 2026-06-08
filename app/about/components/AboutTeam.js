@@ -51,7 +51,7 @@ export default function AboutTeam() {
             >
               <img
                 alt="Founder image"
-                src="/images/founder.jpg"
+                src="/Profile.png"
                 loading="lazy"
                 className="features-image"
               />
