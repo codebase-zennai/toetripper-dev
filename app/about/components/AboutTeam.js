@@ -42,7 +42,7 @@ export default function AboutTeam() {
 
   return (
     <div>
-      <div className="background-black">
+      <div className="background-black" id="founders-note">
         <div className="padding-13-5rem">
           <div className="about-flex gap-4rem">
             <div

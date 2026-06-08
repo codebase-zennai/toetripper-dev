@@ -4,7 +4,7 @@ import { animate, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 const METRICS = [
-  { id: 'journeys', value: 10, suffix: 'K', label: 'Journeys Planned' },
+  { id: 'journeys', value: 10000, suffix: '+', label: 'Journeys Planned' },
   { id: 'clients', value: 27, label: 'Corporate Clients' },
   { id: 'destinations', value: 20, label: 'Global Destinations' },
   { id: 'experience', value: 19, label: 'Years of Experience' }

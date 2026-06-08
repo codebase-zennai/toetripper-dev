@@ -282,6 +282,7 @@ export default function Feedback() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            id="form"
           >
             <div className="form-layout-wrapper">
               <div className="form-info-side">

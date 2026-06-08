@@ -143,12 +143,6 @@ export default function Footer() {
                     <span>traveldesk@toetripper.com</span>
                   </a>
                 </div>
-                <div className="footer-link" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', textTransform: 'none', cursor: 'default', textAlign: 'center' }}>
-                  <span style={{ lineHeight: '1.4', color: '#94a3b8' }}>
-                    Marine Drive, Mumbai,<br />
-                    Maharashtra, India
-                  </span>
-                </div>
               </div>
             </div>
           </div>

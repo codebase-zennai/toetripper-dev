@@ -42,6 +42,7 @@ export default function ServicesHero() {
             Curated Journeys. Designed Around You.
           </motion.h5>
           <div className="space-0-5rem"></div>
+          <div className='flex gap-4'>
           <motion.a
             href="/packages"
             data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
@@ -50,8 +51,8 @@ export default function ServicesHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="button-text">Explore Packages</p>
-            <p className="button-text-absolute">Explore Packages</p>
+            <p className="button-text">Travel Destinations</p>
+            <p className="button-text-absolute">Travel Destinations</p>
             <div className="button-arrow-wrapper">
               <img
                 width="Auto"
@@ -63,6 +64,28 @@ export default function ServicesHero() {
               />
             </div>
           </motion.a>
+          <motion.a
+            href="/packages"
+            data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
+            className="button-with-circle-icon w-inline-block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
+            <p className="button-text">Travel Themes</p>
+            <p className="button-text-absolute">Travel Themes</p>
+            <div className="button-arrow-wrapper">
+              <img
+                width="Auto"
+                height="Auto"
+                alt=""
+                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
+                loading="eager"
+                className="arrow"
+              />
+            </div>
+          </motion.a>
+          </div>
         </div>
       </div>
 

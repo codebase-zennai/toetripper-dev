@@ -175,7 +175,9 @@ export default function ContactPage() {
                   <article className="contact-info-card contact-info-card-full">
                     <MapPin size={20} strokeWidth={1.8} />
                     <h3>Address</h3>
-                    <p>Marine Drive, Mumbai, Maharashtra, India</p>
+                    <p>1/3,Wellington Street, 1St Floor,
+            R.No.6, Mehta House 
+Dhobitalao, Mumbai 400002</p>
                   </article>
                 </div>
               </div>

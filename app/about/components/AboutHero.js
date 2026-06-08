@@ -45,7 +45,7 @@ export default function AboutHero() {
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
-            href="#About"
+            href="#founders-note"
             data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
             className="button-with-circle-icon w-inline-block"
             initial={{ opacity: 0, y: 20 }}
