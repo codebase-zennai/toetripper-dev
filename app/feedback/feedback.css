@@ -194,7 +194,7 @@
 
 .direct-review-card {
   scroll-snap-align: start;
-  background: rgba(20, 20, 22, 0.7);
+  background: var(--primary);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1rem;
   padding: 1.75rem;
@@ -209,7 +209,7 @@
 
 .direct-review-card:hover {
   border-color: rgba(244, 163, 0, 0.3); /* brand secondary gold */
-  background: rgba(25, 25, 28, 0.8);
+  background: var(--primary);
   box-shadow: 0 8px 20px rgba(244, 163, 0, 0.05); /* gold secondary glow */
   transform: translateY(-4px);
 }

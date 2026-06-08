@@ -159,7 +159,7 @@ export default function ContactPage() {
                   <article className="contact-info-card">
                     <Phone size={20} strokeWidth={1.8} />
                     <h3>Phone Number</h3>
-                    <p>+91 98765 43210</p>
+                    <p>+91 98866 89001</p>
                   </article>
 
                   <article className="contact-info-card">

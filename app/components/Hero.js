@@ -29,11 +29,11 @@ const cardGroupVariants = {
 
 export default function Hero() {
   return (
-    <section className="section" style={{ backgroundColor: '#e7e7e9' }}>
-      <div className="padding-4-5rem">
+    <section className="section hero-section-fullscreen" style={{ backgroundColor: '#e7e7e9' }}>
+      <div className="hero-content-container">
         <div className="hero-flex">
           <motion.div
-            className="flex flex-col justify-between my-20"
+            className="flex flex-col justify-between hero-left-content"
             // variants={heroBlockVariants}
             initial="hidden"
             animate="visible"
@@ -55,7 +55,7 @@ export default function Hero() {
             </div>
             <div className="">
               <p className="hero-text">
-                You Dream. <span className="italics">We Deliver.</span>
+                You <br></br>Dream. <span className="italics">We Deliver.</span>
               </p>
               {/* <div className="hero-line"></div> */}
             </div>
@@ -78,21 +78,9 @@ export default function Hero() {
                   <h5>Effortless</h5>
                   <div className="line"></div>
                 </div>
-                <div className="move-flex">
-                  <h4
-                    data-w-id="7f686655-205d-dfce-349c-464c2a11efdc"
-                    className="move"
-                  >
+                  <h3>
                     TRAVEL
-                  </h4>
-                  <h4
-                    data-w-id="2654ea20-eee1-abff-ff89-8a6ab3d2ad9d"
-                    className="move-up"
-                  >
-                    Experiences
-                  </h4>
-                  <IceCream size={48} className="ice-cream-icon" />
-                </div>
+                  </h3>
               </motion.div>
               <motion.div
                 className="card text-site-white background-secondary"
@@ -100,7 +88,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...transition, delay: 0.3 }}
               >
-                <h2>36K+</h2>
+                <h2>10K+</h2>
                 <h5>Customers</h5>
               </motion.div>
             </motion.div>
@@ -211,7 +199,6 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
-        <div className="space-7rem"></div>
       </div>
     </section>
   );

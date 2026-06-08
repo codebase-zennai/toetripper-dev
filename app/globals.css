@@ -2888,6 +2888,10 @@
     color: var(--light-grey\<deleted\|variable-5675b63e-c5d8-527e-72b6-ecfca8505550\>);
   }
 
+  .footer-link.no-hover:hover {
+    color: var(--white);
+  }
+
   .footer-link.w--current {
     color: #eee;
   }
@@ -7614,4 +7618,166 @@
   margin: 0.5em 0;
   color: #6b7280;
   font-style: italic;
+}
+
+/* ===== Hero Fullscreen (Navbar + Hero = 100vh) ===== */
+.hero-section-fullscreen {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  margin-top: calc(-1.25rem - 2.5rem); /* Offset navbar margin */
+}
+
+.hero-content-container {
+  /* padding-top: calc(80px + 2rem) !important; Navbar height + spacing */
+  padding-bottom: 2rem !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-left-content {
+  height: 100%;
+  max-height: 43.9vw;
+}
+
+/* Adjust hero text for better fit */
+.hero-section-fullscreen .hero-text {
+  font-size: 8vw;
+  line-height: 6.5vw;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 991px) {
+  .hero-section-fullscreen {
+    margin-top: calc(-1rem - 1.5rem);
+  }
+  
+  .hero-content-container {
+    padding-top: calc(70px + 1.5rem) !important;
+  }
+  
+  .hero-section-fullscreen .hero-text {
+    font-size: 9vw;
+    line-height: 7vw;
+  }
+
+  .hero-section-fullscreen .hero-image-wrapper {
+    min-width: 45vw;
+    max-width: 45vw;
+    min-height: 45vw;
+    max-height: 45vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero-section-fullscreen {
+    min-height: auto;
+    height: auto;
+    margin-top: 0;
+  }
+  
+  .hero-content-container {
+    padding-top: calc(60px + 1rem) !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .hero-left-content {
+    max-height: none;
+  }
+  
+  .hero-section-fullscreen .hero-text {
+    font-size: 14vw;
+    line-height: 13vw;
+  }
+
+  .hero-section-fullscreen .hero-image-wrapper {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 80vw;
+    max-height: 80vw;
+    margin-top: 2rem;
+  }
+}
+
+.hero-section-fullscreen .hero-image-wrapper {
+  min-width: 30vw;
+  max-width: 30vw;
+  min-height: 30vw;
+  max-height: 30vw;
+}
+
+/* ===== Trending Destinations Fullscreen ===== */
+.trending-section-fullscreen {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.trending-content-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(2rem, 4vh, 6rem) !important;
+  padding-bottom: clamp(2rem, 4vh, 6rem) !important;
+}
+
+/* Optimize spacing to fit 100vh */
+.trending-content-container .space-1rem,
+.trending-content-container .space-4rem,
+.trending-content-container .space-7rem {
+  min-height: clamp(0.5rem, 1.5vh, 2rem) !important;
+}
+
+.trending-content-container .posts-title-flex {
+  margin-bottom: clamp(0.5rem, 1.5vh, 2rem);
+}
+
+.trending-content-container .destinations-grid {
+  gap: clamp(0.75rem, 2vh, 2rem);
+  flex: 1; /* Allow grid to take available space */
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.trending-content-container .destination-card {
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.trending-content-container .destination-card-img-wrap {
+  aspect-ratio: auto; /* Override fixed aspect ratio to fit */
+  flex: 1;
+  min-height: 0; /* Important for flex child to shrink below intrinsic size */
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjust for mobile */
+@media screen and (max-width: 991px) {
+  .trending-section-fullscreen {
+    min-height: auto;
+    height: auto;
+    overflow: visible;
+  }
+  
+  .trending-content-container {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  .trending-content-container .destinations-grid {
+    grid-template-rows: auto;
+  }
+  
+  .trending-content-container .destination-card-img-wrap {
+    aspect-ratio: 16 / 9;
+    flex: none;
+  }
 }

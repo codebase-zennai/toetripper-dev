@@ -47,7 +47,7 @@ export default function FeaturedPackages() {
 
       <div className="relative w-screen overflow-hidden">
         {/* Infinite Scroll Marquee Container */}
-        <div className="flex flex-nowrap w-max animate-marquee pt-6 pb-10 md:pt-10 md:pb-12 items-center">
+        <div className="flex flex-nowrap w-max animate-marquee pt-4 pb-6 md:pt-6 md:pb-8 items-center">
           {scrollItems.map((dest, idx) => (
             <div
               key={`${dest.slug}-${idx}`}
@@ -111,7 +111,7 @@ export default function FeaturedPackages() {
       ) : null}
 
       <div className="px-4 sm:px-6">
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-8">
           <Link
             href="/packages"
             className="inline-flex items-center justify-center py-3.5 px-8 rounded-[10px] font-semibold no-underline transition-all duration-200 text-center bg-black text-white hover:bg-[#333] hover:-translate-y-0.5 hover:shadow-[0_8px_16px_rgba(15,15,15,0.2)]"
@@ -136,20 +136,14 @@ export default function FeaturedPackages() {
 
           /* Circle wrapper — mirrors the original round shape */
           .dest-circle-wrap {
-            width: 9rem;
-            height: 9rem;
+            width: clamp(8rem, 30vh, 15rem);
+            height: clamp(8rem, 30vh, 15rem);
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             position: relative;
           }
-
-          /* Responsive sizing to match original icon circle sizes */
-          @media (min-width: 640px)  { .dest-circle-wrap { width: 11rem; height: 11rem; } }
-          @media (min-width: 768px)  { .dest-circle-wrap { width: 14rem; height: 14rem; } }
-          @media (min-width: 1024px) { .dest-circle-wrap { width: 16rem; height: 16rem; } }
-          @media (min-width: 1280px) { .dest-circle-wrap { width: 18rem; height: 18rem; } }
 
           .dest-circle-img {
             width: 100%;

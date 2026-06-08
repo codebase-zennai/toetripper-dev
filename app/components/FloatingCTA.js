@@ -31,9 +31,7 @@ export default function FloatingCTA() {
           </svg>
         </span>
         <span className="whitespace-nowrap text-white leading-none">
-          <span style={{ fontSize: "0.875rem", fontWeight: "600" }}>
-            WhatsApp Us
-          </span>
+            Chat Now
         </span>
       </a>
 

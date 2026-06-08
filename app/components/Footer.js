@@ -83,19 +83,19 @@ export default function Footer() {
                 </a>
               </div>
               <div className="footer-link-wrapper">
-                <a href="/services" className="footer-link">
-                  Services
+                <a href="/feedback" className="footer-link">
+                  Testimonials
                 </a>
-                <a href="/services" className="footer-link move-down">
-                  Services
+                <a href="/feedback" className="footer-link move-down">
+                  Testimonials
                 </a>
               </div>
               <div className="footer-link-wrapper">
-                <a href="/blog" className="footer-link">
-                  Blog
+                <a href="/packages" className="footer-link">
+                  Packages
                 </a>
-                <a href="/blog" className="footer-link move-down">
-                  Blog
+                <a href="/packages" className="footer-link move-down">
+                  Packages
                 </a>
               </div>
             </div>
@@ -128,22 +128,22 @@ export default function Footer() {
             </div>
             <div className="footer-wrapper">
               <h5 className="text-site-white">Contact</h5>
-              <div className="footer-link-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.5rem' }}>
-                <a href="tel:+919886689001" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', marginTop: '0.5rem' }}>
+                <a href="tel:+919886689001" className="footer-link no-hover" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
                   <span>+91 98866 89001</span>
                 </a>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <a href="mailto:nikita@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
+                  <a href="mailto:nikita@toetripper.com" className="footer-link no-hover" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
                     <span>nikita@toetripper.com</span>
                   </a>
-                  <a href="mailto:packages@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                  <a href="mailto:packages@toetripper.com" className="footer-link no-hover" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
                     <span>packages@toetripper.com</span>
                   </a>
-                  <a href="mailto:traveldesk@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                  <a href="mailto:traveldesk@toetripper.com" className="footer-link no-hover" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
                     <span>traveldesk@toetripper.com</span>
                   </a>
                 </div>
-                <div className="footer-link" style={{ display: 'flex', gap: '0.5rem', textTransform: 'none', cursor: 'default' }}>
+                <div className="footer-link" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', textTransform: 'none', cursor: 'default', textAlign: 'center' }}>
                   <span style={{ lineHeight: '1.4', color: '#94a3b8' }}>
                     Marine Drive, Mumbai,<br />
                     Maharashtra, India
