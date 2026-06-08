@@ -147,8 +147,11 @@ export default function PrivacyPolicy() {
                   If you have any questions or concerns about this Privacy Policy, please contact us at:
                 </p>
                 <ul>
-                  <li><strong>Email:</strong> info@toetripper.com</li>
-                  <li><strong>Website:</strong> www.toetripper.com</li>
+                  <li><strong>Emails:</strong></li>
+                  <li style={{ listStyle: 'none', paddingLeft: '1rem' }}><a href="mailto:nikita@toetripper.com">nikita@toetripper.com</a></li>
+                  <li style={{ listStyle: 'none', paddingLeft: '1rem' }}><a href="mailto:packages@toetripper.com">packages@toetripper.com</a></li>
+                  <li style={{ listStyle: 'none', paddingLeft: '1rem' }}><a href="mailto:traveldesk@toetripper.com">traveldesk@toetripper.com</a></li>
+                  <li><strong>Website:</strong> <a href="https://www.toetripper.com" target="_blank" rel="noopener noreferrer">www.toetripper.com</a></li>
                 </ul>
               </div>
             </div>

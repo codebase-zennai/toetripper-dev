@@ -20,7 +20,7 @@ export default function Footer() {
               <img
                 width="Auto"
                 height="Auto"
-                alt="Logo"
+                alt="Toe Tripper - Corporate Travel, MICE & Experiential Holidays Logo"
                 src="/Brand Kit for Toe Tripper/Toe Tripper Logo.png"
                 loading="eager"
                 sizes="(max-width: 479px) 139.984375px, (max-width: 991px) 124.4296875px, 9vw"
@@ -127,61 +127,22 @@ export default function Footer() {
               </div>
             </div>
             <div className="footer-wrapper">
-              <h5 className="text-site-white">Utilities</h5>
-              <div className="footer-link-wrapper">
-                <a href="/utilties/style-guide" className="footer-link">
-                  Style Guide
-                </a>
-                <a
-                  href="/utilties/style-guide"
-                  className="footer-link move-down"
-                >
-                  Style Guide
-                </a>
-              </div>
-              <div className="footer-link-wrapper">
-                <a href="/utilties/instructions" className="footer-link">
-                  Instructions
-                </a>
-                <a
-                  href="/utilties/instructions"
-                  className="footer-link move-down"
-                >
-                  Instructions
-                </a>
-              </div>
-              <div className="footer-link-wrapper">
-                <a href="/utilties/licenses" className="footer-link">
-                  Licenses
-                </a>
-                <a
-                  href="/utilties/licenses"
-                  className="footer-link move-down"
-                >
-                  Licenses
-                </a>
-              </div>
-              <div className="footer-link-wrapper">
-                <a href="/utilties/changelog" className="footer-link">
-                  Changelog
-                </a>
-                <a
-                  href="/utilties/changelog"
-                  className="footer-link move-down"
-                >
-                  Changelog
-                </a>
-              </div>
-            </div>
-            <div className="footer-wrapper">
               <h5 className="text-site-white">Contact</h5>
               <div className="footer-link-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.5rem' }}>
                 <a href="tel:+919886689001" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
                   <span>+91 98866 89001</span>
                 </a>
-                <a href="mailto:packages@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
-                  <span>packages@toetripper.com</span>
-                </a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <a href="mailto:nikita@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                    <span>nikita@toetripper.com</span>
+                  </a>
+                  <a href="mailto:packages@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                    <span>packages@toetripper.com</span>
+                  </a>
+                  <a href="mailto:traveldesk@toetripper.com" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'none' }}>
+                    <span>traveldesk@toetripper.com</span>
+                  </a>
+                </div>
                 <div className="footer-link" style={{ display: 'flex', gap: '0.5rem', textTransform: 'none', cursor: 'default' }}>
                   <span style={{ lineHeight: '1.4', color: '#94a3b8' }}>
                     Marine Drive, Mumbai,<br />

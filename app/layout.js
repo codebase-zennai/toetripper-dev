@@ -13,14 +13,51 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.toetripper.com"),
   title: {
     default: "Toe Tripper | Corporate Travel, MICE & Experiential Holidays",
     template: "%s | Toe Tripper",
   },
   description: "Toe Tripper is India's leading corporate travel management and MICE specialist, delivering curated experiential holidays and seamless corporate travel solutions.",
+  keywords: [
+    "corporate travel",
+    "MICE travel",
+    "experiential holidays",
+    "business travel India",
+    "team retreats",
+    "custom travel itineraries",
+    "Toe Tripper",
+    "incentive travel"
+  ],
   icons: {
     icon: "/Brand Kit for Toe Tripper/Toe Tripper Logo Icon.png",
     apple: "/Brand Kit for Toe Tripper/Toe Tripper Logo Icon.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.toetripper.com",
+    siteName: "Toe Tripper",
+    title: "Toe Tripper | Corporate Travel, MICE & Experiential Holidays",
+    description: "India's leading corporate travel management and MICE specialist, delivering curated experiential holidays and seamless corporate travel solutions.",
+    images: [
+      {
+        url: "/Brand Kit for Toe Tripper/Toe Tripper Logo.png",
+        width: 800,
+        height: 600,
+        alt: "Toe Tripper Logo",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Toe Tripper | Corporate Travel, MICE & Experiential Holidays",
+    description: "India's leading corporate travel management and MICE specialist, delivering curated experiential holidays and seamless corporate travel solutions.",
+    images: ["/Brand Kit for Toe Tripper/Toe Tripper Logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

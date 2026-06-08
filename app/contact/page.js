@@ -73,7 +73,7 @@ export default function ContactPage() {
                   <img
                     width="Auto"
                     height="Auto"
-                    alt=""
+                    alt="Toe Tripper Brand Icon"
                     src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e977b86095f9904467158e_svg_sTMW.svg"
                     loading="eager"
                     className="small-icon"
@@ -165,7 +165,11 @@ export default function ContactPage() {
                   <article className="contact-info-card">
                     <Mail size={20} strokeWidth={1.8} />
                     <h3>Email</h3>
-                    <p>info@toetripper.com</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginTop: '0.5rem' }}>
+                      <a href="mailto:nikita@toetripper.com" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:underline">nikita@toetripper.com</a>
+                      <a href="mailto:packages@toetripper.com" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:underline">packages@toetripper.com</a>
+                      <a href="mailto:traveldesk@toetripper.com" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:underline">traveldesk@toetripper.com</a>
+                    </div>
                   </article>
 
                   <article className="contact-info-card contact-info-card-full">
@@ -179,7 +183,7 @@ export default function ContactPage() {
               <div className="contact-right-panel">
                 <img
                   src="/images/explore2.jpg"
-                  alt="Toe Tripper team consultation"
+                  alt="Toe Tripper team consultation and travel planning session"
                   className="contact-side-image"
                   loading="lazy"
                 />
