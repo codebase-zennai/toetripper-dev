@@ -44,7 +44,7 @@ export default function ServicesHero() {
           <div className="space-0-5rem"></div>
           <div className='flex gap-4'>
           <motion.a
-            href="/packages"
+            href="/destinations"
             data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
             className="button-with-circle-icon w-inline-block"
             initial={{ opacity: 0, y: 20 }}
@@ -65,7 +65,7 @@ export default function ServicesHero() {
             </div>
           </motion.a>
           <motion.a
-            href="/packages"
+            href="/travel-themes"
             data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
             className="button-with-circle-icon w-inline-block"
             initial={{ opacity: 0, y: 20 }}

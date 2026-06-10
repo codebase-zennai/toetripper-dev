@@ -18,7 +18,9 @@ const NAV_ITEMS = [
         label: 'Experiential Holidays', 
         href: '/services/experiential-holidays'
       },
-  ]
+      { label: 'Travel Destinations', href: '/destinations' },
+      { label: 'Travel Themes', href: '/travel-themes' },
+    ]
   },
   {
     id: 'testimonials',
