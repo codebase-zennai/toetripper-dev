@@ -99,7 +99,7 @@ export default function DestinationsGrid() {
   return (
     <section className="bg-linear-to-b mb-24 md:mb-40 px-4 sm:px-8 lg:px-20" id="destinations-grid">
       <div className="padding-9rem">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {DESTINATIONS_LIST.map((dest) => (
             <DestinationsCard
               key={dest.id}
