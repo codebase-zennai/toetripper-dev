@@ -19,13 +19,13 @@ const DESTINATIONS_LIST = [
     id: 'australia',
     title: 'Australia',
     description: 'Explore the vast beauty of the land down under, from pristine coastal reefs to the sacred red sands of the outback.',
-    imageSrc: 'https://images.unsplash.com/photo-1523482596682-cd93a6e54520?w=800&auto=format&fit=crop&q=80',
+    imageSrc: '/images/australia_dest.png',
   },
   {
     id: 'usa',
     title: 'USA',
     description: 'Uncover a tapestry of diverse experiences, spanning iconic urban skylines, massive national parks, and coastal roads.',
-    imageSrc: 'https://images.unsplash.com/photo-1474015977336-57f3084c8a24?w=800&auto=format&fit=crop&q=80',
+    imageSrc: '/images/usa_dest.png',
   },
   {
     id: 'africa',
@@ -49,13 +49,13 @@ const DESTINATIONS_LIST = [
     id: 'canada',
     title: 'Canada',
     description: 'Journey through majestic snow-peaked mountains, pristine turquoise lakes, and welcoming multicultural cities.',
-    imageSrc: 'https://images.unsplash.com/photo-1507629269375-749ac777b47b?w=800&auto=format&fit=crop&q=80',
+    imageSrc: '/images/canada_dest.png',
   },
   {
     id: 'south-korea',
     title: 'South Korea',
     description: 'Delight in the dynamic fusion of futuristic high-tech cities, ancient royal palaces, and scenic volcanic islands.',
-    imageSrc: 'https://images.unsplash.com/photo-1538669715516-b23d53efdfb7?w=800&auto=format&fit=crop&q=80',
+    imageSrc: '/images/korea_dest.png',
   },
   {
     id: 'fiji',
@@ -73,7 +73,7 @@ const DESTINATIONS_LIST = [
     id: 'mauritius',
     title: 'Mauritius',
     description: 'Escape to a diverse island oasis featuring dramatic volcanic peaks, historic estates, and coral-fringed beaches.',
-    imageSrc: 'https://images.unsplash.com/photo-1589979482837-e74f2e145060?w=800&auto=format&fit=crop&q=80',
+    imageSrc: '/images/mauritius_dest.png',
   },
   {
     id: 'russia',

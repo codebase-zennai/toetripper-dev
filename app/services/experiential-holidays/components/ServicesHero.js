@@ -99,7 +99,8 @@ export default function ServicesHero() {
       >
         <div className="services-video">
           <img
-            src="/images/experiential_holiday_hero.png"
+            src="/images/experiential_hero_diverse.png"
+            loading="lazy"
             alt="Experiential Holidays"
             style={{
               width: '100%',

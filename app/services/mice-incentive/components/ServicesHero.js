@@ -76,8 +76,9 @@ export default function ServicesHero() {
       >
         <div className="services-video">
           <img
-            src="/images/mice_hero.png"
+            src="/images/mice_hero_diverse.png"
             alt="MICE & Events"
+            loading="lazy"
             style={{
               width: '100%',
               height: '100%',

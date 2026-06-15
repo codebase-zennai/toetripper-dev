@@ -183,7 +183,8 @@
   display: grid;
   grid-template-rows: repeat(2, minmax(190px, auto));
   grid-auto-flow: column;
-  grid-auto-columns: 360px;
+  /* 3 columns: (100% minus the 2 gaps of 1.5rem) divided by 3 */
+  grid-auto-columns: calc((100% - 3rem) / 3);
   gap: 1.5rem;
   overflow-x: auto;
   padding: 1rem 0.5rem 2rem 0.5rem;

@@ -93,6 +93,13 @@ export default function Hero() {
               </motion.div>
             </motion.div>
           </motion.div>
+          <style>{`
+            @media (max-width: 768px) {
+              .hero-image-wrapper {
+                display: none !important;
+              }
+            }
+          `}</style>
           <motion.div
             className="hero-image-wrapper"
             variants={heroImageVariants}

@@ -12,6 +12,7 @@ import NewsletterCTA from "./components/NewsletterCTA";
 import Footer from "./components/Footer";
 import WebflowClientOnly from "./components/WebflowClientOnly";
 import FeaturedPackages from "./components/FeaturedPackages";
+import Recommendations from "./components/Recommendations";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Explore />
         {/* <Brands /> */}
         <Metrics />
+        <Recommendations />
         {/* TrendingDestinations grid removed — destinations are in the FeaturedPackages marquee above */}
         <NewsletterCTA />
         <Footer />

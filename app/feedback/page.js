@@ -7,6 +7,7 @@ import "./feedback.css";
 import NewsletterCTA from '../components/NewsletterCTA';
 import FeedbackHero from './components/FeedbackHero';
 import Footer from '../components/Footer';
+import TestimonialCard from '../components/TestimonialCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Instagram, Linkedin, MessageSquareText, PlusCircle, Star, ThumbsUp, ExternalLink, ShieldCheck, Heart, Share2 } from 'lucide-react';
 
@@ -241,33 +242,7 @@ export default function Feedback() {
             ) : (
               <div className="direct-reviews-grid">
                 {directTestimonials.map((testimonial, index) => (
-                  <motion.div 
-                    key={testimonial.id || index}
-                    className="direct-review-card"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    whileHover={{ y: -6 }}
-                  >
-                    <div className="card-top">
-                      <div className="stars-row">
-                        {[...Array(testimonial.rating || 5)].map((_, i) => (
-                          <Star key={i} size={16} fill="var(--secondary, #F4A300)" color="var(--secondary, #F4A300)" />
-                        ))}
-                      </div>
-                      <ShieldCheck size={20} className="verified-icon" />
-                    </div>
-                    
-                    <p className="review-message">"{testimonial.message || testimonial.text}"</p>
-                    
-                    <div className="review-meta">
-                      <h4 className="client-name">{testimonial.name}</h4>
-                      {testimonial.destination && (
-                        <span className="client-destination">{testimonial.destination}</span>
-                      )}
-                    </div>
-                  </motion.div>
+                  <TestimonialCard key={testimonial.id || index} rec={testimonial} index={index} />
                 ))}
               </div>
             )}

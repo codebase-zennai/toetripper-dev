@@ -76,7 +76,8 @@ export default function ServicesHero() {
       >
         <div className="services-video">
           <img
-            src="/images/corporate_travel_hero.png"
+            src="/images/corporate_hero_diverse.png"
+            loading="lazy"
             alt="Corporate Travel Management"
             style={{
               width: '100%',

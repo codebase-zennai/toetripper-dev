@@ -7,7 +7,7 @@ const THEMES_LIST = [
   {
     id: 1,
     title: 'Adventure & Outdoor Escapes',
-    image: 'https://images.unsplash.com/photo-1533240332313-0db49b439ad3?w=600&auto=format&fit=crop&q=80',
+    image: '/images/theme_1_adventure.png',
     activities: ['Trekking', 'Hiking', 'Cycling Tours', 'Rafting & Kayaking', 'Wildlife Safaris'],
   },
   {
@@ -19,13 +19,13 @@ const THEMES_LIST = [
   {
     id: 3,
     title: 'Food & Culinary Trails',
-    image: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&auto=format&fit=crop&q=80',
+    image: '/images/theme_3_food.png',
     activities: ['Food Tours', 'Cooking Classes', 'Vineyard & Winery Visits', 'Farm-to-Table Experiences', 'Street Food Explorations'],
   },
   {
     id: 4,
     title: 'Wellness & Spiritual Retreats',
-    image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&auto=format&fit=crop&q=80',
+    image: '/images/theme_4_wellness.png',
     activities: ['Spiritual Pilgrimages', 'Yoga & Meditation', 'Ayurveda Retreats'],
   },
   {
@@ -43,31 +43,31 @@ const THEMES_LIST = [
   {
     id: 7,
     title: 'Family Discovery Holidays',
-    image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&auto=format&fit=crop&q=80',
     activities: ['Educational Tours', 'Theme Park Adventures', 'Farm Stays', 'Interactive Wildlife Experiences', 'Multi-Generational Travel'],
   },
   {
     id: 8,
     title: 'Romantic & Celebration Escapes',
-    image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&auto=format&fit=crop&q=80',
+    image: '/images/theme_8_romantic.png',
     activities: ['Honeymoons', 'Anniversary Getaways', 'Proposal Trips', 'Destination Weddings', 'Private Island Experiences'],
   },
   {
     id: 9,
     title: 'Photography & Special Interest Tours',
-    image: 'https://images.unsplash.com/photo-1452780212940-6f5c0d14d84a?w=600&auto=format&fit=crop&q=80',
+    image: '/images/theme_9_photo.png',
     activities: ['Photography Expeditions', 'Astronomy Tours', 'Train Enthusiast Journeys', 'Architecture Tours', 'Film & TV Location Tours'],
   },
   {
     id: 10,
     title: 'Slow Travel & Authentic Living',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&auto=format&fit=crop&q=80',
     activities: ['Countryside Stays', 'Homestays', 'Digital Detox Retreats', 'Long-Stay Explorations', 'Workation Experiences'],
   },
   {
     id: 11,
     title: 'MICE & Corporate Experiences',
-    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=80',
     activities: ['Incentive Travel', 'Team Building Retreats', 'Leadership Offsites', 'Corporate Wellness Retreats', 'Executive Networking Journeys'],
   },
   {
@@ -88,7 +88,7 @@ export default function ThemesList() {
   };
 
   return (
-    <section className="section bg-[#0a0a0a] py-20 px-4 sm:px-8 lg:px-20" id="themes-list">
+    <section className="section background-black py-20 px-4 sm:px-8 lg:px-20" id="themes-list">
       <div className="padding-9rem max-w-5xl mx-auto">
         <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
           Experiential <span className="text-[#bb9862]">Holiday Themes</span>
