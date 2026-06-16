@@ -43,7 +43,7 @@ export default function About() {
       <>
         <Navbar />
         <AboutHero />
-        <AboutImages />
+        {/* <AboutImages /> */}
       <section className="section">
         <div className="padding-9rem">
           <div className="space-7rem"></div>
