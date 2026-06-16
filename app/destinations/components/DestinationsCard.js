@@ -24,12 +24,13 @@ export default function DestinationsCard({ title, description, imageSrc }) {
               {title}
             </p>
 
-            <p className="h-16 overflow-hidden text-sm leading-6 text-black/60 md:text-[0.95rem]">
+            <p className="h-16 text-sm leading-6 text-black/60 md:text-[0.95rem]">
               {description}
             </p>
+
           </div>
 
-          <div className="mt-auto pt-3">
+          <div className="mt-2 pt-4">
             <button
               onClick={() => setIsModalOpen(true)}
               className="inline-flex w-full items-center justify-center border border-black bg-(--primary) px-4 py-4 text-sm font-semibold text-white no-underline transition-colors duration-200 hover:bg-(--secondary) hover:text-black cursor-pointer"
