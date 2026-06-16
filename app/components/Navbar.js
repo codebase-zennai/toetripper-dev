@@ -16,12 +16,7 @@ const NAV_ITEMS = [
       { label: 'Corporate Travel Desk', href: '/services/corporate-travels' },
       { 
         label: 'Experiential Holidays', 
-        isNested: true,
-        items: [
-          { label: 'Overview', href: '/services/experiential-holidays' },
-          { label: 'Travel Destinations', href: '/destinations' },
-          { label: 'Travel Themes', href: '/travel-themes' }
-        ]
+        href: '/services/experiential-holidays'
       }
     ]
   },

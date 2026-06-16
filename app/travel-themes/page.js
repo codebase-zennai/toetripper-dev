@@ -15,7 +15,7 @@ export default function TravelThemesPage() {
       <>
         <Navbar />
         <ThemesHero />
-        <ThemesImages />
+        {/* <ThemesImages /> */}
         <ThemesList />
         <NewsletterCTA />
         <Footer />
