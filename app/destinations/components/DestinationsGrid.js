@@ -4,6 +4,12 @@ import DestinationsCard from './DestinationsCard';
 
 const DESTINATIONS_LIST = [
   {
+    id: 'malaysia',
+    title: 'Malaysia',
+    description: 'Experience a vibrant mix of modern metropolises, colonial historic towns, pristine beaches, and ancient rainforests.',
+    imageSrc: 'https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?w=800&auto=format&fit=crop&q=80',
+  },
+  {
     id: 'iceland',
     title: 'Iceland',
     description: 'Embark on an unforgettable journey through a dramatic landscape of glaciers, active volcanoes, and cascading waterfalls.',
@@ -19,13 +25,19 @@ const DESTINATIONS_LIST = [
     id: 'australia',
     title: 'Australia',
     description: 'Explore the vast beauty of the land down under, from pristine coastal reefs to the sacred red sands of the outback.',
-    imageSrc: '/images/australia_dest.png',
+    imageSrc: 'https://images.unsplash.com/photo-1523482596682-cd93a6e54520?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'bali',
+    title: 'Bali',
+    description: 'Discover a tropical paradise with stunning beaches, lush rice terraces, ancient temples, vibrant culture, and world-class wellness retreats.',
+    imageSrc: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'usa',
     title: 'USA',
     description: 'Uncover a tapestry of diverse experiences, spanning iconic urban skylines, massive national parks, and coastal roads.',
-    imageSrc: '/images/usa_dest.png',
+    imageSrc: 'https://images.unsplash.com/photo-1474015977336-57f3084c8a24?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'africa',
@@ -46,22 +58,22 @@ const DESTINATIONS_LIST = [
     imageSrc: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&auto=format&fit=crop&q=80',
   },
   {
-    id: 'canada',
-    title: 'Canada',
-    description: 'Journey through majestic snow-peaked mountains, pristine turquoise lakes, and welcoming multicultural cities.',
-    imageSrc: '/images/canada_dest.png',
+    id: 'singapore',
+    title: 'Singapore',
+    description: 'A city-state of stunning contrasts — futuristic gardens, hawker culture, and seamless efficiency.',
+    imageSrc: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'south-korea',
     title: 'South Korea',
     description: 'Delight in the dynamic fusion of futuristic high-tech cities, ancient royal palaces, and scenic volcanic islands.',
-    imageSrc: '/images/korea_dest.png',
+    imageSrc: 'https://images.unsplash.com/photo-1538669715516-b23d53efdfb7?w=800&auto=format&fit=crop&q=80',
   },
   {
-    id: 'fiji',
-    title: 'Fiji',
-    description: 'Unwind in a secluded south Pacific haven of sun-drenched beaches, azure waters, and warm island hospitality.',
-    imageSrc: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&auto=format&fit=crop&q=80',
+    id: 'vietnam',
+    title: 'Vietnam',
+    description: 'Discover rich historic heritage, breathtaking landscapes of Halong Bay, delicious street food, and vibrant city life.',
+    imageSrc: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'maldives',
