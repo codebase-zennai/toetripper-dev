@@ -19,7 +19,8 @@ import {
   Sparkles,
   AlertCircle,
   ExternalLink,
-  Loader2
+  Loader2,
+  Edit2
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -54,6 +55,7 @@ export default function TestimonialManager() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState('direct'); // 'direct' or 'social'
+  const [editingItem, setEditingItem] = useState(null);
   
   // Form State
   const [form, setForm] = useState({ 
@@ -139,7 +141,27 @@ export default function TestimonialManager() {
     }
   };
 
-  const handleAdd = async (e) => {
+  const handleEditClick = (item) => {
+    setEditingItem(item);
+    setFormType(getEmbedUrl(item.destination) !== null ? 'social' : 'direct');
+    setForm({
+      name: item.name,
+      destination: item.destination || '',
+      rating: item.rating || 5,
+      message: item.message || '',
+      image_url: item.image_url || ''
+    });
+    setShowForm(true);
+  };
+
+  const handleCreateClick = () => {
+    setEditingItem(null);
+    setFormType('direct');
+    setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
+    setShowForm(true);
+  };
+
+  const handleSave = async (e) => {
     e.preventDefault();
     if (!form.name.trim()) {
       toast.error('Name is required.');
@@ -169,24 +191,34 @@ export default function TestimonialManager() {
         image_url: form.image_url || null
       };
 
-      const res = await fetch('/api/testimonials', { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify(payload) 
-      });
+      let res;
+      if (editingItem) {
+        res = await fetch('/api/testimonials', { 
+          method: 'PATCH', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ id: editingItem.id, ...payload }) 
+        });
+      } else {
+        res = await fetch('/api/testimonials', { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify(payload) 
+        });
+      }
 
       if (res.ok) {
-        toast.success('New testimonial successfully added!');
+        toast.success(editingItem ? 'Testimonial successfully updated!' : 'New testimonial successfully added!');
         setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
+        setEditingItem(null);
         setShowForm(false);
         await fetchItems();
       } else {
         const errData = await res.json();
-        toast.error(`Failed to add testimonial: ${errData.error || 'Server error'}`);
+        toast.error(`Failed to save testimonial: ${errData.error || 'Server error'}`);
       }
     } catch (err) {
       console.error(err);
-      toast.error('Error creating testimonial.');
+      toast.error('Error saving testimonial.');
     }
   };
 
@@ -202,7 +234,7 @@ export default function TestimonialManager() {
   const directTestimonials = items.filter(t => getEmbedUrl(t.destination) === null);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       
       {/* Top Banner Control */}
       <div className="flex justify-between items-center mb-2">
@@ -212,167 +244,188 @@ export default function TestimonialManager() {
         </h3>
         
         <button
-          onClick={() => {
-            setShowForm(!showForm);
-            if (!showForm) {
-              setForm({ name: '', destination: '', rating: 5, message: '', image_url: '' });
-            }
-          }}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-            showForm 
-              ? 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
-              : 'bg-[#193B9D] hover:bg-[#153285] text-white shadow-md shadow-[#193B9D]/15'
-          }`}
+          onClick={handleCreateClick}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer bg-[#193B9D] hover:bg-[#153285] text-white shadow-md shadow-[#193B9D]/15"
         >
-          {showForm ? <X size={14} /> : <Plus size={14} />}
-          <span>{showForm ? 'Cancel' : 'Create Story'}</span>
+          <Plus size={14} />
+          <span>Create Story</span>
         </button>
       </div>
 
-      {/* Form Drawer (Collapsible) */}
+      {/* Modal Popup for Add/Edit Testimonial */}
       {showForm && (
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-5">
-          <div className="flex border-b border-slate-200 pb-3 justify-between items-center">
-            <span className="text-[10px] uppercase tracking-widest text-[#193B9D] font-bold">New Testimonial Configuration</span>
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200">
+          <div className="relative bg-white rounded-3xl border border-slate-200 w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200">
             
-            {/* Form Type Selector */}
-            <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/50">
+              <div className="flex items-center gap-2">
+                <Sparkles className="text-[#F4A300]" size={18} />
+                <h4 className="text-sm font-bold text-slate-900">
+                  {editingItem ? 'Edit Testimonial' : 'Create New Testimonial'}
+                </h4>
+              </div>
               <button
                 type="button"
                 onClick={() => {
-                  setFormType('direct');
-                  setForm(prev => ({ ...prev, destination: '' }));
+                  setShowForm(false);
+                  setEditingItem(null);
                 }}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                  formType === 'direct' 
-                    ? 'bg-[#193B9D] text-white' 
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
+                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-all cursor-pointer"
               >
-                Direct Story
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setFormType('social');
-                  setForm(prev => ({ ...prev, destination: '' }));
-                }}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                  formType === 'social' 
-                    ? 'bg-[#193B9D] text-white' 
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                Social Embed
+                <X size={16} />
               </button>
             </div>
-          </div>
 
-          <form onSubmit={handleAdd} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              {/* Reviewer Name */}
-              <div className="space-y-1">
-                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Reviewer Name</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
-                    <User size={14} />
-                  </span>
-                  <input 
-                    type="text"
-                    required
-                    value={form.name} 
-                    onChange={(e) => setForm({ ...form, name: e.target.value })} 
-                    placeholder="e.g. Sarah Jenkins" 
-                    className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
-                  />
+            {/* Modal Form Scroll Area */}
+            <div className="overflow-y-auto p-6 flex-1 text-left">
+              <form onSubmit={handleSave} className="space-y-5">
+                
+                {/* Form Type Selector */}
+                <div className="flex bg-slate-100 p-1.5 rounded-xl border border-slate-200 w-fit">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormType('direct');
+                      setForm(prev => ({ ...prev, destination: '' }));
+                    }}
+                    className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                      formType === 'direct' 
+                        ? 'bg-[#193B9D] text-white shadow-sm' 
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    Direct Story
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormType('social');
+                      setForm(prev => ({ ...prev, destination: '' }));
+                    }}
+                    className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                      formType === 'social' 
+                        ? 'bg-[#193B9D] text-white shadow-sm' 
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    Social Embed
+                  </button>
                 </div>
-              </div>
 
-              {/* Destination / Link URL */}
-              <div className="space-y-1">
-                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
-                  {formType === 'social' ? 'Social Post Link (Instagram / LinkedIn)' : 'Location / Destination'}
-                </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
-                    {formType === 'social' ? <Link2 size={14} /> : <Globe size={14} />}
-                  </span>
-                  <input 
-                    type={formType === 'social' ? 'url' : 'text'}
-                    required
-                    value={form.destination} 
-                    onChange={(e) => setForm({ ...form, destination: e.target.value })} 
-                    placeholder={formType === 'social' ? 'https://www.instagram.com/p/...' : 'e.g. Swiss Alps'} 
-                    className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
-                  />
-                </div>
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Reviewer Name */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Reviewer Name</label>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                        <User size={14} />
+                      </span>
+                      <input 
+                        type="text"
+                        required
+                        value={form.name} 
+                        onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                        placeholder="e.g. Sarah Jenkins" 
+                        className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                      />
+                    </div>
+                  </div>
 
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              
-              {/* Experience Rating */}
-              {formType === 'direct' && (
-                <div className="space-y-1 md:col-span-1">
-                  <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Experience Rating</label>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
-                      <Star size={14} className="text-[#F4A300]" />
-                    </span>
-                    <select 
-                      value={form.rating} 
-                      onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })} 
-                      className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] text-sm text-slate-800 appearance-none cursor-pointer transition-all"
-                    >
-                      {[5, 4, 3, 2, 1].map(r => (
-                        <option key={r} value={r}>{r} Star{r > 1 ? 's' : ''}</option>
-                      ))}
-                    </select>
+                  {/* Destination / Link URL */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                      {formType === 'social' ? 'Social Post Link (Instagram / LinkedIn)' : 'Location / Destination'}
+                    </label>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                        {formType === 'social' ? <Link2 size={14} /> : <Globe size={14} />}
+                      </span>
+                      <input 
+                        type={formType === 'social' ? 'url' : 'text'}
+                        required
+                        value={form.destination} 
+                        onChange={(e) => setForm({ ...form, destination: e.target.value })} 
+                        placeholder={formType === 'social' ? 'https://www.instagram.com/p/...' : 'e.g. Swiss Alps'} 
+                        className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                      />
+                    </div>
                   </div>
                 </div>
-              )}
 
-              {/* Image URL */}
-              <div className={`space-y-1 ${formType === 'social' ? 'md:col-span-3' : 'md:col-span-2'}`}>
-                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Avatar Image URL (Optional)</label>
-                <input 
-                  type="url"
-                  value={form.image_url} 
-                  onChange={(e) => setForm({ ...form, image_url: e.target.value })} 
-                  placeholder="https://images.unsplash.com/photo-..." 
-                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
-                />
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Experience Rating */}
+                  {formType === 'direct' && (
+                    <div className="space-y-1.5 md:col-span-1">
+                      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Experience Rating</label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                          <Star size={14} className="text-[#F4A300]" />
+                        </span>
+                        <select 
+                          value={form.rating} 
+                          onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })} 
+                          className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] text-sm text-slate-800 appearance-none cursor-pointer transition-all"
+                        >
+                          {[5, 4, 3, 2, 1].map(r => (
+                            <option key={r} value={r}>{r} Star{r > 1 ? 's' : ''}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  )}
 
+                  {/* Image URL */}
+                  <div className={`space-y-1.5 ${formType === 'social' ? 'md:col-span-3' : 'md:col-span-2'}`}>
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Avatar Image URL (Optional)</label>
+                    <input 
+                      type="url"
+                      value={form.image_url} 
+                      onChange={(e) => setForm({ ...form, image_url: e.target.value })} 
+                      placeholder="https://images.unsplash.com/photo-..." 
+                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Review Content / Message */}
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                    {formType === 'social' ? 'Notes / Fallback Message (Optional)' : 'Review Message'}
+                  </label>
+                  <textarea 
+                    required={formType === 'direct'}
+                    value={form.message} 
+                    onChange={(e) => setForm({ ...form, message: e.target.value })} 
+                    placeholder={formType === 'social' ? 'Add notes or custom description about this embed...' : 'Describe the client experience and journey feedback...'} 
+                    rows="4"
+                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all resize-none"
+                  />
+                </div>
+
+                {/* Modal Footer Actions */}
+                <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setShowForm(false);
+                      setEditingItem(null);
+                    }}
+                    className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold rounded-xl transition-all cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="px-5 py-2.5 bg-[#193B9D] hover:bg-[#153285] text-white text-xs font-bold rounded-xl shadow-md shadow-[#193B9D]/15 transition-all cursor-pointer"
+                  >
+                    {editingItem ? 'Save Changes' : 'Create Testimonial'}
+                  </button>
+                </div>
+              </form>
             </div>
 
-            {/* Review Content / Message */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
-                {formType === 'social' ? 'Notes / Fallback Message (Optional)' : 'Review Message'}
-              </label>
-              <textarea 
-                required={formType === 'direct'}
-                value={form.message} 
-                onChange={(e) => setForm({ ...form, message: e.target.value })} 
-                placeholder={formType === 'social' ? 'Add notes or custom description about this embed...' : 'Describe the client experience and journey feedback...'} 
-                rows="3"
-                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-[#193B9D] focus:ring-2 focus:ring-[#193B9D]/10 text-sm text-slate-800 placeholder-slate-400 transition-all resize-none"
-              />
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex justify-end gap-3 pt-2">
-              <button 
-                type="submit" 
-                className="px-5 py-2.5 bg-[#193B9D] hover:bg-[#153285] text-white text-xs font-bold rounded-xl shadow-md shadow-[#193B9D]/15 transition-all cursor-pointer"
-              >
-                Create Testimonial
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       )}
 
@@ -530,6 +583,13 @@ export default function TestimonialManager() {
 
                               <div className="flex gap-2">
                                 <button
+                                  onClick={() => handleEditClick(testimonial)}
+                                  className="p-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-lg transition-all cursor-pointer"
+                                  title="Edit Story"
+                                >
+                                  <Edit2 size={13} />
+                                </button>
+                                <button
                                   onClick={() => handlePublish(testimonial.id, !testimonial.is_published)}
                                   className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
                                     testimonial.is_published
@@ -658,6 +718,13 @@ export default function TestimonialManager() {
                               </span>
 
                               <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleEditClick(testimonial)}
+                                  className="p-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-lg transition-all cursor-pointer"
+                                  title="Edit Story"
+                                >
+                                  <Edit2 size={13} />
+                                </button>
                                 <button
                                   onClick={() => handlePublish(testimonial.id, !testimonial.is_published)}
                                   className={`p-1.5 rounded-lg border transition-all cursor-pointer ${

@@ -111,14 +111,14 @@ export default function FeaturedPackages() {
       ) : null}
 
       <div className="px-4 sm:px-6">
-        <div className="flex justify-center mt-8">
+        {/* <div className="flex justify-center mt-8">
           <Link
             href="/packages"
             className="inline-flex items-center justify-center py-3.5 px-8 rounded-[10px] font-semibold no-underline transition-all duration-200 text-center bg-black text-white hover:bg-[#333] hover:-translate-y-0.5 hover:shadow-[0_8px_16px_rgba(15,15,15,0.2)]"
           >
             View All Destinations
           </Link>
-        </div>
+        </div> */}
 
         <style dangerouslySetInnerHTML={{
           __html: `
