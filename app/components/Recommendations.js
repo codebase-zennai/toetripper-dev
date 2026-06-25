@@ -17,7 +17,7 @@ export default function Recommendations() {
         if (!mounted) return;
         if (Array.isArray(data)) {
           // Filter for the specifically added Toe Tripper Recommendations
-          const filtered = data.filter(t => t.destination === 'Toe Tripper Recommendation');
+          const filtered = data.filter(t => t.destination !== 'Toe Tripper Recommendation');
           setRecommendations(filtered);
         }
         setIsLoading(false);
