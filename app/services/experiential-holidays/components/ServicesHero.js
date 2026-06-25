@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function ServicesHero() {
   return (
@@ -6,7 +6,7 @@ export default function ServicesHero() {
       <div className="padding-9rem">
         <div className="space-page-top"></div>
         <div className="title-block">
-          <motion.div 
+          <motion.div
             className="subheading-flex"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function ServicesHero() {
           >
             EXPERIENTIAL <br></br> HOLIDAYS
           </motion.h1>
-          <motion.h5 
+          <motion.h5
             className="max-width-20rem"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,49 +42,49 @@ export default function ServicesHero() {
             Curated Journeys. Designed Around You.
           </motion.h5>
           <div className="space-0-5rem"></div>
-          <div className='flex gap-4'>
-          <motion.a
-            href="/destinations"
-            data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
-            className="button-with-circle-icon w-inline-block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <p className="button-text">Travel Destinations</p>
-            <p className="button-text-absolute">Travel Destinations</p>
-            <div className="button-arrow-wrapper">
-              <img
-                width="Auto"
-                height="Auto"
-                alt=""
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
-                loading="eager"
-                className="arrow"
-              />
-            </div>
-          </motion.a>
-          <motion.a
-            href="/travel-themes"
-            data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
-            className="button-with-circle-icon w-inline-block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <p className="button-text">Travel Themes</p>
-            <p className="button-text-absolute">Travel Themes</p>
-            <div className="button-arrow-wrapper">
-              <img
-                width="Auto"
-                height="Auto"
-                alt=""
-                src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
-                loading="eager"
-                className="arrow"
-              />
-            </div>
-          </motion.a>
+          <div className="flex flex-col sm:flex-row gap-4 items-start">
+            <motion.a
+              href="/destinations"
+              data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
+              className="button-with-circle-icon w-inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <p className="button-text">Travel Destinations</p>
+              <p className="button-text-absolute">Travel Destinations</p>
+              <div className="button-arrow-wrapper">
+                <img
+                  width="Auto"
+                  height="Auto"
+                  alt=""
+                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
+                  loading="eager"
+                  className="arrow"
+                />
+              </div>
+            </motion.a>
+            <motion.a
+              href="/travel-themes"
+              data-w-id="5636032a-1271-e473-ecbe-20e393bd2447"
+              className="button-with-circle-icon w-inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <p className="button-text">Travel Themes</p>
+              <p className="button-text-absolute">Travel Themes</p>
+              <div className="button-arrow-wrapper">
+                <img
+                  width="Auto"
+                  height="Auto"
+                  alt=""
+                  src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f449091e597be1c4c815_arrow_outward.svg"
+                  loading="eager"
+                  className="arrow"
+                />
+              </div>
+            </motion.a>
           </div>
         </div>
       </div>
@@ -103,10 +103,10 @@ export default function ServicesHero() {
             loading="lazy"
             alt="Experiential Holidays"
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block'
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
             }}
           />
         </div>

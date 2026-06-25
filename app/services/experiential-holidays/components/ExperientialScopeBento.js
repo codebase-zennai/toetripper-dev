@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   Compass,
+  Hotel,
+  Sparkles,
   Users,
   Utensils,
   Wallet,
-  Hotel,
-  Sparkles,
-} from 'lucide-react';
+} from "lucide-react";
 
-const viewportOptions = { once: true, amount: 0.15, margin: '-60px' };
+const viewportOptions = { once: true, amount: 0.15, margin: "-60px" };
 const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
 
 const createBentoVariants = ({ x = 0, y = 0 }) => ({
@@ -70,10 +70,14 @@ export default function ExperientialScopeBento() {
               transition={{ ...baseTransition, delay: 0.2 }}
             >
               <div className="features-flex space-between align-center">
-                <h4 className="outline-black">Budget Comfort with Smart Routing</h4>
+                <h4 className="outline-black">
+                  Budget Comfort with Smart Routing
+                </h4>
                 <Wallet size={72} strokeWidth={0.8} />
               </div>
-              <h5>Plans are built around comfort level, not a generic template.</h5>
+              <h5>
+                Plans are built around comfort level, not a generic template.
+              </h5>
             </motion.div>
           </div>
 
@@ -87,10 +91,18 @@ export default function ExperientialScopeBento() {
               transition={{ ...baseTransition, delay: 0.1 }}
             >
               <div className="features-flex space-between align-center">
-                <h4 className="text-site-white">Right-Duration Stays in Carefully Selected Hotels</h4>
-                <Hotel size={72} strokeWidth={0.8} className="text-site-white" />
+                <h4 className="text-site-white">
+                  Right-Duration Stays in Carefully Selected Hotels
+                </h4>
+                <Hotel
+                  size={72}
+                  strokeWidth={0.8}
+                  className="text-site-white"
+                />
               </div>
-              <h5 className="text-site-white">Stay length and property choice are matched to trip flow.</h5>
+              <h5 className="text-site-white">
+                Stay length and property choice are matched to trip flow.
+              </h5>
             </motion.div>
 
             <div className="features-flex-wrapper">

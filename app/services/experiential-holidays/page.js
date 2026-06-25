@@ -1,13 +1,13 @@
 "use client";
 import "./services.css";
 import Footer from "../../components/Footer";
+import Metrics from "../../components/Metrics";
 import Navbar from "../../components/Navbar";
 import NewsletterCTA from "../../components/NewsletterCTA";
-import ServicesHero from "./components/ServicesHero";
-import ServicesFeatures from "./components/ServicesFeatures";
-import ExperientialScopeBento from "./components/ExperientialScopeBento";
 import WebflowClientOnly from "../../components/WebflowClientOnly";
-import Metrics from "../../components/Metrics";
+import ExperientialScopeBento from "./components/ExperientialScopeBento";
+import ServicesFeatures from "./components/ServicesFeatures";
+import ServicesHero from "./components/ServicesHero";
 
 export default function Services() {
   return (

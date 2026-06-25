@@ -1,52 +1,55 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Briefcase, Check, Award } from 'lucide-react';
+import { Award, Briefcase, Check } from "lucide-react";
+import Link from "next/link";
 
 const sections = [
   {
-    title: 'What We Manage',
-    heading: 'End-to-End Holiday Operations',
-    description: 'We coordinate all essential travel layers so your journey feels seamless from start to finish.',
+    title: "What We Manage",
+    heading: "End-to-End Holiday Operations",
+    description:
+      "We coordinate all essential travel layers so your journey feels seamless from start to finish.",
     items: [
-      'International and domestic flights',
-      'Hotels and boutique stays',
-      'Local logistics',
-      'Visas and insurance',
-      'Activity and experience bookings',
+      "International and domestic flights",
+      "Hotels and boutique stays",
+      "Local logistics",
+      "Visas and insurance",
+      "Activity and experience bookings",
     ],
     icon: Check,
-    image: '/images/holiday_ops.jpg',
+    image: "/images/holiday_ops.jpg",
     reverse: true,
   },
   {
-    title: 'Our Travel Philosophy',
-    heading: 'Experience-Weighted Spending',
-    description: 'Premium does not mean excess. Affordable does not mean compromise. We focus on experience-weighted spending, placing your budget where it truly enhances the journey.',
+    title: "Our Travel Philosophy",
+    heading: "Experience-Weighted Spending",
+    description:
+      "Premium does not mean excess. Affordable does not mean compromise. We focus on experience-weighted spending, placing your budget where it truly enhances the journey.",
     items: [
-      'Budget placed where it improves experience',
-      'Quality without unnecessary excess',
-      'Value without compromise on essentials',
+      "Budget placed where it improves experience",
+      "Quality without unnecessary excess",
+      "Value without compromise on essentials",
     ],
     icon: Award,
-    image: '/images/travel_philosophy.jpg',
+    image: "/images/travel_philosophy.jpg",
     reverse: false,
   },
   {
-    title: 'Travel Styles We Support',
-    heading: 'Tailored for How You Want to Travel',
-    description: 'We support diverse travel styles with curated recommendations and practical planning.',
+    title: "Travel Styles We Support",
+    heading: "Tailored for How You Want to Travel",
+    description:
+      "We support diverse travel styles with curated recommendations and practical planning.",
     items: [
-      'Luxury travel',
-      'Family holidays',
-      'Honeymoons',
-      'Spiritual and wellness journeys',
-      'Europe and international itineraries',
-      'Japan, Bali, and curated Asia routes',
-      'India experiential circuits',
+      "Luxury travel",
+      "Family holidays",
+      "Honeymoons",
+      "Spiritual and wellness journeys",
+      "Europe and international itineraries",
+      "Japan, Bali, and curated Asia routes",
+      "India experiential circuits",
     ],
     icon: Briefcase,
-    image: '/images/travel_styles.jpg',
+    image: "/images/travel_styles.jpg",
     reverse: true,
   },
 ];
@@ -59,12 +62,14 @@ export default function ServicesFeatures() {
           const Icon = section.icon;
           return (
             <div key={idx}>
-              <div className={`card-flex ${section.reverse ? 'reverse-on-tab' : ''} gap-8 lg:gap-10 w-full items-stretch`}>
+              <div
+                className={`card-flex ${section.reverse ? "reverse-on-tab" : ""} gap-8 lg:gap-10 w-full items-stretch`}
+              >
                 {/* Image Section */}
                 {!section.reverse && (
                   <div
-                    className="features-image-wrapper slide-from-left-animation w-full" 
-                    style={{ minWidth: 0, maxWidth: 'none', flex: '1 1 0%' }}
+                    className="features-image-wrapper slide-from-left-animation w-full"
+                    style={{ minWidth: 0, maxWidth: "none", flex: "1 1 0%" }}
                   >
                     <div className="cut-out-wrapper">
                       <img
@@ -72,7 +77,7 @@ export default function ServicesFeatures() {
                         loading="lazy"
                         alt="Cut out SVG"
                         className="cut-out-image"
-                        style={{ filter: 'brightness(0.02)' }}
+                        style={{ filter: "brightness(0.02)" }}
                       />
                     </div>
                     <img
@@ -88,12 +93,18 @@ export default function ServicesFeatures() {
                 {/* Content Section */}
                 <div
                   className="large-card w-full p-6 sm:p-8 lg:p-[4.4vw]"
-                  style={{ minWidth: 0, maxWidth: 'none', flex: '1 1 0%' }}
+                  style={{ minWidth: 0, maxWidth: "none", flex: "1 1 0%" }}
                 >
-                  <div className={`card-text-block ${section.reverse ? 'slide-up-animation' : 'slide-from-right-animation'} w-full min-w-0 gap-4 sm:gap-5`}>
+                  <div
+                    className={`card-text-block ${section.reverse ? "slide-up-animation" : "slide-from-right-animation"} w-full min-w-0 gap-4 sm:gap-5`}
+                  >
                     <div className="subheading-flex">
                       <div className="icon-wrapper background-primary">
-                        <Icon className="text-white" size={24} strokeWidth={1.5} />
+                        <Icon
+                          className="text-white"
+                          size={24}
+                          strokeWidth={1.5}
+                        />
                       </div>
                       <h5>{section.title}</h5>
                     </div>
@@ -105,7 +116,10 @@ export default function ServicesFeatures() {
                     </p>
                     <ul className="w-full list-disc pl-6 space-y-3 text-left">
                       {section.items.map((item, itemIdx) => (
-                        <li key={itemIdx} className="text-base sm:text-lg leading-relaxed wrap-break-word">
+                        <li
+                          key={itemIdx}
+                          className="text-base sm:text-lg leading-relaxed wrap-break-word"
+                        >
                           {item}
                         </li>
                       ))}
@@ -117,7 +131,7 @@ export default function ServicesFeatures() {
                 {section.reverse && (
                   <div
                     className="features-image-wrapper align-botton slide-down-animation w-full"
-                    style={{ minWidth: 0, maxWidth: 'none', flex: '1 1 0%' }}
+                    style={{ minWidth: 0, maxWidth: "none", flex: "1 1 0%" }}
                   >
                     <div className="cut-out-wrapper align-bottom">
                       <img
@@ -125,7 +139,7 @@ export default function ServicesFeatures() {
                         loading="lazy"
                         alt="Cut out SVG"
                         className="cut-out-image"
-                        style={{ filter: 'brightness(0.02)' }}
+                        style={{ filter: "brightness(0.02)" }}
                       />
                     </div>
                     <img
@@ -142,7 +156,6 @@ export default function ServicesFeatures() {
             </div>
           );
         })}
-
       </div>
     </section>
   );
