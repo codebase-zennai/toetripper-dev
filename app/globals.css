@@ -95,8 +95,21 @@
 
 .new-hero-section {
   min-height: 75vh;
+  margin: 0px;
+  padding: 0px;
 }
 
+.new-hero-inner{
+  min-width: 100vw;
+}
+
+.new-hero-text-div{
+  font-size: 7rem;
+}
+
+.text-h {
+  font-size: 10rem;
+}
 
 /* ===== Shared Animation Classes ===== */
 .animate-on-scroll {
@@ -3599,8 +3612,8 @@
     align-items: flex-start;
     min-width: 50vw;
     max-width: 50vw;
-    min-height: 40vw;
-    max-height: 40vw;
+    min-height: 32vw;
+    max-height: 32vw;
     display: flex;
     position: relative;
   }
@@ -3680,9 +3693,6 @@
 
   .hero-text {
     text-transform: uppercase;
-    font-size: 9.5vw;
-    font-weight: 500;
-    line-height: 7.5vw;
   }
 
   .hero-line {
@@ -5588,11 +5598,6 @@
       right: 1rem;
     }
 
-    .hero-text {
-      text-align: center;
-      font-size: 10rem;
-      line-height: 8rem;
-    }
 
     .hero-line {
       width: 35rem;
@@ -6298,10 +6303,7 @@
       right: 0;
     }
 
-    .hero-text {
-      font-size: 7rem;
-      line-height: 6rem;
-    }
+
 
     .hero-line {
       width: 25rem;
@@ -6645,10 +6647,6 @@
       display: none;
     }
 
-    .hero-text {
-      font-size: 16vw;
-      line-height: 14vw;
-    }
 
     .hero-line {
       width: 90vw;
@@ -7653,10 +7651,7 @@
 }
 
 /* Adjust hero text for better fit */
-.hero-section-fullscreen .hero-text {
-  font-size: 8vw;
-  line-height: 6.5vw;
-}
+
 
 /* Responsive adjustments */
 @media screen and (max-width: 991px) {
@@ -7668,10 +7663,6 @@
     padding-top: calc(70px + 1.5rem) !important;
   }
 
-  .hero-section-fullscreen .hero-text {
-    font-size: 9vw;
-    line-height: 7vw;
-  }
 
   .hero-section-fullscreen .hero-image-wrapper {
     min-width: 45vw;
@@ -7697,10 +7688,7 @@
     max-height: none;
   }
 
-  .hero-section-fullscreen .hero-text {
-    font-size: 14vw;
-    line-height: 13vw;
-  }
+
 
   .hero-section-fullscreen .hero-image-wrapper {
     min-width: 100%;

@@ -14,12 +14,14 @@ import Footer from "./components/Footer";
 import WebflowClientOnly from "./components/WebflowClientOnly";
 import FeaturedPackages from "./components/FeaturedPackages";
 import Recommendations from "./components/Recommendations";
+import HeroRight from "./components/HeroRight";
 
 export default function Home() {
   return (
     <WebflowClientOnly>
       <>
         <Navbar />
+        {/* <HeroRight /> */}
         <Hero2 />
         {/* <Hero /> */}
         <Services />
