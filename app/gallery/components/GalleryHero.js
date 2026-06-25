@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function GalleryHero() {
   return (
@@ -8,7 +8,7 @@ export default function GalleryHero() {
       <div className="padding-9rem">
         <div className="space-page-top"></div>
         <div className="title-block">
-          <motion.div 
+          <motion.div
             className="subheading-flex"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -35,13 +35,14 @@ export default function GalleryHero() {
           >
             PHOTO BOOTH
           </motion.h1>
-          <motion.h5 
-            className="max-width-31rem" 
+          <motion.h5
+            className="max-width-31rem"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
           >
-            Explore the world through the eyes of our travelers. A visual journey of destinations, adventures, and unforgettable moments.
+            Explore the world through the eyes of our travelers. A visual
+            journey of destinations, adventures, and unforgettable moments.
           </motion.h5>
           <div className="space-0-5rem"></div>
           <motion.a
