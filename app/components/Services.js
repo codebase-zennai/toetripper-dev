@@ -85,11 +85,6 @@ export default function Services() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center w-full">
-              <h5 className="text-white text-center">
-                Premium travel designed for individuality
-              </h5>
-            </div>
           </motion.div>
           <div className="features-block">
             <div className="features-flex-wrapper">
@@ -119,9 +114,6 @@ export default function Services() {
                     className=""
                   />
                 </div>
-                <h5 className="">
-                  Alerts to safely participate in the market
-                </h5>
               </motion.div>
             </div>
             <motion.div
@@ -150,9 +142,6 @@ export default function Services() {
                   className="text-white"
                 />
               </div>
-              <h5 className="text-site-white">
-                Alerts to safely participate in the market
-              </h5>
             </motion.div>
           </div>
         </div>

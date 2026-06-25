@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import RotatingGlobe from "./RotatingGlobe";
 
 const transition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
-const marqueeTransition = { duration: 27, ease: "linear", repeat: Infinity };
+const marqueeTransition = { duration: 10, ease: "linear", repeat: Infinity };
 const headingItems = [
   "Corporate Travel",
   "Curated Holiday",
