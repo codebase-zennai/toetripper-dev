@@ -93,6 +93,11 @@
   }
 }
 
+.new-hero-section {
+  min-height: 75vh;
+}
+
+
 /* ===== Shared Animation Classes ===== */
 .animate-on-scroll {
   opacity: 0;
@@ -7629,7 +7634,8 @@
   align-items: center;
   /* margin-bottom: 10rem; */
   /* padding-bottom: 20rem; */
-  margin-top: calc(-1.25rem - 2.5rem); /* Offset navbar margin */
+  margin-top: calc(-1.25rem - 2.5rem);
+  /* Offset navbar margin */
 }
 
 .hero-content-container {
@@ -7657,11 +7663,11 @@
   .hero-section-fullscreen {
     margin-top: calc(-1rem - 1.5rem);
   }
-  
+
   .hero-content-container {
     padding-top: calc(70px + 1.5rem) !important;
   }
-  
+
   .hero-section-fullscreen .hero-text {
     font-size: 9vw;
     line-height: 7vw;
@@ -7681,16 +7687,16 @@
     height: auto;
     margin-top: 0;
   }
-  
+
   .hero-content-container {
     padding-top: calc(60px + 1rem) !important;
     padding-bottom: 3rem !important;
   }
-  
+
   .hero-left-content {
     max-height: none;
   }
-  
+
   .hero-section-fullscreen .hero-text {
     font-size: 14vw;
     line-height: 13vw;
@@ -7737,7 +7743,8 @@
 
 .trending-content-container .destinations-grid {
   gap: clamp(0.75rem, 2vh, 2rem);
-  flex: 1; /* Allow grid to take available space */
+  flex: 1;
+  /* Allow grid to take available space */
   display: grid;
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
@@ -7748,9 +7755,11 @@
 }
 
 .trending-content-container .destination-card-img-wrap {
-  aspect-ratio: auto; /* Override fixed aspect ratio to fit */
+  aspect-ratio: auto;
+  /* Override fixed aspect ratio to fit */
   flex: 1;
-  min-height: 0; /* Important for flex child to shrink below intrinsic size */
+  min-height: 0;
+  /* Important for flex child to shrink below intrinsic size */
   margin-bottom: 0.5rem;
 }
 
@@ -7761,16 +7770,16 @@
     height: auto;
     overflow: visible;
   }
-  
+
   .trending-content-container {
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
   }
-  
+
   .trending-content-container .destinations-grid {
     grid-template-rows: auto;
   }
-  
+
   .trending-content-container .destination-card-img-wrap {
     aspect-ratio: 16 / 9;
     flex: none;

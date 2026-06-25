@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import FloatingCTA from "./components/FloatingCTA";
+import JsonLd, { organizationSchema, websiteSchema } from "./components/JsonLd";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -58,6 +59,27 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://www.toetripper.com",
+  },
+  category: "travel",
+  // Uncomment and add your Google Search Console verification code:
+  // verification: {
+  //   google: "YOUR_GOOGLE_VERIFICATION_CODE",
+  // },
+  other: {
+    "geo.region": "IN",
+    "geo.placename": "India",
+    "revisit-after": "7 days",
+    "rating": "general",
   },
 };
 
@@ -71,6 +93,8 @@ export default function RootLayout({ children }) {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
       </head>
       <body className={poppins.className}>
         <Suspense fallback={null}>

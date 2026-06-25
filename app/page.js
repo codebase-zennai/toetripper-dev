@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Hero from "./components/Hero";
+import Hero2 from "./components/Hero2";
 import Navbar from "./components/Navbar";
 import Brands from "./components/Brands";
 import Services from "./components/Services";
@@ -19,7 +20,8 @@ export default function Home() {
     <WebflowClientOnly>
       <>
         <Navbar />
-        <Hero />
+        <Hero2 />
+        {/* <Hero /> */}
         <Services />
         <FeaturedPackages />
         <Explore />
