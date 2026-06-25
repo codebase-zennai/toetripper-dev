@@ -33,7 +33,7 @@ export default function FeaturedPackages() {
   const scrollItems = useMemo(() => [...destinations, ...destinations], [destinations]);
 
   return (
-    <div className="m-0 mb-10 p-0 relative" id="trending-destinations">
+    <div className="m-0 mb-10 p-0 relative flex-col items-center justify-center flex" id="trending-destinations">
       <div className="px-4 sm:px-6">
         <div className="flex flex-col items-center gap-3 mb-10 md:mb-12">
           <h1 className="text-center px-2 py-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -80,7 +80,7 @@ export default function FeaturedPackages() {
                   </div>
                 </a>
               ) : (
-                <Link href={`/destinations/${dest.slug}`} className="group flex flex-col items-center gap-6 no-underline w-full">
+                <div className="group flex flex-col items-center gap-6 no-underline w-full">
                   {/* Circle with destination photo */}
                   <div className="dest-circle-wrap group-hover:-translate-y-3 group-hover:shadow-[0_15px_30px_rgba(15,15,15,0.3)]">
                     <img
@@ -99,7 +99,7 @@ export default function FeaturedPackages() {
                       {dest.country}
                     </p>
                   </div>
-                </Link>
+                </div>
               )}
             </div>
           ))}

@@ -14,6 +14,10 @@
   --secondary: #F4A300;
 }
 
+#trending-destinations{
+  min-height: 100vh;
+}
+
 /* ===== Shared Animation Keyframes ===== */
 @keyframes fadeInUp {
   from {
@@ -7624,6 +7628,7 @@
 .prose p {
   margin: 0.5em 0;
 }
+
 
 .prose blockquote {
   border-left: 4px solid #d1d5db;
