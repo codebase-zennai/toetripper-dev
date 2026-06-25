@@ -30,7 +30,7 @@ export default function DestinationsCard({ title, description, imageSrc }) {
 
           </div>
 
-          <div className="mt-2 pt-4">
+          <div className="mt-15 pt-4">
             <button
               onClick={() => setIsModalOpen(true)}
               className="inline-flex w-full items-center justify-center border border-black bg-(--primary) px-4 py-4 text-sm font-semibold text-white no-underline transition-colors duration-200 hover:bg-(--secondary) hover:text-black cursor-pointer"

@@ -7,7 +7,7 @@ const DESTINATIONS_LIST = [
     id: 'malaysia',
     title: 'Malaysia',
     description: 'Experience a vibrant mix of modern metropolises, colonial historic towns, pristine beaches, and ancient rainforests.',
-    imageSrc: 'https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?w=800&auto=format&fit=crop&q=80',
+    imageSrc: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'iceland',
@@ -25,7 +25,7 @@ const DESTINATIONS_LIST = [
     id: 'australia',
     title: 'Australia',
     description: 'Explore the vast beauty of the land down under, from pristine coastal reefs to the sacred red sands of the outback.',
-    imageSrc: 'https://images.unsplash.com/photo-1523482596682-cd93a6e54520?w=800&auto=format&fit=crop&q=80',
+    imageSrc: 'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'bali',
@@ -37,7 +37,7 @@ const DESTINATIONS_LIST = [
     id: 'usa',
     title: 'USA',
     description: 'Uncover a tapestry of diverse experiences, spanning iconic urban skylines, massive national parks, and coastal roads.',
-    imageSrc: 'https://images.unsplash.com/photo-1474015977336-57f3084c8a24?w=800&auto=format&fit=crop&q=80',
+    imageSrc: 'https://images.unsplash.com/photo-1628353900470-0bd683a6946a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'africa',
@@ -67,7 +67,7 @@ const DESTINATIONS_LIST = [
     id: 'south-korea',
     title: 'South Korea',
     description: 'Delight in the dynamic fusion of futuristic high-tech cities, ancient royal palaces, and scenic volcanic islands.',
-    imageSrc: 'https://images.unsplash.com/photo-1538669715516-b23d53efdfb7?w=800&auto=format&fit=crop&q=80',
+    imageSrc: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'vietnam',
