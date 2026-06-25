@@ -11,7 +11,7 @@ export default function HeroLeft() {
   return (
     <>
       <motion.div
-        className="flex flex-col items-center justify-center h-100 gap-10"
+        className="flex flex-col items-center justify-around h-100 gap-10"
         // variants={heroBlockVariants}
         initial="hidden"
         animate="visible"

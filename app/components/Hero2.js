@@ -11,7 +11,7 @@ export default function Hero() {
                     <div className="w-1/2 h-full">
                         <HeroLeft/>
                     </div>
-                    <div className="w-1/2 bg-red-500 h-full">
+                    <div className="w-1/2 h-full me-10">
                         <HeroRight />
                     </div>
                 </div>

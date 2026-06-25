@@ -111,12 +111,14 @@ export default function HeroRight() {
                         </div>
                     </a>
                 </div>
-                <img
-                    src="/images/home.jpg"
-                    loading="lazy"
-                    sizes="(max-width: 479px) 80vw, (max-width: 767px) 420px, (max-width: 991px) 632px, 44vw"
-                    alt="woman and man  sitting on a chair"
+                <video
+                    src="/hero.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="hero-image"
+                    style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
                 <a
                     href="#learn-more"
