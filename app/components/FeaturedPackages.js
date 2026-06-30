@@ -54,10 +54,7 @@ export default function FeaturedPackages() {
               className="flex-none flex justify-center pb-4 min-w-55 sm:min-w-65 md:min-w-80 lg:min-w-100 pr-5 sm:pr-8 md:pr-12"
             >
               {(dest.linkType === 'instagram' && dest.instagramUrl) ? (
-                <a
-                  href={dest.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div
                   className="group flex flex-col items-center gap-6 no-underline w-full"
                 >
                   {/* Circle with destination photo */}
@@ -78,7 +75,7 @@ export default function FeaturedPackages() {
                       {dest.country}
                     </p>
                   </div>
-                </a>
+                </div>
               ) : (
                 <div className="group flex flex-col items-center gap-6 no-underline w-full">
                   {/* Circle with destination photo */}
