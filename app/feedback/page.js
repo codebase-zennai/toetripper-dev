@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/Navbar";
 import WebflowClientOnly from "../components/WebflowClientOnly";
 import "./feedback.css";
@@ -8,7 +8,7 @@ import NewsletterCTA from '../components/NewsletterCTA';
 import FeedbackHero from './components/FeedbackHero';
 import Footer from '../components/Footer';
 import TestimonialCard from '../components/TestimonialCard';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useAnimationFrame } from 'framer-motion';
 import { Instagram, Linkedin, MessageSquareText, PlusCircle, Star, ThumbsUp, ExternalLink, ShieldCheck, Heart, Share2 } from 'lucide-react';
 
 function getEmbedUrl(url) {
@@ -46,6 +46,10 @@ function getMarqueeItems(list) {
 }
 
 export default function Feedback() {
+  // Testimonials state
+  const [testimonials, setTestimonials] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [formType, setFormType] = useState('direct'); // 'direct' or 'social'
   const [status, setStatus] = useState('idle');
   const [feedbackForm, setFeedbackForm] = useState({
@@ -57,9 +61,54 @@ export default function Feedback() {
   });
   const [formStatus, setFormStatus] = useState('idle');
 
-  // Testimonials state
-  const [testimonials, setTestimonials] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // Testimonials Marquee Drag & Hover Animation Logic
+  const [isHovered, setIsHovered] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [trackWidth, setTrackWidth] = useState(0);
+  const trackRef = useRef(null);
+  const x = useMotionValue(0);
+
+  const wrap = (min, max, v) => {
+    const range = max - min;
+    return ((((v - min) % range) + range) % range) + min;
+  };
+
+  const W = trackWidth / 2;
+
+  useEffect(() => {
+    if (!trackRef.current) return;
+
+    const updateWidth = () => {
+      if (trackRef.current) {
+        setTrackWidth(trackRef.current.scrollWidth);
+      }
+    };
+
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(trackRef.current);
+
+    return () => observer.disconnect();
+  }, [testimonials]);
+
+  useAnimationFrame((time, delta) => {
+    if (isHovered || isDragging || W === 0) return;
+
+    const speed = 40; // Pixels per second
+    const currentX = x.get() - (speed * delta) / 1000;
+    const wrappedX = wrap(-W, 0, currentX);
+    x.set(wrappedX);
+  });
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    if (W === 0) return;
+    const currentX = x.get();
+    const wrappedX = wrap(-W, 0, currentX);
+    x.set(wrappedX);
+  };
+
 
   // Fetch testimonials from DB only — no fallback data
   useEffect(() => {
@@ -249,14 +298,27 @@ export default function Feedback() {
                 <p style={{ color: '#a0aec0', fontSize: '0.9rem', textAlign: 'center', padding: '2rem 0' }}>No client reviews have been published yet.</p>
               </div>
             ) : (
-              <div className="testimonials-marquee-container">
-                <div className="testimonials-marquee-track">
+              <div 
+                className="testimonials-marquee-container"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <motion.div 
+                  ref={trackRef}
+                  className="testimonials-marquee-track"
+                  style={{ x }}
+                  drag="x"
+                  dragConstraints={{ left: -W, right: 0 }}
+                  dragElastic={0.1}
+                  onDragStart={() => setIsDragging(true)}
+                  onDragEnd={handleDragEnd}
+                >
                   {getMarqueeItems(directTestimonials).map((testimonial, index) => (
                     <div key={`marquee-${testimonial.id || index}-${index}`} className="marquee-item-wrapper">
                       <TestimonialCard rec={testimonial} index={index} />
                     </div>
                   ))}
-                </div>
+                </motion.div>
               </div>
             )}
           </section>

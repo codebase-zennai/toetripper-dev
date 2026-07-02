@@ -591,12 +591,12 @@
   display: flex;
   gap: 1.5rem;
   width: max-content;
-  animation: marquee-left 90s linear infinite;
   padding: 0.5rem;
+  cursor: grab;
 }
 
-.testimonials-marquee-track:hover {
-  animation-play-state: paused;
+.testimonials-marquee-track:active {
+  cursor: grabbing;
 }
 
 .marquee-item-wrapper {
