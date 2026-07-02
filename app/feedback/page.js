@@ -36,6 +36,15 @@ function getEmbedUrl(url) {
   return null;
 }
 
+function getMarqueeItems(list) {
+  if (!list || list.length === 0) return [];
+  let items = [...list];
+  while (items.length < 8) {
+    items = [...items, ...list];
+  }
+  return [...items, ...items];
+}
+
 export default function Feedback() {
   const [formType, setFormType] = useState('direct'); // 'direct' or 'social'
   const [status, setStatus] = useState('idle');
@@ -240,10 +249,14 @@ export default function Feedback() {
                 <p style={{ color: '#a0aec0', fontSize: '0.9rem', textAlign: 'center', padding: '2rem 0' }}>No client reviews have been published yet.</p>
               </div>
             ) : (
-              <div className="direct-reviews-grid">
-                {directTestimonials.map((testimonial, index) => (
-                  <TestimonialCard key={testimonial.id || index} rec={testimonial} index={index} />
-                ))}
+              <div className="testimonials-marquee-container">
+                <div className="testimonials-marquee-track">
+                  {getMarqueeItems(directTestimonials).map((testimonial, index) => (
+                    <div key={`marquee-${testimonial.id || index}-${index}`} className="marquee-item-wrapper">
+                      <TestimonialCard rec={testimonial} index={index} />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </section>
