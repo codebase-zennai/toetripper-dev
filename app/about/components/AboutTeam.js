@@ -78,42 +78,6 @@ export default function AboutTeam() {
                 Nikita Rajpuut <br />
                 Founder, Toe Tripper
               </p>
-              <div className="socials-wrapper">
-                <a href="https://www.youtube.com/" target="_blank" className="w-inline-block">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/669f719e32c9ea42465af181/669f719e32c9ea42465af1c5_youtube.png"
-                    loading="eager"
-                    className="social-icon smaller invert"
-                  />
-                </a>
-                <a href="https://www.instagram.com/" target="_blank" className="w-inline-block">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png"
-                    loading="eager"
-                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782a45_instagram.png 512w"
-                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
-                    className="social-icon smaller"
-                  />
-                </a>
-                <a href="https://www.tiktok.com/en/" target="_blank" className="w-inline-block">
-                  <img
-                    width="Auto"
-                    height="Auto"
-                    alt=""
-                    src="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png"
-                    loading="eager"
-                    srcSet="https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok-p-500.png 500w, https://wubflow-shield.NOCODEXPORT.DEV/66e3df8d47eb3991ca9dbef7/66e3f49146e48580f1782b02_tiktok.png 512w"
-                    sizes="(max-width: 767px) 16px, (max-width: 991px) 2vw, 1vw"
-                    className="social-icon smaller"
-                  />
-                </a>
-              </div>
             </div>
           </div>
 
