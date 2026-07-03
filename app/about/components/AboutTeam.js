@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Diamond, FileCheck, Gem, HeartHandshake, Medal, PartyPopper, Target, TargetIcon, TicketsPlane, TreePalm } from 'lucide-react';
+import { Instagram, Linkedin } from 'lucide-react';
 
 const viewportOptions = { once: true, amount: 0.2, margin: '-80px' };
 const baseTransition = { duration: 0.55, ease: [0.16, 1, 0.3, 1] };
@@ -78,6 +79,30 @@ export default function AboutTeam() {
                 Nikita Rajpuut <br />
                 Founder, Toe Tripper
               </p>
+                          <div className="socials-wrapper" style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', marginTop: '1rem' }}>
+              <a
+                href="https://www.instagram.com/toetripper_travel_events/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-inline-block"
+                style={{ color: '#cbd5e0', transition: 'color 0.2s ease' }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#F4A300'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e0'}
+              >
+                <Instagram size={24} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nikitarajpuut/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-inline-block"
+                style={{ color: '#cbd5e0', transition: 'color 0.2s ease' }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#193B9D'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e0'}
+              >
+                <Linkedin size={24} />
+              </a>
+            </div>
             </div>
           </div>
 
