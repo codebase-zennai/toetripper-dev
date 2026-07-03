@@ -57,7 +57,6 @@ export default function Footer() {
           </div>
           <div className="footer-right-flex">
             <div className="footer-wrapper">
-              <h5 className="text-site-white">Main</h5>
               <div className="footer-link-wrapper">
                 <a
                   href="/"
@@ -100,7 +99,6 @@ export default function Footer() {
               </div>
             </div>
             <div className="footer-wrapper">
-              <h5 className="text-site-white">Pages</h5>
               <div className="footer-link-wrapper">
                 <a href="/contact" className="footer-link">
                   Contact
