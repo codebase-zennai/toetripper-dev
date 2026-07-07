@@ -27,19 +27,32 @@ export async function POST(request) {
     params.append('email', email);
     params.append('message', message);
     params.append('subject', `New Contact Form Submission from ${name}`);
-    params.append('from_name', 'Toe Tripper Contact Form');
+    params.append('from_name', 'Toe Tripper API');
     params.append('to_email', process.env.ADMIN_EMAIL || 'info@toetripper.com');
 
-    console.log('Sending to Web3Forms:', { name, email, key: process.env.WEB3FORMS_ACCESS_KEY.substring(0, 8) + '...' });
+    const paramsNikita = new URLSearchParams(params.toString());
+    paramsNikita.set('to_email', 'nikita@toetripper.com');
 
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
-      body: params.toString(),
-    });
+    // Submit to Web3Forms
+
+    const [response, responseNikita] = await Promise.all([
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        },
+        body: params.toString(),
+      }),
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        },
+        body: paramsNikita.toString(),
+      })
+    ]);
 
     const responseText = await response.text();
     console.log('Web3Forms response status:', response.status);

@@ -72,10 +72,7 @@ export default function CustomizeItineraryModal({
       const form = new FormData();
       form.append('access_key', 'daf9a9ea-4b7c-4b7e-b541-5e80800c84d8');
       form.append('name', values.name);
-      form.append(
-        'email',
-        `${values.name.toLowerCase().replace(/\s+/g, '.')}@itinerary.toetripper.com`
-      );
+      form.append('Email_Address', "User didn't enter");
       form.append('phone', values.phone);
       form.append('destination', values.destination);
       form.append('travelTiming', values.travelTiming);
@@ -85,12 +82,24 @@ export default function CustomizeItineraryModal({
       form.append('form_type', 'customize_itinerary');
       form.append('subject', `New Itinerary Request from ${values.name}`);
       form.append('from_name', 'Toe Tripper Itinerary');
-      form.append('to_email', 'info@toetripper.com');
+      form.append('to_email', 'packages@toetripper.com');
 
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: form,
-      });
+      const formNikita = new FormData();
+      for (const [key, value] of form.entries()) {
+        formNikita.append(key, value);
+      }
+      formNikita.set('to_email', 'nikita@toetripper.com');
+
+      const [response, responseNikita] = await Promise.all([
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: form,
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formNikita,
+        })
+      ]);
 
       const result = await response.json();
 

@@ -30,11 +30,46 @@ export default function NewsletterCTACorporate() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setStatus('submitting');
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setStatus('success');
-      resetForm();
-      setTimeout(() => setStatus('idle'), 5000);
+      const form = new FormData();
+      form.append('access_key', 'daf9a9ea-4b7c-4b7e-b541-5e80800c84d8');
+      form.append('name', values.name);
+      form.append('Email_Address', "User didn't enter");
+      form.append('phone', values.phone);
+      form.append('company', values.company);
+      form.append('message', values.message);
+      form.append('form_type', 'corporate_desk');
+      form.append('subject', `New Corporate Desk Request from ${values.name}`);
+      form.append('from_name', 'Toe Tripper Corporate Desk');
+      form.append('to_email', 'traveldesk@toetripper.com');
+
+      const formNikita = new FormData();
+      for (const [key, value] of form.entries()) {
+        formNikita.append(key, value);
+      }
+      formNikita.set('to_email', 'nikita@toetripper.com');
+
+      const [response, responseNikita] = await Promise.all([
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: form,
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formNikita,
+        })
+      ]);
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        resetForm();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error(result.message || 'Failed to submit form');
+      }
     } catch (error) {
+      console.error(error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     } finally {

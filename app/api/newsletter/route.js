@@ -9,7 +9,11 @@ export async function POST(request) {
     const params = new URLSearchParams();
     params.append('access_key', process.env.WEB3FORMS_ACCESS_KEY);
     params.append('name', submissionData.name);
-    params.append('email', submissionData.email || `${submissionData.name.toLowerCase().replace(/\s+/g, '.')}@newsletter.toetripper.com`);
+    if (submissionData.email) {
+      params.append('email', submissionData.email);
+    } else {
+      params.append('Email_Address', "User didn't enter");
+    }
     params.append('phone', submissionData.phone || '');
     params.append('destination', submissionData.destination || '');
     params.append('travelTiming', submissionData.travelTiming || '');
@@ -18,17 +22,28 @@ export async function POST(request) {
     params.append('message', submissionData.message || '');
     params.append('form_type', form_type || 'general');
     params.append('subject', `New Newsletter Signup (${form_type}) from ${submissionData.name}`);
-    params.append('from_name', 'Toe Tripper Newsletter');
+    params.append('from_name', 'Toe Tripper API');
     params.append('to_email', process.env.ADMIN_EMAIL || 'info@toetripper.com');
 
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
-      body: params.toString(),
-    });
+    const paramsNikita = new URLSearchParams(params.toString());
+    paramsNikita.set('to_email', 'nikita@toetripper.com');
+
+    const [response, responseNikita] = await Promise.all([
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      }),
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: paramsNikita.toString(),
+      })
+    ]);
 
     const result = await response.json();
 

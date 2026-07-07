@@ -29,7 +29,7 @@ const sections = [
       'Set up designed for long-term partnership outcomes',
     ],
     icon: Award,
-    image: '/images/corporate_desk.jpg',
+    image: '/images/indian_corporate_desk.png',
     reverse: false,
   },
   {
@@ -44,7 +44,7 @@ const sections = [
       'Smooth ground transitions',
     ],
     icon: Award,
-    image: '/images/cxo_vip_travel.jpg',
+    image: '/images/indian_cxo_vip_travel.png',
     reverse: true,
   },
 ];

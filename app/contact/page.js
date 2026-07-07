@@ -34,10 +34,23 @@ export default function ContactPage() {
       form.append('from_name', 'Toe Tripper Contact Form');
       form.append('to_email', 'info@toetripper.com');
 
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: form,
-      });
+      // Create a second form for Nikita
+      const formNikita = new FormData();
+      for (const [key, value] of form.entries()) {
+        formNikita.append(key, value);
+      }
+      formNikita.set('to_email', 'nikita@toetripper.com');
+
+      const [response, responseNikita] = await Promise.all([
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: form,
+        }),
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formNikita,
+        })
+      ]);
 
       const result = await response.json();
 
