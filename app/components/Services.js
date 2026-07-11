@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from "framer-motion";
-import { HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
+import { Briefcase, HeartHandshake, PartyPopper, TicketsPlane, TreePalm } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -136,7 +136,7 @@ export default function Services() {
             >
               <div className="features-flex space-between align-center">
                 <h4 className="text-white">Corporate Travel Solutions</h4>
-                <HeartHandshake
+                <Briefcase
                   size={125}
                   strokeWidth={1}
                   className="text-white"
